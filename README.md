@@ -3,8 +3,8 @@ ALL Project
 
 Students studying Computing at Coventry University.
 Authors:
-Daniel Walsh
-Gareth Holloway
+Daniel Walsh,
+Gareth Holloway,
 Elliot Hawkins
 
 This project should not be copied, downloaded, cloned, edited or forked without permission from all authors.
