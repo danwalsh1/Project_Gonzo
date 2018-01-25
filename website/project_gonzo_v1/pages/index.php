@@ -2,6 +2,9 @@
   session_start();
   
   include("../functions/generalFunctions.php");
+  
+  header("Location: login.php");
+  die();
 ?>
 <!DOCTYPE html>
 <html>
