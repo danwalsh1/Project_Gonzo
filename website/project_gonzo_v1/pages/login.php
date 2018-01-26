@@ -2,6 +2,9 @@
   session_start();
   
   include("../functions/generalFunctions.php");
+  include("../functions/sqlFunctions.php");
+  
+  check_db_exists();
 ?>
 <!DOCTYPE html>
 <html>
