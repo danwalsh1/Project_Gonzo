@@ -32,8 +32,12 @@
 		$sql = "CREATE TABLE users (
 		username VARCHAR(20) NOT NULL PRIMARY KEY,
 		password VARCHAR(20) NOT NULL,
-		admin BOOLEAN NOT NULL
-		)";
+		admin BOOLEAN NOT NULL,
+		forename VARCHAR(20) NOT NULL,
+		surname VARCHAR(20) NOT NULL,
+		device_id VARCHAR(32) NOT NULL,
+		phone_num INT(11) NOT NULL,
+		email VARCHAR(100) NOT NULL)";
 		$result = mysqli_query($connect, $sql);
 		
 		$sql = "CREATE TABLE device_data (
