@@ -1,0 +1,29 @@
+nav ul {
+	margin:0;
+	padding:0;
+}
+
+nav ul li {
+	float:left;
+	display:block;
+	width:150px;
+	height:60px;
+	text-align:center;
+	line-height:55px;
+	font-size:17px;
+	background-color: #000000;
+}
+
+nav ul li a {
+	text-decoration:none;
+	color:#FFFFFF;
+}
+
+nav ul li:hover {
+	background:#b4b4b4;
+}
+
+nav ul li:hover a {
+	display:block;
+	color:#000000;
+}
