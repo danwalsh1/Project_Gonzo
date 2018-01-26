@@ -1,4 +1,4 @@
-When pushing changes to the repository use the following code:
+When pushing changes to the repository use the following codes:
 
 UPDATED <filename> (for adding changed to files)
 ADDED <filename> (for when adding newly created files)
