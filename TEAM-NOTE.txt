@@ -1,0 +1,6 @@
+When pushing changes to the repository use the following code:
+
+UPDATED <filename> (for adding changed to files)
+ADDED <filename> (for when adding newly created files)
+REMOVED <filename> (for removing files)
+MOVED <filename> FROM <location> TO <location> (for moving files to different location within the repository)
