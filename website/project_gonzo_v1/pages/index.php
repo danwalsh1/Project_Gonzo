@@ -9,6 +9,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" />
+    <link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
     <title>Project Gonzo</title>
   </head>
   <body>
