@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" />
+    <link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
     <title>Home | Project Gonzo</title>
   </head>
   <body>
