@@ -2,6 +2,10 @@
   session_start();
   
   include("../functions/generalFunctions.php");
+  unset($_SESSION['Username']);
+  session_destroy();
+  Header("Location: login.php");
+  Die();
 ?>
 <!DOCTYPE html>
 <html>
