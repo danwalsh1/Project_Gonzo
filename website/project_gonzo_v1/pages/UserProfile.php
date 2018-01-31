@@ -4,34 +4,32 @@
   include("../functions/generalFunctions.php");
   include("../functions/sqlFunctions.php");
    
-  if (isset($_POST['submit'])){# checks credentials are valid and then passes through to homepage.
-	$result = UserLogin($_POST['Username'],$_POST['Password']); #Stores input username and password.
-	if($result){ #if result is true, continues through to homepage otherwise remains on login page.
-		$_SESSION["Username"] = $_POST['Username']; #Post assigned to session to carry username to next page.
-		header ("Location: home.php");
-		die();
-	}
-  }
-  
-function UserLogin($username,$password){ #Passes in username and password from html form.
-$connect = connect_db(); #connect to db
-$sql = 'SELECT * FROM users WHERE username="' . $username . '" AND password="' . $password . '"'; # checking validity of credentials.
-$result = mysqli_query($connect,$sql); #Executed query stored in $result.
-if(mysqli_num_rows($result)== 1){ #Conditions checked, passes over to $result in the start if statement.
-	return true;
-	}
-else{
-	return false;
-	}
-}
-	
+
+function fetch_user_data($username){
+		$connect = connect_db("NULL");
+		$sql = '"SELECT * FROM users WHERE username="'. $_SESSION["Username"];
+		$result = mysqli_query($connect, $sql);
+		$value = mysqli_fetch_object($result);
+		
+		}
+		
+
+function submit_user_data(){
+        $connect = connect_db("NULL");
+        $sql = 'UPDATE users (username, forename, surname, device_ID, phone_num, email) VALUES' .               $_POST['username'],$_POST['forename'],$_POST['surname'],$_POST['deviceid'],$_POST['phonenum'], $_POST['email'];
+        
+        $result = mysqli_query($connect, $sql);
+        $value = mysqli_
+
 ?>
+
+
 <!DOCTYPE html>
 <html>
   <head>
   <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" />
   <link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
-    <title>Logout | Project Gonzo</title> <!--Project title -->
+    <title>User Profile | Project Gonzo</title> <!--Project title -->
   </head>
   <body>
     <div id="Page">
@@ -49,30 +47,35 @@ else{
       <div style ="text-align: center;"> <!--Form Configuration and positioning -->
 	  <form method ="POST" action="login.php">
 	  
-       <div id="UsernameText" style="padding-top: 10px;">
+	   <div id="Username" style="padding-top: 10px;">
 		<label> First Name: </label>
-		<input type ="text" name="First Name">
+		<input type ="text" name="username" value=<?php echo '"' . $value->username . '"' ?>>
+	   </div>
+	  
+       <div id="FirstNameText" style="padding-top: 10px;">
+		<label> First Name: </label>
+		<input type ="text" name="forename" value=<?php echo '"' . $value->forename . '"' ?>>
 	   </div>
 		
 	   <div id="Surname" style="padding-top: 10px;">
 		<label> Surname: </label>
-		<input type="text" name ="Surname">
+		<input type="text" name ="surname" value=<?php echo '"' . $value->surname . '"' ?>>
 	   </div>
 		
 		<div id= "Device_ID" style="padding-top: 10px;">
 		 <label> Device ID: </label>
-		 <input type ="text" name="DeviceID">
+		 <input type ="text" name="deviceid" value=<?php echo '"' . $value->device_id . '"' ?>>
 		</div>
 		 
 		
 		<div id= "Phone_Number" style="padding-top: 10px;">
 		 <label> Phone Number: </label>
-		 <input type ="text" name="Phone Number">
+		 <input type ="text" name="phonenum" value=<?php echo '"' . $value->phone_num . '"' ?>>
 		</div>
 		
 		<div id= "Email_Address" style="padding-top: 10px;">
 		 <label> Email Address: </label>
-		 <input type ="text" name="Email Address">
+		 <input type ="text" name="email" value=<?php echo '"' . $value->email . '"' ?>>
 		</div>
 
 		<div style="padding-top: 10px;padding-left: 50px;">
