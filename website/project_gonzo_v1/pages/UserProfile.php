@@ -3,24 +3,35 @@
   
   include("../functions/generalFunctions.php");
   include("../functions/sqlFunctions.php");
-   
+
+check_db_exists();  
+
+
+	
+if (isset($_POST['SubmitProfileForm'])){
+	$result = update_user_data();
+	}
+
+
 
 function fetch_user_data($username){
 		$connect = connect_db("NULL");
-		$sql = '"SELECT * FROM users WHERE username="'. $_SESSION["Username"];
+		$sql = 'SELECT * FROM users WHERE username="'. $_SESSION["Username"] . '"';
 		$result = mysqli_query($connect, $sql);
 		$value = mysqli_fetch_object($result);
-		
+		return $value;
 		}
+$value = fetch_user_data($_SESSION['Username']);
 		
-
-function submit_user_data(){
+function update_user_data(){
         $connect = connect_db("NULL");
-        $sql = 'UPDATE users (username, forename, surname, device_ID, phone_num, email) VALUES' .               $_POST['username'],$_POST['forename'],$_POST['surname'],$_POST['deviceid'],$_POST['phonenum'], $_POST['email'];
-        
+		{
+        $sql = 
+			"UPDATE users SET forename='" . $_POST['forename'] . "' WHERE username='". $_POST['username'] . "'";
+		}		
         $result = mysqli_query($connect, $sql);
-        $value = mysqli_
-
+		echo $sql;
+}
 ?>
 
 
@@ -45,10 +56,10 @@ function submit_user_data(){
 	  
 	 
       <div style ="text-align: center;"> <!--Form Configuration and positioning -->
-	  <form method ="POST" action="login.php">
+	  <form method ="POST" action="UserProfile.php">
 	  
 	   <div id="Username" style="padding-top: 10px;">
-		<label> First Name: </label>
+		<label> Username: </label>
 		<input type ="text" name="username" value=<?php echo '"' . $value->username . '"' ?>>
 	   </div>
 	  
@@ -79,7 +90,7 @@ function submit_user_data(){
 		</div>
 
 		<div style="padding-top: 10px;padding-left: 50px;">
-		  <input type="submit" value="Submit" name ="SubmitProfileForm">
+		  <input type="submit" value="Save" name="SubmitProfileForm">
 		</div>
 	   </div>
 	  </form>
