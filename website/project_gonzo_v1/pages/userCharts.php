@@ -2,11 +2,14 @@
   session_start();
   
   include("../functions/generalFunctions.php");
+  include("../functions/sqlFunctions.php");
   
   if(!isset($_SESSION['Username'])){
 	  header("Location: login.php");
 	  die();
   }
+  
+  $userValues = get_users_values($_SESSION['Username']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,6 +31,7 @@
       </div>
       
       <div id="Content">
+		<h2>Device ID: <?php echo $userValues->device_id; ?></h2>
       </div>
       
       <div id="Footer">
