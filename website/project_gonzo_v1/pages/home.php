@@ -2,6 +2,11 @@
   session_start();
   
   include("../functions/generalFunctions.php");
+  
+  if(!isset($_SESSION['Username'])){
+	  header("Location: login.php");
+	  die();
+  }
 ?>
 <!DOCTYPE html>
 <html>
