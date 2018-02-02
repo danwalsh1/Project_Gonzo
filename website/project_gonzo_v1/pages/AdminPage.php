@@ -2,11 +2,39 @@
   session_start();
 
   include("../functions/generalFunctions.php");
+  include("../functions/sqlFunctions.php");
+
+check_db_exists();
+
+
+
+if (isset($_POST['SubmitProfileForm'])){
+  $result = update_user_data();
+  }
 
   if(!isset($_SESSION['Username'])){
 	  header("Location: login.php");
 	  die();
   }
+
+  function fetch_user_data($username){
+  		$connect = connect_db("NULL");
+  		$sql = 'SELECT * FROM users WHERE username="'. $_SESSION["Username"] . '"';
+  		$result = mysqli_query($connect, $sql);
+  		$value = mysqli_fetch_object($result);
+  		return $value;
+  		}
+  $value = fetch_user_data($_SESSION['Username']);
+
+  function update_user_data(){
+          $connect = connect_db("NULL");
+  		{
+          $sql = "UPDATE users SET forename='" . $_POST['forename'] . "', surname='" . $_POST['surname'] . "', device_id='" . $_POST['deviceid'] . "', phone_num='" . $_POST['phonenum'] . "', email='" . $_POST['email'] . "'WHERE username='". $_POST['username'] . "'";
+  		}
+          $result = mysqli_query($connect, $sql);
+  		echo $sql;
+  }
+
 
 ?>
 <style>
@@ -43,9 +71,9 @@
     <br>
 	  <form action="/action_page.php">
       Select Username:
-	    <input list="browsers" name="browser">
+	    <input list="browsers" name="browser">         <!-- To get this to work all we need to do is get this drop down to set the user name for this session,
+                                                      then refresh the page which will then load all the necessary deails for the user selected on the drop down.-->
 		<datalist id="browsers">				<!-- Below should be changed to fit the needs of our data using PHP. -->
-		  <option value="THIS ISNT DONE YET">
 		  <option value="Daniel Walsh">
 		  <option value="Gareth Holloway">
 		  <option value="Elliot Hawkins">
@@ -60,10 +88,10 @@
 
   <form action="action_page.php">              <!-- Below should be changed to fit the needs of our data using PHP. -->
   Username:
-  <input name="Username" type="text" value="Username here.">
+  <input name="Username" type="text" value=<?php echo '"' . $value->username . '"'?>>
   <br>
   Password:
-  <input name="Password" type="text" value="Password here.">
+  <input name="Password" type="text" value=<?php echo '"' .$value->password . '"'?>>
   <br>
   <br>
   Forename:
@@ -81,7 +109,7 @@
   Email:
   <input name="Email" type="text" value="Email here.">
   <br><br>
-  <input type="submit">
+  <input type="submit" value="Save Details" name="SubmitProfileForm"> <!-- This also needs to be made so it changes the details for the user selected in the drop down and not the user logged in. -->
 </form>
 </div>
 
