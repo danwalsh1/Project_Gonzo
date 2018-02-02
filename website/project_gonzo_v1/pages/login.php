@@ -56,7 +56,7 @@ else{
 	 
       <div style ="text-align: center;"> <!--Form Configuration and positioning -->
 	  <form method ="POST" action="login.php">
-       <div id="UsernameText">
+       <div id="UsernameText" style="padding-top: 10px;">
 		<label> Username: </label>
 		<input type ="text" name="Username">
 		</div>
