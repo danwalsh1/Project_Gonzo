@@ -26,8 +26,7 @@ $value = fetch_user_data($_SESSION['Username']);
 function update_user_data(){
         $connect = connect_db("NULL");
 		{
-        $sql = 
-			"UPDATE users SET forename='" . $_POST['forename'] . "' WHERE username='". $_POST['username'] . "'";
+        $sql = "UPDATE users SET forename='" . $_POST['forename'] . "', surname='" . $_POST['surname'] . "', device_id='" . $_POST['deviceid'] . "', phone_num='" . $_POST['phonenum'] . "', email='" . $_POST['email'] . "'WHERE username='". $_POST['username'] . "'";
 		}		
         $result = mysqli_query($connect, $sql);
 		echo $sql;
@@ -88,6 +87,13 @@ function update_user_data(){
 		 <label> Email Address: </label>
 		 <input type ="text" name="email" value=<?php echo '"' . $value->email . '"' ?>>
 		</div>
+		
+		<!--
+		<<div id= "Update_Password" style="padding-top: 10px;">
+		 <label> Update Password: </label>
+		 <input type ="text" name="PasswordUpdate" value=<?php echo '"' . $value->password . '"' ?>>
+		</div> 
+		-->
 
 		<div style="padding-top: 10px;padding-left: 50px;">
 		  <input type="submit" value="Save" name="SubmitProfileForm">
