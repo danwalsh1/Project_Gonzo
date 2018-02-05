@@ -29,7 +29,7 @@ function update_user_data(){
         $sql = "UPDATE users SET forename='" . $_POST['forename'] . "', surname='" . $_POST['surname'] . "', device_id='" . $_POST['deviceid'] . "', phone_num='" . $_POST['phonenum'] . "', email='" . $_POST['email'] . "'WHERE username='". $_POST['username'] . "'";
 		} #Updates all table fields as a catch all solution even if the value is the same.		
         $result = mysqli_query($connect, $sql);
-		//echo $sql; #Testing for the SQL to ensure correct syntax.
+		#echo $sql; #Testing for the SQL to ensure correct syntax.
 }
 ?>
 
