@@ -26,7 +26,7 @@ $value = fetch_user_data($_SESSION['Username']); #Used to automatically the iden
 function update_user_data(){
         $connect = connect_db("NULL"); #Connects to DB
 		{
-        $sql = "UPDATE users SET forename='" . $_POST['forename'] . "', surname='" . $_POST['surname'] . "', device_id='" . $_POST['deviceid'] . "', phone_num='" . $_POST['phonenum'] . "', email='" . $_POST['email'] . "'WHERE username='". $_POST['username'] . "'";
+        $sql = "UPDATE users SET forename='" . $_POST['forename'] . "', surname='" . $_POST['surname'] . "', device_id='" . $_POST['deviceid'] . "', phone_num='" . $_POST['phonenum'] . "', email='" . $_POST['email'] . "', password='" . $_POST['PasswordUpdate'] . "'WHERE username='". $_POST['username'] . "'";
 		} #Updates all table fields as a catch all solution even if the value is the same.		
         $result = mysqli_query($connect, $sql);
 		#echo $sql; #Testing for the SQL to ensure correct syntax.
@@ -59,11 +59,9 @@ function update_user_data(){
 	  
 	   <div id="Username" style="padding-top: 10px;">
 		<label> Username: </label>
-		<input type ="text" name="username" value=<?php echo '"' . $value->username . '"' ?>> 
-		   
-		   <!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
+		<input type ="text" name="username" value=<?php echo '"' . $value->username . '"' ?>>   
 	   </div>
-	  
+	  <!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
        <div id="FirstNameText" style="padding-top: 10px;">
 		<label> First Name: </label>
 		<input type ="text" name="forename" value=<?php echo '"' . $value->forename . '"' ?>>
@@ -90,12 +88,12 @@ function update_user_data(){
 		 <input type ="text" name="email" value=<?php echo '"' . $value->email . '"' ?>>
 		</div>
 		
-		<!--
-		<<div id= "Update_Password" style="padding-top: 10px;">
+		
+		<div id= "Update_Password" style="padding-top: 10px;">
 		 <label> Update Password: </label>
-		 <input type ="text" name="PasswordUpdate" value=<?php echo '"' . $value->password . '"' ?>>
+		 <input type ="password" name="PasswordUpdate" value=<?php echo '"' . $value->password . '"' ?>>
 		</div> 
-		-->
+		
 
 		<div style="padding-top: 10px;padding-left: 50px;">
 		  <input type="submit" value="Save" name="SubmitProfileForm">
@@ -109,3 +107,4 @@ function update_user_data(){
     </div>
   </body>
 </html>
+
