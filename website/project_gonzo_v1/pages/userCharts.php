@@ -3,6 +3,7 @@
   
   include("../functions/generalFunctions.php");
   include("../functions/sqlFunctions.php");
+  include("../functions/chartFunctions.php");
   
   if(!isset($_SESSION['Username'])){
 	  header("Location: login.php");
@@ -32,6 +33,22 @@
       
       <div id="Content">
 		<h2>Device ID: <?php echo $userValues->device_id; ?></h2>
+		<?php
+			$result = get_avg_device_data_dates('2018-02-04', 7, 'lapTest');
+
+			$count = 0;
+			$dataString = "[['Date', 'Avg Battery Level'],";
+			while($count < 6){
+				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "],";
+				$count += 1;
+			}
+			$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "]]";
+			
+			#echo $dataString;
+			makeGoogleChart('Data Chart', 500, 300, 'dataChart', $dataString);
+		?>
+		
+		<div id="dataChart"></div>
       </div>
       
       <div id="Footer">
