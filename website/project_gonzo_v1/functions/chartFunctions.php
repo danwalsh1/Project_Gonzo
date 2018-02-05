@@ -26,8 +26,8 @@
 	function get_avg_device_data_day($startDate, $endDate, $deviceId){
 		# Start date is inclusive, end date is not inclusive
 		$connect = connect_db();
-		#$sql = "SELECT * FROM device_data WHERE date>='" . $startDate . "' AND date<'" . $endDate . "' AND device_id='" . $deviceId . "'";
-		$sql = "SELECT * FROM device_data WHERE date>='" . $startDate . "' AND date<'" . $endDate . "'";
+		$sql = "SELECT * FROM device_data WHERE date>='" . $startDate . "' AND date<'" . $endDate . "' AND device_id='" . $deviceId . "'";
+		#$sql = "SELECT * FROM device_data WHERE date>='" . $startDate . "' AND date<'" . $endDate . "'";
 		$result = mysqli_query($connect, $sql);
 		if(mysqli_num_rows($result) != 0){
 			while($row = mysqli_fetch_array($result)){
@@ -52,11 +52,12 @@
 		while($count < $numOfDays){
 			#echo get_avg_device_data_day($startDate, strtotime("+1 day", strtotime($startDate)), $deviceId);
 			#echo date("Y-m-d", $startDate);
-			$avgLevelArray[] = get_avg_device_data_day($startDate, date("Y-m-d", strtotime("+1 day", strtotime($startDate))), $deviceId);
+			$avgLevelArray[] = round(get_avg_device_data_day($startDate, date("Y-m-d", strtotime("+1 day", strtotime($startDate))), $deviceId));
+			$dateArray[] = $startDate;
 			$startDate = date("Y-m-d", strtotime("+1 day", strtotime($startDate)));
 			$count += 1;
 		}
 		
-		return $avgLevelArray;
+		return array($avgLevelArray, $dateArray);
 	}
 ?>
