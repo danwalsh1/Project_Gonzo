@@ -1,35 +1,35 @@
 <?php
   session_start(); #Starts a session.
   
-  include("../functions/generalFunctions.php");
+  include("../functions/generalFunctions.php"); #Import additional functionality stored in seperate files.
   include("../functions/sqlFunctions.php");
 
 check_db_exists();  
 
 
 	
-if (isset($_POST['SubmitProfileForm'])){
+if (isset($_POST['SubmitProfileForm'])){ #Checks to make sure the $_POST form value exists before processing the function call assigned to the variable.
 	$result = update_user_data();
 	}
 
 
 
 function fetch_user_data($username){
-		$connect = connect_db("NULL");
-		$sql = 'SELECT * FROM users WHERE username="'. $_SESSION["Username"] . '"';
-		$result = mysqli_query($connect, $sql);
-		$value = mysqli_fetch_object($result);
-		return $value;
+		$connect = connect_db("NULL"); #NULL as no data retrieval is required yet, simply the connection.
+		$sql = 'SELECT * FROM users WHERE username="'. $_SESSION["Username"] . '"'; #Queries the database for the users details using details stored in session.
+		$result = mysqli_query($connect, $sql); #Run the query.
+		$value = mysqli_fetch_object($result);#Fetch the items identified in the $resulte variable.
+		return $value; #return the fields identified.
 		}
-$value = fetch_user_data($_SESSION['Username']);
+$value = fetch_user_data($_SESSION['Username']); #Used to automatically the identified user data into the html form.
 		
 function update_user_data(){
-        $connect = connect_db("NULL");
+        $connect = connect_db("NULL"); #Connects to DB
 		{
         $sql = "UPDATE users SET forename='" . $_POST['forename'] . "', surname='" . $_POST['surname'] . "', device_id='" . $_POST['deviceid'] . "', phone_num='" . $_POST['phonenum'] . "', email='" . $_POST['email'] . "'WHERE username='". $_POST['username'] . "'";
-		}		
+		} #Updates all table fields as a catch all solution even if the value is the same.		
         $result = mysqli_query($connect, $sql);
-		echo $sql;
+		//echo $sql; #Testing for the SQL to ensure correct syntax.
 }
 ?>
 
@@ -39,7 +39,7 @@ function update_user_data(){
   <head>
   <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" />
   <link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
-    <title>User Profile | Project Gonzo</title> <!--Project title -->
+    <title>User Profile | Project Gonzo</title> <!--Page title -->
   </head>
   <body>
     <div id="Page">
@@ -59,7 +59,9 @@ function update_user_data(){
 	  
 	   <div id="Username" style="padding-top: 10px;">
 		<label> Username: </label>
-		<input type ="text" name="username" value=<?php echo '"' . $value->username . '"' ?>>
+		<input type ="text" name="username" value=<?php echo '"' . $value->username . '"' ?>> 
+		   
+		   <!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
 	   </div>
 	  
        <div id="FirstNameText" style="padding-top: 10px;">
