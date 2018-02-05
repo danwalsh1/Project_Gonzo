@@ -36,7 +36,7 @@
 		forename VARCHAR(20) NOT NULL,
 		surname VARCHAR(20) NOT NULL,
 		device_id VARCHAR(32) NOT NULL,
-		phone_num INT(11) NOT NULL,
+		phone_num INT(12) NOT NULL,
 		email VARCHAR(100) NOT NULL)";
 		$result = mysqli_query($connect, $sql);
 		
@@ -48,5 +48,34 @@
 		charging_state BOOLEAN NOT NULL
 		)";
 		$result = mysqli_query($connect, $sql);
+	}
+	
+	function get_users_values($username){
+		$connect = connect_db();
+		$sql = "SELECT * FROM users WHERE username='" . $username . "'";
+		$result = mysqli_query($connect, $sql);
+		$val = mysqli_fetch_object($result);
+		return $val;
+	}
+	
+	function get_avg_device_data_day($startDate, $endDate, $deviceId){
+		# Start date is inclusive, end date is not inclusive
+		$connect = connect_db();
+		$sql = "SELECT * FROM device_data WHERE date>='" . $startDate . "' AND date<'" . $endDate . "' AND device_id='" . $deviceId . "'";
+		$result = mysqli_query($connect, $sql);
+		if(mysqli_num_rows($result) != 0){
+			while($row = mysqli_fetch_array($result)){
+				$batLevelArray[] = $row['battery_level'];
+			}
+		}
+		$count = 0;
+		$avg = 0;
+		while($count < count($batLevelArray)){
+			$avg = $avg + $batLevelArray[$count];
+			$count += 1;
+		}
+		
+		$avg = $avg / count($batLevelArray);
+		return $avg;
 	}
 ?>
