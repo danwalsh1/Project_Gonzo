@@ -57,4 +57,11 @@
 		$val = mysqli_fetch_object($result);
 		return $val;
 	}
+	
+	function insert_device_data($deviceId, $batteryLevel, $chargingState){
+		$connect = connect_db();
+		$sql = "INSERT INTO device_data(device_id, battery_level, charging_state) VALUES ('" . $deviceId . "', '" . $batteryLevel . "', " . $chargingState . ")";
+		$result = mysqli_query($connect, $sql);
+		return $result;
+	}
 ?>
