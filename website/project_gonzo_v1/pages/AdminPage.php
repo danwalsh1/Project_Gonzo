@@ -10,11 +10,12 @@ if (isset($_POST['SubmitProfileForm'])){ #Checks to make sure the $_POST form va
 	$result = update_user_data();
 	}
 
-if (isset($_POST['UpdateDetailsView'])){ #Checks to make sure the $_POST form value exists before processing the function call assigned to the variable.
-	$result = update_user_data();
+if (isset($_POST['UpdateDetailsView'])){
+	$UserSelected = $_POST['DD'];
+	$result = fetch_user_data($UserSelected);
+	
 	}	
-	
-	
+		
 function retrieve_users_DropDown(){
 	$connect = connect_db("NULL");
 	$sql = "SELECT * FROM users";
@@ -27,14 +28,22 @@ function retrieve_users_DropDown(){
 	}
 	}
 
-function fetch_user_data($username){
+function fetch_user_data($UserSelected){
 		$connect = connect_db("NULL"); #NULL as no data retrieval is required yet, simply the connection.
-		$sql = 'SELECT * FROM users WHERE username="'. $_SESSION["Username"] . '"'; #Queries the database for the users details using details stored in session.
+		$sql = 'SELECT * FROM users WHERE username="' . $UserSelected . '"'; #Queries the database for the users details using details stored in session.
 		$result = mysqli_query($connect, $sql); #Run the query.
 		$value = mysqli_fetch_object($result);#Fetch the items identified in the $result variable.
 		return $value; #return the fields identified.
 		}
-$value = fetch_user_data($_SESSION['Username']); #Used to automatically the identified user data into the html form.
+		
+		{		
+if(@$UserSelected == False){
+$value = fetch_user_data($_SESSION['Username']);
+}
+else{
+$value = fetch_user_data($UserSelected);
+}
+		}	
 		
 function update_user_data(){
         $connect = connect_db("NULL"); #Connects to DB
