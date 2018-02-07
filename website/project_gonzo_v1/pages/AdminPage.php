@@ -23,8 +23,6 @@ function retrieve_users_DropDown(){
 	while($row = mysqli_fetch_array($result))
 	{
 		echo $ListofNames="<option>" . $row['username'] . "</option>";
-		
-		$UsernameArray[] = $ListofNames;
 
 	}
 	}
