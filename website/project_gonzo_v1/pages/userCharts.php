@@ -11,6 +11,19 @@
   }
   
   $userValues = get_users_values($_SESSION['Username']);
+  
+  if(isset($_POST['UpdateChartView'])){
+	$Date = date("Y-m-d", strtotime($_POST['Calendar']));
+	if($_POST['DDTimeframe'] == "Day"){
+		$NumOfDays = 1;
+	}elseif($_POST['DDTimeframe'] == "Week"){
+	  $NumOfDays = 7;
+	}elseif($_POST['DDTimeframe'] == "Month"){
+	  $NumOfDays = 30;
+	}
+	
+	print_chart($Date, $NumOfDays, $userValues->device_id, "Battery Utilisation Chart", 500, 300, "dataChart");
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,21 +46,27 @@
       
       <div id="Content">
 		<h2>Device ID: <?php echo $userValues->device_id; ?></h2>
-		<?php
-			$result = get_avg_device_data_dates('2018-02-04', 7, 'lapTest');
-
-			$count = 0;
-			$dataString = "[['Date', 'Avg Battery Level'],";
-			while($count < 6){
-				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "],";
-				$count += 1;
-			}
-			$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "]]";
+		<form action="userCharts.php" method="POST">
+			<div id="Timeframe" style="padding-top: 10px; text-align: left;">
+			<label> Period to report: </label>
+			<select class="form-dropdown" style="width:150px" id="DropdownTimeframe" name="DDTimeframe">
+				<option> Day </option>
+				<option> Week </option>
+				<option> Month </option>
+			</select>
+			</div>
 			
-			#echo $dataString;
-			makeGoogleChart('Data Chart', 500, 300, 'dataChart', $dataString);
-		?>
+			<div id = "Calendar" style="padding-top: 10px; text-align: left;">
+			<label> Please select a start date: </label>
+			<input type= "date" name="Calendar">
+			</div>
 		
+			<div id="ChartsView" style="padding-top: 10px;padding-left: 50px; text-align: left;">
+				<br />
+				<br />
+				<input type="submit" value="Show Charts" name="UpdateChartView">	
+			</div>
+		</form>
 		<div id="dataChart"></div>
       </div>
       
