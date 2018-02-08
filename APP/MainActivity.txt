@@ -1,22 +1,41 @@
-package com.example.jacob.projectgonzo;
+package com.example.salazhar.projectgonzo;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
+import android.content.Context;
 import android.net.Uri;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+    private BroadcastReceiver BatteryChange = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context c, Intent i) {
+            //Get the battery level and assign it to the 'level' variable.
+            int level = i.getIntExtra("level", 0);
+            //Find textview control created in activity_main.xml
+            TextView tv = (TextView) findViewById(R.id.BatteryLevel);
+            //Set the BatteryLevel text field as 'Battery level *batterylevelhere* %'.
+            tv.setText("Battery Level:" + Integer.toString(level) + "%");
+            //For future reference the battery level is stored inside the 'level' variable.
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Register the receiver which triggers the event 'BatteryChange' when the battery changes. This in turn then changes the text on the screen to say the now current battery life.
+        registerReceiver(BatteryChange, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
     }
 
     public void OpenBrowser(View view){
-
+        //Creates a new browser session that opens a certain website.
         Intent browserIntent=new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.co.uk"));
         startActivity(browserIntent);
     }
