@@ -4,15 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jacob.projectgonzo.MainActivity">
+    tools:context="com.example.salazhar.projectgonzo.MainActivity">
 
     <Button
+        android:id="@+id/BrowserButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/BatteryLevel"
         android:gravity="center"
         android:onClick="OpenBrowser"
-        android:text="Press to go to google."
-        tools:layout_editor_absoluteX="54dp"
-        tools:layout_editor_absoluteY="136dp" />
+        android:text="Press to go to a website."
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="94dp" />
+
+    <TextView
+        android:id="@+id/BatteryLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Battery..."
+        app:layout_constraintTop_toBottomOf="@id/BrowserButton"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="78dp" />
 
 </android.support.constraint.ConstraintLayout>
