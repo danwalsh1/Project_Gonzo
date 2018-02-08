@@ -60,4 +60,18 @@
 		
 		return array($avgLevelArray, $dateArray);
 	}
+	
+	function print_chart($startDate, $numOfDays, $deviceId, $title = 'Data Chart', $width = 500, $height = 300, $divId = 'chartDiv'){
+		$result = get_avg_device_data_dates($startDate, $numOfDays, $deviceId);
+		
+		$count = 0;
+		$dataString = "[['Date', 'Avg Battery Level'],";
+		while($count < $numOfDays-1){
+			$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "],";
+			$count += 1;
+		}
+		$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "]]";
+		
+		makeGoogleChart($title, $width, $height, $divId, $dataString);
+	}
 ?>
