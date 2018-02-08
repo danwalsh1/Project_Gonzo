@@ -1,7 +1,7 @@
 The files in this folder have content that should be replaced inside a newly made project.
 
 activity_main.txt copy and paste from line 8 down.
-MainActivity.txt copy and paste from line 9 down.
+MainActivity.txt copy and paste from line 2 down.
 
 --
 
