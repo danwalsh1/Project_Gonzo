@@ -13,7 +13,7 @@
   if(isset($_POST['UpdateChartView']))
   {
   $ChooseUser = $_POST['DD'];	
-  $Date = "2018-02-04";
+  $Date = date("Y-m-d", strtotime($_POST['Calendar']));
   
   if($_POST['DDTimeframe'] == "Day")
   {
@@ -33,6 +33,8 @@
   
   print_chart($Date, $NumOfDays, $DeviceID, "Battery Utilisation Chart", 500, 300, "Charts" );
   #start date, number of days, device id, title, width, height, div id
+  
+  #echo $_POST['Calendar'];
   }
   
   #Day, week and month options
@@ -61,23 +63,30 @@
      <div id="Content">
 		<form action= "adminCharts.php" method = "POST">
 		
-			<div id="DropDown" style="padding-top: 10px; text-align: center;">
+			<div id="DropDown" style="padding-top: 10px; text-align: Left;">
 			<label> Please Select a User: </label>
 			<select class="form-dropdown" style="width:150px" id="Dropdown" name="DD">
 				<?php echo retrieve_users_DropDown(); ?>			
 			</select>
 			</div>
 			
-			<div id="Timeframe" style="padding-top: 10px; text-align: center;">
-			<label> Please Select a User: </label>
+			<div id="Timeframe" style="padding-top: 10px; text-align: left;">
+			<label> Period to report: </label>
 			<select class="form-dropdown" style="width:150px" id="DropdownTimeframe" name="DDTimeframe">
 				<option> Day </option>
 				<option> Week </option>
 				<option> Month </option>
 			</select>
 			</div>
+			
+			<div id = "Calendar" style="padding-top: 10px; text-align: left;">
+			<label> Please select a start date: </label>
+			<input type= "date" name="Calendar">
+			</div>
 		
-			<div style="padding-top: 10px;padding-left: 50px;">
+			<div id="ChartsView" style="padding-top: 10px;padding-left: 50px; text-align: left;">
+				<br />
+				<br />
 				<input type="submit" value="Show Charts" name="UpdateChartView">	
 			</div>
 	  
