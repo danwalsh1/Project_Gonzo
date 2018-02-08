@@ -8,5 +8,5 @@ The content in -MainActivity.txt- should replace the content in -MainActivity.ja
 
 --
 
-Inside activity_main.xml change line 7 where it says "jacob" to the name of your user.
-Inside MainActivity.java change line 1 whee it says "jacob" to the name of your user.
+Inside activity_main.xml change line 7 where it says "jacob" (it could say "salazhar" but the same applies) to the name of your user.
+Inside MainActivity.java change line 1 whee it says "jacob" (it could say "salazhar" but the same applies) to the name of your user.
