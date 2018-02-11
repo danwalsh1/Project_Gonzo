@@ -1,2 +1,0 @@
-language: php
-before_install: cd website/project_gonzo_v1
