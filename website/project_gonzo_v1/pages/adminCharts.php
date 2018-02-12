@@ -31,7 +31,7 @@
   $value = get_users_values($_POST['DD']);
   $DeviceID = $value->device_id;
   
-  print_chart($Date, $NumOfDays, $DeviceID, "Battery Utilisation Chart", 500, 300, "Charts" );
+  print_chart($Date, $NumOfDays, $DeviceID, "Battery Utilisation Chart", 1000, 600, "Charts" );
   #start date, number of days, device id, title, width, height, div id
   
   #echo $_POST['Calendar'];
