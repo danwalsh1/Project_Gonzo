@@ -4,6 +4,11 @@
   include("../functions/generalFunctions.php");
   include("../functions/sqlFunctions.php");
   
+  if(isset($_SESSION['Username'])){
+	  header("Location: home.php");
+	  die();
+  }
+
   check_db_exists();
   
   if (isset($_POST['logindone'])){# checks credentials are valid and then passes through to homepage.
