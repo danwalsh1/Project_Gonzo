@@ -10,4 +10,16 @@
 			echo '<li><a href="login.php">Login</a></li><li style="float:right"><a href="home.php"><img src="../img/gonzoLogo.jpg" height="60" width="65" style="align:center" /></a></li>';
 		}
 	}
+	
+	function retrieve_users_DropDown(){
+	$connect = connect_db("NULL");
+	$sql = "SELECT * FROM users";
+	$result = mysqli_query($connect, $sql);
+	$row = mysqli_fetch_array($result);
+	while($row = mysqli_fetch_array($result))
+	{
+		echo $ListofNames="<option>" . $row['username'] . "</option>";
+
+	}
+	}
 ?>
