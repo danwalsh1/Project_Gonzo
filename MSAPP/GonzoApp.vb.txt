@@ -1,0 +1,73 @@
+Imports System.Net
+Imports System.IO
+
+Public Class frmProjGon
+    Dim data_Send As sendData
+
+    Private Sub frmProjGon_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        data_Send = New sendData(10000, Me)
+        data_Send.startSending()
+    End Sub
+
+    Private Sub lblDevIDData_Click(sender As Object, e As EventArgs) Handles lblDevIDData.Click
+
+    End Sub
+
+    Private Sub lblBatLevData_Click(sender As Object, e As EventArgs) Handles lblBatLevData.Click
+
+    End Sub
+End Class
+
+Public Class sendData
+    Private WithEvents gonzoTimer As New System.Windows.Forms.Timer
+    Private gonzoForm As frmProjGon
+    Private batteryData As PowerStatus
+    Private batLevel As Integer
+    Private deviceID As String
+    Private chargingState As PowerLineStatus
+
+    Public Sub New(gonzoInterval As Integer, monitorform As frmProjGon)
+        gonzoTimer = New System.Windows.Forms.Timer
+        gonzoTimer.Interval = gonzoInterval
+        gonzoForm = monitorform
+    End Sub
+
+    Public Event Load(sender As Object, e As EventArgs)
+
+    Public Sub startSending()
+        gonzoTimer.Start()
+    End Sub
+
+    Public Sub stopSending()
+        gonzoTimer.Stop()
+    End Sub
+
+    Private Sub intervalTick() Handles gonzoTimer.Tick
+        batteryData = SystemInformation.PowerStatus 'Assign power status function to variable batteryData
+        batLevel = batteryData.BatteryLifePercent * 100
+        deviceID = My.Computer.Name
+        chargingState = batteryData.PowerLineStatus
+        gonzoForm.lblBatLevData.Text = batLevel
+        gonzoForm.lblDevIDData.Text = deviceID
+        gonzoForm.lblChargeStateData.Text = chargingState
+        Page_Load()
+    End Sub
+
+    Private Sub Page_Load()
+        Dim chargeString As String
+        If chargingState = PowerLineStatus.Online Then
+            chargeString = "true"
+        Else
+            chargeString = "false"
+        End If
+
+        Dim url As String = "http://localhost/project_gonzo_v1/app_page/insertData.php?deviceid=" & deviceID & "&batlevel=" & batLevel & "&chargestate=" & chargeString
+        ' Using WebRequest
+        Dim request As WebRequest = WebRequest.Create(url)
+        Dim response As WebResponse = request.GetResponse()
+
+    End Sub
+
+
+
+End Class
