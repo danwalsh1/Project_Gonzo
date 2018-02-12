@@ -3,6 +3,11 @@
   
   include("../functions/generalFunctions.php"); #Import additional functionality stored in seperate files.
   include("../functions/sqlFunctions.php");
+
+  if(!isset($_SESSION['Username'])){
+	  header("Location: login.php");
+	  die();
+  }
   
 check_db_exists();  
 	
