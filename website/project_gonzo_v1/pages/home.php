@@ -28,6 +28,8 @@
       </div>
       
       <div id="Content">
+		<img src="../img/gonzoLogo.jpg" />
+		<p>Welcome <?php echo $_SESSION['Username']; ?>, to the Project Gonzo homepage</p>
       </div>
       
       <div id="Footer">
