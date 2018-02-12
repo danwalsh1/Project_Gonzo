@@ -15,18 +15,6 @@ if (isset($_POST['UpdateDetailsView'])){
 	$result = fetch_user_data($UserSelected);
 	
 	}	
-		
-function retrieve_users_DropDown(){
-	$connect = connect_db("NULL");
-	$sql = "SELECT * FROM users";
-	$result = mysqli_query($connect, $sql);
-	$row = mysqli_fetch_array($result);
-	while($row = mysqli_fetch_array($result))
-	{
-		echo $ListofNames="<option>" . $row['username'] . "</option>";
-
-	}
-	}
 
 function fetch_user_data($UserSelected){
 		$connect = connect_db("NULL"); #NULL as no data retrieval is required yet, simply the connection.
