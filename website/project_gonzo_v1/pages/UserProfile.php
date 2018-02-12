@@ -3,6 +3,12 @@
   
   include("../functions/generalFunctions.php"); #Import additional functionality stored in seperate files.
   include("../functions/sqlFunctions.php");
+
+  if(!isset($_SESSION['Username'])){
+	  header("Location: login.php");
+	  die();
+  }
+
 check_db_exists();  
 	
 if (isset($_POST['SubmitProfileForm'])){ #Checks to make sure the $_POST form value exists before processing the function call assigned to the variable.
