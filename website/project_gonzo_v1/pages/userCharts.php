@@ -22,7 +22,7 @@
 	  $NumOfDays = 30;
 	}
 	
-	print_chart($Date, $NumOfDays, $userValues->device_id, "Battery Utilisation Chart", 500, 300, "dataChart");
+	print_chart($Date, $NumOfDays, $userValues->device_id, "Battery Utilisation Chart", 1000, 600, "dataChart");
   }
 ?>
 <!DOCTYPE html>
