@@ -15,7 +15,6 @@
 	$connect = connect_db("NULL");
 	$sql = "SELECT * FROM users";
 	$result = mysqli_query($connect, $sql);
-	$row = mysqli_fetch_array($result);
 	while($row = mysqli_fetch_array($result))
 	{
 		echo $ListofNames="<option>" . $row['username'] . "</option>";
