@@ -4,27 +4,27 @@
   include("../functions/generalFunctions.php"); #Import additional functionality stored in seperate files.
   include("../functions/sqlFunctions.php");
 
-  if(!isset($_SESSION['Username'])){
+  if(!isset($_SESSION['Username'])){ #Checks the session username is set from the login page and then kills off the login page after.
 	  header("Location: login.php");
 	  die();
   }
   
-check_db_exists();  
+check_db_exists();  #Checks database existence by calling the function stored in sqlFunctions.php
 	
 if (isset($_POST['SubmitProfileForm'])){ #Checks to make sure the $_POST form value exists before processing the function call assigned to the variable.
 
 	if(ctype_alnum($_POST['username']) AND ctype_alnum($_POST['forename']) AND ctype_alnum($_POST['surname']) AND ctype_alnum($_POST['deviceid']) AND ctype_alnum($_POST['phonenum']) AND filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) and ctype_alnum($_POST['PasswordUpdate'])){
-		
+		#If the data entry type is correct and equates to true, calls the update user data function.
 	$result = update_user_data();
 	}
 	}
 
 if (isset($_POST['UpdateDetailsView'])){
 	$UserSelected = $_POST['DD'];
-	
+	#Function uses a select query to extract the user details based on dropdown value.
 	if(ctype_alnum($_POST['username']) AND ctype_alnum($_POST['forename']) AND ctype_alnum($_POST['surname']) AND ctype_alnum($_POST['deviceid']) AND ctype_alnum($_POST['phonenum']) AND filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) and ctype_alnum($_POST['PasswordUpdate'])){
-		
-	$result = fetch_user_data($UserSelected);
+		#Checked for validity incase of sql injection attempts.
+	$result = fetch_user_data($UserSelected); #Runs the fetch function and displays in the form fields.
 	}
 	}	
 
@@ -37,11 +37,11 @@ function fetch_user_data($UserSelected){
 		}
 		
 		{		
-if(@$UserSelected == False){
-$value = fetch_user_data($_SESSION['Username']);
+if(@$UserSelected == False){ #Used to set initial fields in the form when the page is first loaded.
+$value = fetch_user_data($_SESSION['Username']); #By default, use the session owners username which will be the admin account.
 }
 else{
-$value = fetch_user_data($UserSelected);
+$value = fetch_user_data($UserSelected); #If the variable is found to exist, pass in the user selected in the dropdown and then run the function.
 }
 		}	
 		
@@ -57,7 +57,7 @@ function update_user_data(){
 <!DOCTYPE html>
 <html>
   <head>
-  <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" />
+  <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" /> <!--Calls CSS style sheets-->
   <link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
     <title>Admin Profile | Project Gonzo</title> <!--Page title -->
   </head>
@@ -67,7 +67,7 @@ function update_user_data(){
 		<div id="Menu">
 			<nav>
 				<ul>
-					<?php displayMainMenu(); ?>
+					<?php displayMainMenu(); ?> <!--Displays main menu options -->
 				</ul>
 			</nav>
 		</div>
@@ -90,7 +90,7 @@ function update_user_data(){
 	  
 	  <div id="Username" style="padding-top: 10px;">
 		<label> Username: </label>
-		<input type ="text" name="username" value=<?php echo '"' . $value->username . '"' ?>>   
+		<input type ="text" name="username" value=<?php echo '"' . $value->username . '"' ?>>   <!--Updates the value based on whats passed in from the fetch_user_data function.-->
 	   </div>
 	 	   
 	  <!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
