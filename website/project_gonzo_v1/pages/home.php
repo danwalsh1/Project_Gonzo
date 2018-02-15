@@ -18,7 +18,6 @@
   <body>
     <div id="Page">
       <div id="Header">
-	  <h1>Project Gonzo<h1>
 		<div id="Menu">
 			<nav>
 				<ul>
@@ -26,6 +25,8 @@
 				</ul>
 			</nav>
 		</div>
+	      
+	      <h1>Project Gonzo<h1>
       </div>
       
       <div id="Content">
