@@ -12,11 +12,13 @@
   check_db_exists();
   
   if (isset($_POST['logindone'])){# checks credentials are valid and then passes through to homepage.
-	$result = UserLogin($_POST['Username'],$_POST['Password']); #Stores input username and password.
-	if($result){ #if result is true, continues through to homepage otherwise remains on login page.
-		$_SESSION["Username"] = $_POST['Username']; #Post assigned to session to carry username to next page.
-		header ("Location: home.php");
-		die();
+	if(ctype_alnum($_POST['Username']) AND ctype_alnum($_POST['Password'])){
+		$result = UserLogin($_POST['Username'],$_POST['Password']); #Stores input username and password.
+		if($result){ #if result is true, continues through to homepage otherwise remains on login page.
+			$_SESSION["Username"] = $_POST['Username']; #Post assigned to session to carry username to next page.
+			header ("Location: home.php");
+			die();
+		}
 	}
   }
   
