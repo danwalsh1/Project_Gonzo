@@ -12,13 +12,20 @@
 check_db_exists();  
 	
 if (isset($_POST['SubmitProfileForm'])){ #Checks to make sure the $_POST form value exists before processing the function call assigned to the variable.
+
+	if(ctype_alnum($_POST['username']) AND ctype_alnum($_POST['forename']) AND ctype_alnum($_POST['surname']) AND ctype_alnum($_POST['deviceid']) AND ctype_alnum($_POST['phonenum']) AND filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) and ctype_alnum($_POST['PasswordUpdate'])){
+		
 	$result = update_user_data();
+	}
 	}
 
 if (isset($_POST['UpdateDetailsView'])){
 	$UserSelected = $_POST['DD'];
-	$result = fetch_user_data($UserSelected);
 	
+	if(ctype_alnum($_POST['username']) AND ctype_alnum($_POST['forename']) AND ctype_alnum($_POST['surname']) AND ctype_alnum($_POST['deviceid']) AND ctype_alnum($_POST['phonenum']) AND filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) and ctype_alnum($_POST['PasswordUpdate'])){
+		
+	$result = fetch_user_data($UserSelected);
+	}
 	}	
 
 function fetch_user_data($UserSelected){
