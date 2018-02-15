@@ -12,8 +12,11 @@
 check_db_exists();  
 	
 if (isset($_POST['SubmitProfileForm'])){ #Checks to make sure the $_POST form value exists before processing the function call assigned to the variable.
-	$result = update_user_data();
+	if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) and ctype_alnum($_POST['username'])and ctype_alnum($_POST['forename'])and ctype_alnum($_POST['surname'])and ctype_alnum($_POST['deviceid'])and ctype_alnum($_POST['phonenum'])and ctype_alnum($_POST['passwordUpdate'])){
+		$result = update_user_data();
 	}
+}
+
 function fetch_user_data($username){
 		$connect = connect_db("NULL"); #NULL as no data retrieval is required yet, simply the connection.
 		$sql = 'SELECT * FROM users WHERE username="'. $_SESSION["Username"] . '"'; #Queries the database for the users details using details stored in session.
