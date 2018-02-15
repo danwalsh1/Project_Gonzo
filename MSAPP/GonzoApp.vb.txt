@@ -61,7 +61,7 @@ Public Class sendData
             chargeString = "false"
         End If
 
-        Dim url As String = "http://projectgonzo.local/project_gonzo_v1/app_page/insertData.php?deviceid=" & deviceID & "&batlevel=" & batLevel & "&chargestate=" & chargeString
+        Dim url As String = "http://projectgonzocoventry.000webhostapp.com/app_page/insertData.php?deviceid=" & deviceID & "&batlevel=" & batLevel & "&chargestate=" & chargeString
         ' Using WebRequest
         Dim request As WebRequest = WebRequest.Create(url)
         Dim response As WebResponse = request.GetResponse()
