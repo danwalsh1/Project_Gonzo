@@ -25,8 +25,17 @@
 		</div>
       </div>
 	  
+	<div style = "padding-left: 10px;">
+	<p><u>Installation Instructions - Windows Desktop Application</u></p>
+	<p>1. If you haven't already, click on the app link.</p>
+	<p>2. Unzip the download contents.</p>
+	<p>3. Navigate into the folder and run the 'setup.exe' file. </p>
+	<p>4. When prompted press install, the app will automatically open when installation is complete.</p>
+	<p>5. Congratulations, you can now start logging data :) </p>
+	  
 	<div style= padding-top:10px; >
 	<a href=https://projectgonzocoventry.000webhostapp.com/downloads/MSAPP.zip > Click here for the desktop app. </a>
 	</div>
 	</body>
 </html>
+	
