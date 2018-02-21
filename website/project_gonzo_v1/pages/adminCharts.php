@@ -9,7 +9,7 @@
 	  header("Location: login.php");
 	  die();
   }
-
+  
   if(isset($_SESSION['admin'])){
 	  if($_SESSION['admin'] == False){
 		  header("Location: home.php");
@@ -20,36 +20,23 @@
 	  die();
   }
 	  
-  if(isset($_POST['UpdateChartView']))
-  {
-  $ChooseUser = $_POST['DD'];	
-  $Date = date("Y-m-d", strtotime($_POST['Calendar']));
+  if(isset($_POST['UpdateChartView'])){
+	  $ChooseUser = $_POST['DD'];	
+      $Date = date("Y-m-d", strtotime($_POST['Calendar']));
   
-  if($_POST['DDTimeframe'] == "Day")
-  {
-	  $NumOfDays = 1;
-	  
-  }elseif($_POST['DDTimeframe'] == "Week")
-  {
-	  $NumOfDays = 7;
-	  
-  }elseif($_POST['DDTimeframe'] == "Month")
-  {
-	  $NumOfDays = 30;
+      if($_POST['DDTimeframe'] == "Day"){
+	      $NumOfDays = 1;
+      }elseif($_POST['DDTimeframe'] == "Week"){
+	      $NumOfDays = 7;
+      }elseif($_POST['DDTimeframe'] == "Month"){
+	      $NumOfDays = 30;
+      }
+  
+      $value = get_users_values($_POST['DD']);
+      $DeviceID = $value->device_id;
+  
+      print_chart($Date, $NumOfDays, $DeviceID, "Battery Utilisation Chart", 1000, 600, "Charts" );
   }
-  
-  $value = get_users_values($_POST['DD']);
-  $DeviceID = $value->device_id;
-  
-  print_chart($Date, $NumOfDays, $DeviceID, "Battery Utilisation Chart", 1000, 600, "Charts" );
-  #start date, number of days, device id, title, width, height, div id
-  
-  #echo $_POST['Calendar'];
-  }
-  
-  #Day, week and month options
-  
-  
 ?>
 <!DOCTYPE html>
 <html>
@@ -71,28 +58,28 @@
 		</div>
       </div>
       
-     <div id="Content">
+      <div id="Content">
 		<form action= "adminCharts.php" method = "POST">
 		
 			<div id="DropDown" style="padding-top: 10px; text-align: Left;">
-			<label> Please Select a User: </label>
-			<select class="form-dropdown" style="width:150px" id="Dropdown" name="DD">
-				<?php echo retrieve_users_DropDown(); ?>			
-			</select>
+			    <label> Please Select a User: </label>
+			    <select class="form-dropdown" style="width:150px" id="Dropdown" name="DD">
+				    <?php echo retrieve_users_DropDown(); ?>			
+			    </select>
 			</div>
 			
 			<div id="Timeframe" style="padding-top: 10px; text-align: left;">
-			<label> Period to report: </label>
-			<select class="form-dropdown" style="width:150px" id="DropdownTimeframe" name="DDTimeframe">
-				<option> Day </option>
-				<option> Week </option>
-				<option> Month </option>
-			</select>
+			    <label> Period to report: </label>
+			    <select class="form-dropdown" style="width:150px" id="DropdownTimeframe" name="DDTimeframe">
+				    <option> Day </option>
+				    <option> Week </option>
+				    <option> Month </option>
+			    </select>
 			</div>
 			
 			<div id = "Calendar" style="padding-top: 10px; text-align: left;">
-			<label> Please select a start date: </label>
-			<input type= "date" name="Calendar">
+			    <label> Please select a start date: </label>
+			    <input type= "date" name="Calendar">
 			</div>
 		
 			<div id="ChartsView" style="padding-top: 10px;padding-left: 50px; text-align: left;">
@@ -100,20 +87,13 @@
 				<br />
 				<input type="submit" value="Show Charts" name="UpdateChartView">	
 			</div>
-	  
-		
-		
-		<br>
 		</form>
+		<br />
 		
 		<div id= "Charts">
 		</div>
 		
-	</div>
-
-	  
-      </div>
-      
+	  </div>
       <div id="Footer">
       </div>
     </div>
