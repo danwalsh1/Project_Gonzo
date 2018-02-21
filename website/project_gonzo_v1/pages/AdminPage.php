@@ -9,6 +9,16 @@
 	  die();
   }
   
+  if(isset($_SESSION['admin'])){
+	  if($_SESSION['admin'] == False){
+		  header("Location: home.php");
+		  die();
+	  }
+  }else{
+	  header("Location: logout.php");
+	  die();
+  }
+  
 check_db_exists();  #Checks database existence by calling the function stored in sqlFunctions.php
 	
 if (isset($_POST['SubmitProfileForm'])){ #Checks to make sure the $_POST form value exists before processing the function call assigned to the variable.
