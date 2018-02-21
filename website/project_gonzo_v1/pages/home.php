@@ -38,7 +38,7 @@
 			 font-size: 100%;
 		 }	 
 		 </style>
-		<p><img src="../img/gonzoLogo.jpg" alt="Gonzo Logo" align="right" align="bottom"/>
+		<p><img src="../img/gonzoLogo.jpg" alt="Gonzo Logo" align="right" align="bottom" class="res"/>
 			Project Gonzo is an App which you can download on your device, 
 			it records your device's sensor data for example; battery 
 			percentage, CPU usage, brightness, temperature, location and
@@ -59,7 +59,7 @@
 		<p><b>Step 4: Now all you do is leave it</b> - censor data will be recorded
 			every 10 minutes the data recorded can then be viewed anytime 
 			on our website only through your account.</p> 
-		<img src="../img/Androidphone.png" align="top" alt="Android Phone"/>
+		<img src="../img/Androidphone.png" align="top" alt="Android Phone" class="res"/>
       </div>
       
       <div id="Footer">
