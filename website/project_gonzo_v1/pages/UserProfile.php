@@ -40,8 +40,9 @@ function update_user_data(){
 <!DOCTYPE html>
 <html>
   <head>
-  <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" />
-  <link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Makes page mobile-friendly-->
+    <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" />
+    <link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
     <title>User Profile | Project Gonzo</title> <!--Page title -->
   </head>
   <body>
