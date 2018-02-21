@@ -57,8 +57,9 @@ function update_user_data(){
 <!DOCTYPE html>
 <html>
   <head>
-  <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" /> <!--Calls CSS style sheets-->
-  <link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Makes page mobile-friendly-->
+    <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" /> <!--Calls CSS style sheets-->
+    <link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
     <title>Admin Profile | Project Gonzo</title> <!--Page title -->
   </head>
   <body>
