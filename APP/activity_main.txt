@@ -13,7 +13,7 @@
         app:layout_constraintBottom_toTopOf="@id/BatteryLevel"
         android:gravity="center"
         android:onClick="OpenBrowser"
-        android:text="Press to go to a website."
+        android:text="Send Battery LEVEL and CHARGE STATE."
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="94dp" />
 
