@@ -8,6 +8,16 @@
 	  header("Location: login.php");
 	  die();
   }
+
+  if(isset($_SESSION['admin'])){
+	  if($_SESSION['admin'] == False){
+		  header("Location: home.php");
+		  die();
+	  }
+  }else{
+	  header("Location: logout.php");
+	  die();
+  }
   
   if(isset($_POST['createUser'])){
 	  if(ctype_alnum($_POST['username']) and ctype_alnum($_POST['forename']) and ctype_alnum($_POST['surname']) and ctype_alnum($_POST['deviceid']) and ctype_alnum($_POST['phonenumber']) and ctype_alnum($_POST['password']) and filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
