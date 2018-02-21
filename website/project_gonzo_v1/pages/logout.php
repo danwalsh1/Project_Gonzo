@@ -2,7 +2,7 @@
   session_start();
   
   include("../functions/generalFunctions.php");
-  if(isset($_SESSION['Username']){
+  if(isset($_SESSION['Username'])){
 	  unset($_SESSION['Username']);
   }
   if(isset($_SESSION['admin'])){
