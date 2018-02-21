@@ -3,28 +3,26 @@
   
   include("../functions/generalFunctions.php"); #Import additional functionality stored in seperate files.
   include("../functions/sqlFunctions.php");
-
-  if(!isset($_SESSION['Username'])){
-	  header("Location: login.php");
-	  die();
-  }
-
+  
 check_db_exists();  
 	
 if (isset($_POST['SubmitProfileForm'])){ #Checks to make sure the $_POST form value exists before processing the function call assigned to the variable.
-	if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) and ctype_alnum($_POST['username'])and ctype_alnum($_POST['forename'])and ctype_alnum($_POST['surname'])and ctype_alnum($_POST['deviceid'])and ctype_alnum($_POST['phonenum'])and ctype_alnum($_POST['passwordUpdate'])){
-		$result = update_user_data();
+	$result = update_user_data();
 	}
-}
-
 function fetch_user_data($username){
 		$connect = connect_db("NULL"); #NULL as no data retrieval is required yet, simply the connection.
-		$sql = 'SELECT * FROM users WHERE username="'. $_SESSION["Username"] . '"'; #Queries the database for the users details using details stored in session.
-		$result = mysqli_query($connect, $sql); #Run the query.
-		$value = mysqli_fetch_object($result);#Fetch the items identified in the $resulte variable.
-		return $value; #return the fields identified.
+		$sql = 'SELECT * FROM users WHERE username = ?'; #Queries the database for the users details using details stored in session.
+		$stmt = $connect->prepare($sql);
+		$stmt->bind_param('s', $username);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$row = $result->fetch_assoc();
+		
+		return array($row['username'], $row['forename'], $row['surname'], $row['device_id'], $row['phone_num'], $row['email'],$row['password']);
 		}
-$value = fetch_user_data($_SESSION['Username']); #Used to automatically the identified user data into the html form.
+	
+		
+#$value = fetch_user_data($_SESSION['Username']); #Used to automatically the identified user data into the html form.
 		
 function update_user_data(){
         $connect = connect_db("NULL"); #Connects to DB
@@ -40,9 +38,8 @@ function update_user_data(){
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Makes page mobile-friendly-->
-    <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" />
-    <link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
+  <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" />
+  <link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
     <title>User Profile | Project Gonzo</title> <!--Page title -->
   </head>
   <body>
@@ -63,39 +60,39 @@ function update_user_data(){
 	  
 	   <div id="Username" style="padding-top: 10px;">
 		<label> Username: </label>
-		<input type ="text" name="username" value=<?php echo '"' . $value->username . '"' ?>>   
+		<input type ="text" name="username" value=<?php echo fetch_user_data($_SESSION['Username'])[0]  ?>>   
 	   </div>
 	  <!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
        <div id="FirstNameText" style="padding-top: 10px;">
 		<label> First Name: </label>
-		<input type ="text" name="forename" value=<?php echo '"' . $value->forename . '"' ?>>
+		<input type ="text" name="forename" value=<?php echo fetch_user_data($_SESSION['Username'])[1] ?>>
 	   </div>
 		
 	   <div id="Surname" style="padding-top: 10px;">
 		<label> Surname: </label>
-		<input type="text" name ="surname" value=<?php echo '"' . $value->surname . '"' ?>>
+		<input type="text" name ="surname" value=<?php echo fetch_user_data($_SESSION['Username'])[2] ?>>
 	   </div>
 		
 		<div id= "Device_ID" style="padding-top: 10px;">
 		 <label> Device ID: </label>
-		 <input type ="text" name="deviceid" value=<?php echo '"' . $value->device_id . '"' ?>>
+		 <input type ="text" name="deviceid" value=<?php echo fetch_user_data($_SESSION['Username'])[3] ?>>
 		</div>
 		 
 		
 		<div id= "Phone_Number" style="padding-top: 10px;">
 		 <label> Phone Number: </label>
-		 <input type ="text" name="phonenum" value=<?php echo '"' . $value->phone_num . '"' ?>>
+		 <input type ="text" name="phonenum" value=<?php echo fetch_user_data($_SESSION['Username'])[4] ?>>
 		</div>
 		
 		<div id= "Email_Address" style="padding-top: 10px;">
 		 <label> Email Address: </label>
-		 <input type ="text" name="email" value=<?php echo '"' . $value->email . '"' ?>>
+		 <input type ="text" name="email" value=<?php echo fetch_user_data($_SESSION['Username'])[5] ?>>
 		</div>
 		
 		
 		<div id= "Update_Password" style="padding-top: 10px;">
 		 <label> Update Password: </label>
-		 <input type ="password" name="PasswordUpdate" value=<?php echo '"' . $value->password . '"' ?>>
+		 <input type ="password" name="PasswordUpdate" value=<?php echo fetch_user_data($_SESSION['Username'])[6] ?>>
 		</div> 
 		
 
