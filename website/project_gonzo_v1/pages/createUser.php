@@ -4,7 +4,7 @@
   include("../functions/generalFunctions.php"); #Import additional functionality stored in seperate files.
   include("../functions/sqlFunctions.php");
 
-  if(isset($_SESSION['Username']) == false or $_SESSION['admin'] == false){
+  if(isset($_SESSION['Username']) == false){
 	  header("Location: login.php");
 	  die();
   }
