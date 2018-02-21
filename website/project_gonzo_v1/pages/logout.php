@@ -2,7 +2,12 @@
   session_start();
   
   include("../functions/generalFunctions.php");
-  unset($_SESSION['Username']);
+  if(isset($_SESSION['Username']){
+	  unset($_SESSION['Username']);
+  }
+  if(isset($_SESSION['admin'])){
+	  unset($_SESSION['admin']);
+  }
   session_destroy();
   Header("Location: login.php");
   Die();
