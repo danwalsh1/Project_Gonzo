@@ -44,8 +44,9 @@ else{
 <!DOCTYPE html>
 <html>
   <head>
-  <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" />
-  <link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Makes page mobile-friendly-->
+    <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" />
+    <link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
     <title>Login | Project Gonzo</title> <!--Project title -->
   </head>
   <body>
