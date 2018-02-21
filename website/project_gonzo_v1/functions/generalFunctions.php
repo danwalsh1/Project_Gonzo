@@ -13,7 +13,6 @@
 				echo '<li><a href="home.php">Home</a></li>
 				<li><a href="userCharts.php">My Device</a></li>
 				<li><a href="UserProfile.php">My Profile</a></li>
-				<li><a href="Downloads.php">Downloads</a></li>
 				<li><a href="logout.php">Logout</a></li>
 				<li style="float:right"><a href="home.php"><img src="../img/gonzoLogo.jpg" height="60" width="65" style="align:center" /></a></li>';
 			}
