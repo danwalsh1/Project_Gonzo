@@ -8,6 +8,16 @@
 	  header("Location: login.php");
 	  die();
   }
+if(isset($_SESSION['admin'])){
+	  if($_SESSION['admin'] == False){
+		  header("Location: home.php");
+		  die();
+	  }
+  }else{
+	  header("Location: logout.php");
+	  die();
+  }
+  
   
 check_db_exists();  #Checks database existence by calling the function stored in sqlFunctions.php
 	
