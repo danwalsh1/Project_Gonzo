@@ -1,6 +1,9 @@
 package com.example.salazhar.projectgonzo;
 
 import android.content.Intent;
+import android.os.BatteryManager;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -12,31 +15,41 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BroadcastReceiver BatteryChange = new BroadcastReceiver() {
+    String Address;
+    public int level;
+    String NameOfPhone = Build.MODEL; //Sets the phones name equal to the NameOfPhone variable.
+    String deviceStatus;
+
+    public BroadcastReceiver BatteryChange = new BroadcastReceiver() {
         @Override
         public void onReceive(Context c, Intent i) {
-            //Get the battery level and assign it to the 'level' variable.
-            int level = i.getIntExtra("level", 0);
+
+            //For future reference the battery level is stored inside the 'level' variable.
+            //Get the battery level and assign it to the 'level' variable. If the program cannot get a level it will set the battery level to 0 by default.
+            level = i.getIntExtra("level", 0);
             //Find textview control created in activity_main.xml
             TextView tv = (TextView) findViewById(R.id.BatteryLevel);
             //Set the BatteryLevel text field as 'Battery level *batterylevelhere* %'.
             tv.setText("Battery Level:" + Integer.toString(level) + "%");
-            //For future reference the battery level is stored inside the 'level' variable.
+
+            //deviceStatus = Intent.getIntExtra(BatteryManager.EXTRA_STATUS,-1); *not used at the moment*
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Register the receiver which triggers the event 'BatteryChange' when the battery changes. This in turn then changes the text on the screen to say the now current battery life.
+        //Register the receiver which triggers the event 'BatteryChange' when the battery level changes. This in turn then changes the text on the screen to say the now current battery life.
         registerReceiver(BatteryChange, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
     }
 
     public void OpenBrowser(View view){
         //Creates a new browser session that opens a certain website.
-        Intent browserIntent=new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.co.uk"));
+        Address = "https://projectgonzocoventry.000webhostapp.com/app_page/insertData.php?deviceid="+NameOfPhone+"&batlevel="+level+"&chargestate=1";
+        Intent browserIntent=new Intent(Intent.ACTION_VIEW, Uri.parse(Address));
         startActivity(browserIntent);
     }
 
