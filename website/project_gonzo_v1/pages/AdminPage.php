@@ -9,42 +9,33 @@
 	  die();
   }
   
-  if(isset($_SESSION['admin'])){
-	  if($_SESSION['admin'] == False){
-		  header("Location: home.php");
-		  die();
-	  }
-  }else{
-	  header("Location: logout.php");
-	  die();
-  }
-  
 check_db_exists();  #Checks database existence by calling the function stored in sqlFunctions.php
 	
-if (isset($_POST['SubmitProfileForm'])){ #Checks to make sure the $_POST form value exists before processing the function call assigned to the variable.
-
-	if(ctype_alnum($_POST['username']) AND ctype_alnum($_POST['forename']) AND ctype_alnum($_POST['surname']) AND ctype_alnum($_POST['deviceid']) AND ctype_alnum($_POST['phonenum']) AND filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) and ctype_alnum($_POST['PasswordUpdate'])){
+if (isset($_POST['SubmitProfileForm'])){
 		#If the data entry type is correct and equates to true, calls the update user data function.
 	$result = update_user_data();
 	}
-	}
+	
 
 if (isset($_POST['UpdateDetailsView'])){
 	$UserSelected = $_POST['DD'];
-	#Function uses a select query to extract the user details based on dropdown value.
-	if(ctype_alnum($_POST['username']) AND ctype_alnum($_POST['forename']) AND ctype_alnum($_POST['surname']) AND ctype_alnum($_POST['deviceid']) AND ctype_alnum($_POST['phonenum']) AND filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) and ctype_alnum($_POST['PasswordUpdate'])){
 		#Checked for validity incase of sql injection attempts.
 	$result = fetch_user_data($UserSelected); #Runs the fetch function and displays in the form fields.
 	}
-	}	
+		
 
 function fetch_user_data($UserSelected){
-		$connect = connect_db("NULL"); #NULL as no data retrieval is required yet, simply the connection.
-		$sql = 'SELECT * FROM users WHERE username="' . $UserSelected . '"'; #Queries the database for the users details using details stored in session.
-		$result = mysqli_query($connect, $sql); #Run the query.
-		$value = mysqli_fetch_object($result);#Fetch the items identified in the $result variable.
-		return $value; #return the fields identified.
+		$connect = connect_db("NULL");
+		$sql = 'SELECT * FROM users WHERE username = ?';
+		$stmt = $connect->prepare($sql);
+		$stmt->bind_param('s', $UserSelected);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$row = $result->fetch_assoc();
+			
+		return array($row['username'], $row['forename'], $row['surname'], $row['device_id'], $row['phone_num'], $row['email'],$row['password']);		
 		}
+		
 		
 		{		
 if(@$UserSelected == False){ #Used to set initial fields in the form when the page is first loaded.
@@ -101,40 +92,40 @@ function update_user_data(){
 	  
 	  <div id="Username" style="padding-top: 10px;">
 		<label> Username: </label>
-		<input type ="text" name="username" value=<?php echo '"' . $value->username . '"' ?>>   <!--Updates the value based on whats passed in from the fetch_user_data function.-->
+		<input type ="text" name="username" value=<?php echo fetch_user_data(@$UserSelected)[0]  ?>>   <!--Updates the value based on whats passed in from the fetch_user_data function.-->
 	   </div>
 	 	   
 	  <!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
        <div id="FirstNameText" style="padding-top: 10px;">
 		<label> First Name: </label>
-		<input type ="text" name="forename" value=<?php echo '"' . $value->forename . '"' ?>>
+		<input type ="text" name="forename" value=<?php echo fetch_user_data(@$UserSelected)[1] ?>>
 	   </div>
 		
 	   <div id="Surname" style="padding-top: 10px;">
 		<label> Surname: </label>
-		<input type="text" name ="surname" value=<?php echo '"' . $value->surname . '"' ?>>
+		<input type="text" name ="surname" value=<?php echo fetch_user_data(@$UserSelected)[2] ?>>
 	   </div>
 		
 		<div id= "Device_ID" style="padding-top: 10px;">
 		 <label> Device ID: </label>
-		 <input type ="text" name="deviceid" value=<?php echo '"' . $value->device_id . '"' ?>>
+		 <input type ="text" name="deviceid" value=<?php echo fetch_user_data(@$UserSelected)[3] ?>>
 		</div>
 		 
 		
 		<div id= "Phone_Number" style="padding-top: 10px;">
 		 <label> Phone Number: </label>
-		 <input type ="text" name="phonenum" value=<?php echo '"' . $value->phone_num . '"' ?>>
+		 <input type ="text" name="phonenum" value=<?php echo fetch_user_data(@$UserSelected)[4] ?>>
 		</div>
 		
 		<div id= "Email_Address" style="padding-top: 10px;">
 		 <label> Email Address: </label>
-		 <input type ="text" name="email" value=<?php echo '"' . $value->email . '"' ?>>
+		 <input type ="text" name="email" value=<?php echo fetch_user_data(@$UserSelected)[5]?>>
 		</div>
 		
 		
 		<div id= "Update_Password" style="padding-top: 10px;">
 		 <label> Update Password: </label>
-		 <input type ="password" name="PasswordUpdate" value=<?php echo '"' . $value->password . '"' ?>>
+		 <input type ="password" name="PasswordUpdate" value=<?php echo fetch_user_data(@$UserSelected)[6]?>>
 		</div> 
 		
 
