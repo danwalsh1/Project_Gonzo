@@ -9,6 +9,16 @@
 	  header("Location: login.php");
 	  die();
   }
+
+  if(isset($_SESSION['admin'])){
+	  if($_SESSION['admin'] == False){
+		  header("Location: home.php");
+		  die();
+	  }
+  }else{
+	  header("Location: logout.php");
+	  die();
+  }
 	  
   if(isset($_POST['UpdateChartView']))
   {
