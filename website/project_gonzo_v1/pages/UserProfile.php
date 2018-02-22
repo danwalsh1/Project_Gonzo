@@ -23,12 +23,13 @@ function fetch_user_data($username){
 		}
 	
 function update_user_data(){
-        $connect = connect_db("NULL"); #Connects to DB
-		{
-        $sql = "UPDATE users SET forename='" . $_POST['forename'] . "', surname='" . $_POST['surname'] . "', device_id='" . $_POST['deviceid'] . "', phone_num='" . $_POST['phonenum'] . "', email='" . $_POST['email'] . "', password='" . $_POST['PasswordUpdate'] . "'WHERE username='". $_POST['username'] . "'";
-		} #Updates all table fields as a catch all solution even if the value is the same.		
-        $result = mysqli_query($connect, $sql);
-		#echo $sql; #Testing for the SQL to ensure correct syntax.
+       		$connect = connect_db("NULL"); #Connects to DB
+		$stmt = "UPDATE users SET forename = ?, surname = ?, device_id = ? , phone_num = ?, email = ?, password = ? WHERE username = ?";
+        	$sql = $connect->prepare($stmt);
+		$sql->bind_param('sssssss', $_POST['forename'], $_POST['surname'],$_POST['deviceid'], $_POST['phonenum'], $_POST['email'], $_POST['PasswordUpdate'], $_POST['username']);
+		$sql->execute();
+		$sql->close();
+			
 }
 ?>
 
