@@ -14,11 +14,12 @@ import android.net.Uri;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
-
+                        //Initialises variables with varying types.
     String Address;
     public int level;
     String NameOfPhone = Build.MODEL; //Sets the phones name equal to the NameOfPhone variable.
-    String deviceStatus;
+    String state;
+    public boolean isCharging;
 
     public BroadcastReceiver BatteryChange = new BroadcastReceiver() {
         @Override
@@ -30,12 +31,21 @@ public class MainActivity extends AppCompatActivity {
             //Find textview control created in activity_main.xml
             TextView tv = (TextView) findViewById(R.id.BatteryLevel);
             //Set the BatteryLevel text field as 'Battery level *batterylevelhere* %'.
-            tv.setText("Battery Level:" + Integer.toString(level) + "%");
+            tv.setText("Battery Level: " + Integer.toString(level) + "%");
 
-            //deviceStatus = Intent.getIntExtra(BatteryManager.EXTRA_STATUS,-1); *not used at the moment*
+            //Finding the charge state.
+            int status = i.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+            isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                    status == BatteryManager.BATTERY_STATUS_FULL;
+            if (isCharging == true) {
+                state = " Charging.";
+            }else if (isCharging == false) {
+                state = " Not Charging.";
+            }
+            TextView cs = (TextView) findViewById(R.id.ChargeState);
+            cs.setText("Charge State:"+state);
         }
     };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +53,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Register the receiver which triggers the event 'BatteryChange' when the battery level changes. This in turn then changes the text on the screen to say the now current battery life.
         registerReceiver(BatteryChange, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-
     }
 
     public void OpenBrowser(View view){
         //Creates a new browser session that opens a certain website.
-        Address = "https://projectgonzocoventry.000webhostapp.com/app_page/insertData.php?deviceid="+NameOfPhone+"&batlevel="+level+"&chargestate=1";
+        Address = "https://projectgonzocoventry.000webhostapp.com/app_page/insertData.php?deviceid="+NameOfPhone+"&batlevel="+level+"&chargestate="+isCharging;
         Intent browserIntent=new Intent(Intent.ACTION_VIEW, Uri.parse(Address));
         startActivity(browserIntent);
     }
