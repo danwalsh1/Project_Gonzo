@@ -40,7 +40,7 @@
 		email VARCHAR(100) NOT NULL)";
 		$result = mysqli_query($connect, $sql);
 		
-		$sql = "CREATE TABLE device_data (
+		$sql = "CREATE TABLE device_battery_data (
 		record_id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 		device_id VARCHAR(32) NOT NULL,
 		date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -48,6 +48,17 @@
 		charging_state BOOLEAN NOT NULL
 		)";
 		$result = mysqli_query($connect, $sql);
+		
+		$sql = "device_cpu_data (
+		record_id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		device_id VARCHAR(32) NOT NULL,
+		date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		cpu_percent_avg INT(3) NOT NULL
+		)";
+		$result = mysqli_query($connect, $sql);
+		
+		$sql = "INSERT INTO users (username, password, admin, forename, surname, device_id, phone_num, email) VALUES (
+		'admin', 'password', true, 'Admin', 'Admin', 'NONE', '0', 'a')";
 	}
 	
 	function get_users_values($username){
