@@ -9,6 +9,7 @@ check_db_exists();
 if (isset($_POST['SubmitProfileForm'])){ #Checks to make sure the $_POST form value exists before processing the function call assigned to the variable.
 	$result = update_user_data();
 	}
+
 function fetch_user_data($username){
 		$connect = connect_db("NULL"); #NULL as no data retrieval is required yet, simply the connection.
 		$sql = 'SELECT * FROM users WHERE username = ?'; #Queries the database for the users details using details stored in session.
@@ -21,9 +22,6 @@ function fetch_user_data($username){
 		return array($row['username'], $row['forename'], $row['surname'], $row['device_id'], $row['phone_num'], $row['email'],$row['password']);
 		}
 	
-		
-#$value = fetch_user_data($_SESSION['Username']); #Used to automatically the identified user data into the html form.
-		
 function update_user_data(){
         $connect = connect_db("NULL"); #Connects to DB
 		{
@@ -33,7 +31,6 @@ function update_user_data(){
 		#echo $sql; #Testing for the SQL to ensure correct syntax.
 }
 ?>
-
 
 <!DOCTYPE html>
 <html>
