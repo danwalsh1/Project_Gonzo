@@ -45,16 +45,7 @@ function fetch_user_data($UserSelected){
 			
 		return array($row['username'], $row['forename'], $row['surname'], $row['device_id'], $row['phone_num'], $row['email'],$row['password']);		
 		}
-		
-		
-		{		
-if(@$UserSelected == False){ #Used to set initial fields in the form when the page is first loaded.
-$value = fetch_user_data($_SESSION['Username']); #By default, use the session owners username which will be the admin account.
-}
-else{
-$value = fetch_user_data($UserSelected); #If the variable is found to exist, pass in the user selected in the dropdown and then run the function.
-}
-		}	
+			
 		
 function update_user_data(){
         $connect = connect_db("NULL"); #Connects to DB
