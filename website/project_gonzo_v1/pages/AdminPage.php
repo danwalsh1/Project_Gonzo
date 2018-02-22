@@ -77,11 +77,7 @@ function update_user_data(){
     <div id="Page">
       <div id="Header">
 		<div id="Menu">
-			<nav>
-				<ul>
-					<?php displayMainMenu(); ?> <!--Displays main menu options -->
-				</ul>
-			</nav>
+			<?php displayMainMenu(); ?>
 		</div>
       </div>
 	    
