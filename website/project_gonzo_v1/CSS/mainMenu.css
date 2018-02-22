@@ -28,8 +28,31 @@ nav ul li:hover a {
 	color:#000000;
 }
 
+.main-menu-control {
+	color: #FFFFFF;
+	font-size: 17px;
+	text-align: center;
+	display: none;
+}
+
+#main-menu-control {
+	display: none;
+}
+
+#Menu input[type=checkbox]:checked ~ #main-menu {
+	display: block;
+}
+
 @media screen and (max-width:1100px) {
+	#main-menu {
+		display: none;
+	}
+
 	nav ul li {
 		width: 100%;
+	}
+	
+	.main-menu-control {
+		display: block;
 	}
 }
