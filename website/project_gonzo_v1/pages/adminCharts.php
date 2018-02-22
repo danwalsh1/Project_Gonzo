@@ -50,11 +50,7 @@
     <div id="Page">
       <div id="Header">
 		<div id="Menu">
-			<nav>
-				<ul>
-					<?php displayMainMenu(); ?>
-				</ul>
-			</nav>
+			<?php displayMainMenu(); ?>
 		</div>
       </div>
       
