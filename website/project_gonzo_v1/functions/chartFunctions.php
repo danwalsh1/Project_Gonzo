@@ -1,4 +1,6 @@
 <?php
+	// No need to include sqlFunctions due to the chart pages already doing this.
+	
 	function makeGoogleChart($title, $width, $height, $divID, $dataString){
 		# Uses Google Charts
 		echo "
@@ -26,7 +28,7 @@
 	function get_avg_device_data_day($startDate, $endDate, $deviceId){
 		# Start date is inclusive, end date is not inclusive
 		$connect = connect_db();
-		$sql = "SELECT * FROM device_data WHERE date>='" . $startDate . "' AND date<'" . $endDate . "' AND device_id='" . $deviceId . "'";
+		$sql = "SELECT * FROM device_battery_data WHERE date>='" . $startDate . "' AND date<'" . $endDate . "' AND device_id='" . $deviceId . "'";
 		$result = mysqli_query($connect, $sql);
 		if(mysqli_num_rows($result) != 0){
 			while($row = mysqli_fetch_array($result)){
@@ -61,7 +63,7 @@
 	function get_device_data_day($startDate, $endDate, $deviceId){
 		# Start date is inclusive, end date is not inclusive
 		$connect = connect_db();
-		$sql = "SELECT * FROM device_data WHERE date>='" . $startDate . "' AND date<'" . $endDate . "' AND device_id='" . $deviceId . "'";
+		$sql = "SELECT * FROM device_battery_data WHERE date>='" . $startDate . "' AND date<'" . $endDate . "' AND device_id='" . $deviceId . "'";
 		$result = mysqli_query($connect, $sql);
 		if(mysqli_num_rows($result) != 0){
 			while($row = mysqli_fetch_array($result)){
