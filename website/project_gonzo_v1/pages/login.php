@@ -24,11 +24,16 @@
   
 function UserLogin($username,$password){ #Passes in username and password from html form.
 $connect = connect_db(); #connect to db
-$sql = 'SELECT * FROM users WHERE username="' . $username . '" AND password="' . $password . '"'; # checking validity of credentials.
-$result = mysqli_query($connect,$sql); #Executed query stored in $result.
-if(mysqli_num_rows($result)== 1){ #Conditions checked, passes over to $result in the start if statement.
-	$values = mysqli_fetch_object($result);
-	if($values->admin == True){  # Check if the user is an admin and store in the session dictionary.
+$sql = 'SELECT * FROM users WHERE username = ? AND password = ?'; # checking validity of credentials.
+$stmt = $connect->prepare($sql);
+$stmt->bind_param('ss', $username, $password);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
+
+if(mysqli_num_rows($result)== 1){
+if($row['username'] == admin){  # Check if the user is an admin and store in the session dictionary.
 		$_SESSION['admin'] = True;
 	}else{
 		$_SESSION['admin'] = False;
@@ -39,6 +44,7 @@ else{
 	return false;
 	}
 }
+	
 	
 ?>
 <!DOCTYPE html>
