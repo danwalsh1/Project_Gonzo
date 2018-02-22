@@ -49,7 +49,7 @@
 		)";
 		$result = mysqli_query($connect, $sql);
 		
-		$sql = "device_cpu_data (
+		$sql = "CREATE TABLE device_cpu_data (
 		record_id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 		device_id VARCHAR(32) NOT NULL,
 		date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
