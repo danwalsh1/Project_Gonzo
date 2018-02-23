@@ -33,31 +33,43 @@
 		if(mysqli_num_rows($result) != 0){
 			while($row = mysqli_fetch_array($result)){
 				$batLevelArray[] = $row['battery_level'];
+				$batStateArray[] = $row['charging_state'];
 			}
 		}else{
 			return 0;
 		}
 		$count = 0;
-		$avg = 0;
+		$numOfCharging = 0;
+		$avg = array(0, 0);
 		while($count < count($batLevelArray)){
-			$avg = $avg + $batLevelArray[$count];
+			$avg[0] = $avg[0] + $batLevelArray[$count];
+			if($batStateArray[$count] == 1){
+				$numOfCharging = $numOfCharging + 1;
+			}
 			$count += 1;
 		}
+		if($numOfCharging >= round(count($batStateArray) / 2)){
+			$avg[1] = 100;
+		}else{
+			$avg[1] = 0;
+		}
 		
-		$avg = $avg / count($batLevelArray);
+		$avg[0] = $avg[0] / count($batLevelArray);
 		return $avg;
 	}
 	
 	function get_avg_device_data_dates($startDate, $numOfDays, $deviceId){
 		$count = 0;
 		while($count < $numOfDays){
-			$avgLevelArray[] = round(get_avg_device_data_day($startDate, date("Y-m-d", strtotime("+1 day", strtotime($startDate))), $deviceId));
+			$result = get_avg_device_data_day($startDate, date("Y-m-d", strtotime("+1 day", strtotime($startDate))), $deviceId);
+			$avgLevelArray[] = round($result[0]);
+			$avgStateArray[] = $result[1];
 			$dateArray[] = $startDate;
 			$startDate = date("Y-m-d", strtotime("+1 day", strtotime($startDate)));
 			$count += 1;
 		}
 		
-		return array($avgLevelArray, $dateArray);
+		return array($avgLevelArray, $dateArray, $avgStateArray);
 	}
 	
 	function get_device_data_day($startDate, $endDate, $deviceId){
@@ -69,12 +81,17 @@
 			while($row = mysqli_fetch_array($result)){
 				$batLevelArray[] = $row['battery_level'];
 				$dateTimeArray[] = $row['date'];
+				if($row['charging_state'] == 0){
+					$batStateArray[] = 0;
+				}else{
+					$batStateArray[] = 100;
+				}
 			}
 		}else{
 			echo "ERROR";
 		}
 		
-		return array($batLevelArray, $dateTimeArray);
+		return array($batLevelArray, $dateTimeArray, $batStateArray);
 	}
 	
 	function print_chart($startDate, $numOfDays, $deviceId, $title = 'Data Chart', $width = 500, $height = 300, $divId = 'chartDiv'){
@@ -82,25 +99,25 @@
 			$result = get_device_data_day($startDate, date("Y-m-d", strtotime("+1 day", strtotime($startDate))), $deviceId);
 			
 			$count = 0;
-			$dataString = "[['Date', 'Battery Level'],";
+			$dataString = "[['Date', 'Battery Level', 'Charging State'],";
 			while($count < count($result[0])-1){
-				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "],";
+				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . ", " . $result[2][$count] . "],";
 				$count += 1;
 			}
-			$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "]]";
-		
+			$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . ", " . $result[2][$count] . "]]";
+			
 			makeGoogleChart($title, $width, $height, $divId, $dataString);
 		}else{
 			$result = get_avg_device_data_dates($startDate, $numOfDays, $deviceId);
 		
 			$count = 0;
-			$dataString = "[['Date', 'Avg Battery Level'],";
+			$dataString = "[['Date', 'Avg Battery Level', 'Charging State'],";
 			while($count < $numOfDays-1){
-				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "],";
+				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . ", " . $result[2][$count] . "],";
 				$count += 1;
 			}
-			$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "]]";
-		
+			$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . ", " . $result[2][$count] . "]]";
+			
 			makeGoogleChart($title, $width, $height, $divId, $dataString);
 		}
 	}
