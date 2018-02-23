@@ -21,8 +21,18 @@
 	}elseif($_POST['DDTimeframe'] == "Month"){
 	  $NumOfDays = 30;
 	}
+	if($_POST['DDChartType'] == "Battery Level"){
+		$chartType = "batteryLevel";
+		$title = "Battery Level Chart";
+	  }elseif($_POST['DDChartType'] == "Battery Charging State"){
+		$chartType = "batteryState";
+		$title = "Battery Charge State Chart":
+	  }elseif($_POST['DDChartType'] == "CPU Usage"){
+		$chartType = "cpuUsage";
+		$title = "CPU Usage Chart";
+	  }
 	
-	print_chart($Date, $NumOfDays, $userValues->device_id, "Battery Utilisation Chart", 1000, 600, "dataChart");
+	print_chart($Date, $NumOfDays, $userValues->device_id, $title, 1000, 600, "dataChart", $chartType);
   }
 ?>
 <!DOCTYPE html>
@@ -56,6 +66,15 @@
 			<div id = "Calendar" style="padding-top: 10px; text-align: left;">
 			<label> Please select a start date: </label>
 			<input type= "date" name="Calendar">
+			</div>
+			
+			<div id = "ChartType" style="padding-top: 10px; text-align: left;">
+				<label> Please select data to report: </label>
+				<select class="form-dropdown" style="width:150px" id="DropdownChartType" name="DDChartType">
+					<option>Battery Level</option>
+					<option>Battery Charging State</option>
+					<option>CPU Usage</option>
+				</select>
 			</div>
 		
 			<div id="ChartsView" style="padding-top: 10px;padding-left: 50px; text-align: left;">
