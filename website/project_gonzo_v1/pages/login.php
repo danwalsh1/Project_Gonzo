@@ -33,7 +33,7 @@ $row = $result->fetch_assoc();
 
 
 if(mysqli_num_rows($result)== 1){
-if($row['username'] == admin){  # Check if the user is an admin and store in the session dictionary.
+if($row['admin'] == 1){  # Check if the user is an admin and store in the session dictionary.
 		$_SESSION['admin'] = True;
 	}else{
 		$_SESSION['admin'] = False;
