@@ -1,7 +1,7 @@
 <?php
 	// No need to include sqlFunctions due to the chart pages already doing this.
 	
-	function makeGoogleChart($title, $width, $height, $divID, $dataString){
+	function makeGoogleChart($title, $width, $height, $divID, $dataString, $vAxis, $hAxis){
 		# Uses Google Charts
 		echo "
 			<!--Uses Google Charts-->
@@ -15,6 +15,8 @@
 					var data = google.visualization.arrayToDataTable(" . $dataString . ");
 					
 					var options = {'title':'" . $title ."',
+						'vAxis': { title:'" . $vAxis . "'},
+						'hAxis': { title:'" . $hAxis . "'},
 						'width':" . $width . ",
 						'height':" . $height . "};
 					
@@ -49,7 +51,7 @@
 			$count += 1;
 		}
 		if($numOfCharging >= round(count($batStateArray) / 2)){
-			$avg[1] = 100;
+			$avg[1] = 1;
 		}else{
 			$avg[1] = 0;
 		}
@@ -81,10 +83,10 @@
 			while($row = mysqli_fetch_array($result)){
 				$batLevelArray[] = $row['battery_level'];
 				$dateTimeArray[] = $row['date'];
-				if($row['charging_state'] == 0){
-					$batStateArray[] = 0;
+				if($row['charging_state'] == 1){
+					$batStateArray[] = 1;
 				}else{
-					$batStateArray[] = 100;
+					$batStateArray[] = 0;
 				}
 			}
 		}else{
@@ -94,31 +96,59 @@
 		return array($batLevelArray, $dateTimeArray, $batStateArray);
 	}
 	
-	function print_chart($startDate, $numOfDays, $deviceId, $title = 'Data Chart', $width = 500, $height = 300, $divId = 'chartDiv'){
-		if($numOfDays == 1){
-			$result = get_device_data_day($startDate, date("Y-m-d", strtotime("+1 day", strtotime($startDate))), $deviceId);
+	function print_chart($startDate, $numOfDays, $deviceId, $title = 'Data Chart', $width = 500, $height = 300, $divId = 'chartDiv', $chartType){
+		if($chartType == "batteryLevel"){
+			if($numOfDays == 1){
+				$result = get_device_data_day($startDate, date("Y-m-d", strtotime("+1 day", strtotime($startDate))), $deviceId);
 			
-			$count = 0;
-			$dataString = "[['Date', 'Battery Level', 'Charging State'],";
-			while($count < count($result[0])-1){
-				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . ", " . $result[2][$count] . "],";
-				$count += 1;
-			}
-			$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . ", " . $result[2][$count] . "]]";
+				$count = 0;
+				$dataString = "[['Date', 'Battery Level'],";
+				while($count < count($result[0])-1){
+					$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "],";
+					$count += 1;
+				}
+				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "]]";
 			
-			makeGoogleChart($title, $width, $height, $divId, $dataString);
-		}else{
-			$result = get_avg_device_data_dates($startDate, $numOfDays, $deviceId);
+				makeGoogleChart($title, $width, $height, $divId, $dataString, "Battery Level (%)", "Date & Time");
+			}else{
+				$result = get_avg_device_data_dates($startDate, $numOfDays, $deviceId);
 		
-			$count = 0;
-			$dataString = "[['Date', 'Avg Battery Level', 'Charging State'],";
-			while($count < $numOfDays-1){
-				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . ", " . $result[2][$count] . "],";
-				$count += 1;
-			}
-			$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . ", " . $result[2][$count] . "]]";
+				$count = 0;
+				$dataString = "[['Date', 'Avg Battery Level'],";
+				while($count < $numOfDays-1){
+					$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "],";
+					$count += 1;
+				}
+				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "]]";
 			
-			makeGoogleChart($title, $width, $height, $divId, $dataString);
+				makeGoogleChart($title, $width, $height, $divId, $dataString, "Battery Level (%)", "Date");
+			}
+		}elseif($chartType == "batteryState"){
+			if($numOfDays == 1){
+				$result = get_device_data_day($startDate, date("Y-m-d", strtotime("+1 day", strtotime($startDate))), $deviceId);
+			
+				$count = 0;
+				$dataString = "[['Date', 'Charging State'],";
+				while($count < count($result[0])-1){
+					$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[2][$count] . "],";
+					$count += 1;
+				}
+				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[2][$count] . "]]";
+			
+				makeGoogleChart($title, $width, $height, $divId, $dataString, "Battery Charging State", "Date & Time");
+			}else{
+				$result = get_avg_device_data_dates($startDate, $numOfDays, $deviceId);
+		
+				$count = 0;
+				$dataString = "[['Date', 'Avg Charging State'],";
+				while($count < $numOfDays-1){
+					$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[2][$count] . "],";
+					$count += 1;
+				}
+				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[2][$count] . "]]";
+			
+				makeGoogleChart($title, $width, $height, $divId, $dataString, "Battery Charging State", "Date");
+			}
 		}
 	}
 ?>
