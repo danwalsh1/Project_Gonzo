@@ -31,11 +31,21 @@
       }elseif($_POST['DDTimeframe'] == "Month"){
 	      $NumOfDays = 30;
       }
+	  if($_POST['DDChartType'] == "Battery Level"){
+		$chartType = "batteryLevel";
+		$title = "Battery Level Chart";
+	  }elseif($_POST['DDChartType'] == "Battery Charging State"){
+		$chartType = "batteryState";
+		$title = "Battery Charge State Chart";
+	  }elseif($_POST['DDChartType'] == "CPU Usage"){
+		$chartType = "cpuUsage";
+		$title = "CPU Usage Chart";
+	  }
   
       $value = get_users_values($_POST['DD']);
       $DeviceID = $value->device_id;
   
-      print_chart($Date, $NumOfDays, $DeviceID, "Battery Utilisation Chart", 1000, 600, "Charts" );
+      print_chart($Date, $NumOfDays, $DeviceID, $title, 1000, 600, "Charts", $chartType);
   }
 ?>
 <!DOCTYPE html>
@@ -58,24 +68,33 @@
 		<form action= "adminCharts.php" method = "POST">
 		
 			<div id="DropDown" style="padding-top: 10px; text-align: Left;">
-			    <label> Please Select a User: </label>
+			    <label> Please select a User: </label>
 			    <select class="form-dropdown" style="width:150px" id="Dropdown" name="DD">
 				    <?php echo retrieve_users_DropDown(); ?>			
 			    </select>
 			</div>
 			
 			<div id="Timeframe" style="padding-top: 10px; text-align: left;">
-			    <label> Period to report: </label>
+			    <label> Please select period to report: </label>
 			    <select class="form-dropdown" style="width:150px" id="DropdownTimeframe" name="DDTimeframe">
-				    <option> Day </option>
-				    <option> Week </option>
-				    <option> Month </option>
+				    <option>Day</option>
+				    <option>Week</option>
+				    <option>Month</option>
 			    </select>
 			</div>
 			
 			<div id = "Calendar" style="padding-top: 10px; text-align: left;">
 			    <label> Please select a start date: </label>
 			    <input type= "date" name="Calendar">
+			</div>
+			
+			<div id = "ChartType" style="padding-top: 10px; text-align: left;">
+				<label> Please select data to report: </label>
+				<select class="form-dropdown" style="width:150px" id="DropdownChartType" name="DDChartType">
+					<option>Battery Level</option>
+					<option>Battery Charging State</option>
+					<option>CPU Usage</option>
+				</select>
 			</div>
 		
 			<div id="ChartsView" style="padding-top: 10px;padding-left: 50px; text-align: left;">
