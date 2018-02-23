@@ -91,40 +91,54 @@ function update_user_data(){
 	  
 	  <div id="Username" style="padding-top: 10px;">
 		<label> Username: </label>
-		<input type ="text" name="username" value=<?php echo fetch_user_data(@$UserSelected)[0]  ?>>   <!--Updates the value based on whats passed in from the fetch_user_data function.-->
+		<input type ="text" name="username" value="<?php if(isset($UserSelected)){
+															echo fetch_user_data($UserSelected)[0];
+														} ?>">   <!--Updates the value based on whats passed in from the fetch_user_data function.-->
 	   </div>
 	 	   
 	  <!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
        <div id="FirstNameText" style="padding-top: 10px;">
 		<label> First Name: </label>
-		<input type ="text" name="forename" value=<?php echo fetch_user_data(@$UserSelected)[1] ?>>
+		<input type ="text" name="forename" value="<?php if(isset($UserSelected)){
+															echo fetch_user_data($UserSelected)[1];
+														} ?>">
 	   </div>
 		
 	   <div id="Surname" style="padding-top: 10px;">
 		<label> Surname: </label>
-		<input type="text" name ="surname" value=<?php echo fetch_user_data(@$UserSelected)[2] ?>>
+		<input type="text" name ="surname" value="<?php if(isset($UserSelected)){
+															echo fetch_user_data($UserSelected)[2];
+														} ?>">
 	   </div>
 		
 		<div id= "Device_ID" style="padding-top: 10px;">
 		 <label> Device ID: </label>
-		 <input type ="text" name="deviceid" value=<?php echo fetch_user_data(@$UserSelected)[3] ?>>
+		 <input type ="text" name="deviceid" value="<?php if(isset($UserSelected)){
+															echo fetch_user_data($UserSelected)[3];
+														} ?>">
 		</div>
 		 
 		
 		<div id= "Phone_Number" style="padding-top: 10px;">
 		 <label> Phone Number: </label>
-		 <input type ="text" name="phonenum" value=<?php echo fetch_user_data(@$UserSelected)[4] ?>>
+		 <input type ="text" name="phonenum" value="<?php if(isset($UserSelected)){
+															echo fetch_user_data($UserSelected)[4];
+														} ?>">
 		</div>
 		
 		<div id= "Email_Address" style="padding-top: 10px;">
 		 <label> Email Address: </label>
-		 <input type ="text" name="email" value=<?php echo fetch_user_data(@$UserSelected)[5]?>>
+		 <input type ="text" name="email" value="<?php if(isset($UserSelected)){
+															echo fetch_user_data($UserSelected)[5];
+														} ?>">
 		</div>
 		
 		
 		<div id= "Update_Password" style="padding-top: 10px;">
 		 <label> Update Password: </label>
-		 <input type ="password" name="PasswordUpdate" value=<?php echo fetch_user_data(@$UserSelected)[6]?>>
+		 <input type ="password" name="PasswordUpdate" value="<?php if(isset($UserSelected)){
+															echo fetch_user_data($UserSelected)[6];
+														} ?>">
 		</div> 
 		
 
