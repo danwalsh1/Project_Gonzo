@@ -90,7 +90,9 @@
 				}
 			}
 		}else{
-			echo "ERROR";
+			$batLevelArray[] = 0;
+			$dateTimeArray[] = "No Data";
+			$batStateArray[] = 0;
 		}
 		
 		return array($batLevelArray, $dateTimeArray, $batStateArray);
