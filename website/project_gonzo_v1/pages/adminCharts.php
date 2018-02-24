@@ -41,11 +41,15 @@
 		$chartType = "cpuUsage";
 		$title = "CPU Usage Chart";
 	  }
+	  
+	  $tWidth = (int) $_POST['deviceWidth'];
+	  $width = $tWidth - (($tWidth/100)*10);
+	  $height = ($width/100) * 60;
   
       $value = get_users_values($_POST['DD']);
       $DeviceID = $value->device_id;
   
-      print_chart($Date, $NumOfDays, $DeviceID, $title, 1000, 600, "Charts", $chartType);
+      print_chart($Date, $NumOfDays, $DeviceID, $title, $width, $height, "Charts", $chartType);
   }
 ?>
 <!DOCTYPE html>
@@ -96,6 +100,10 @@
 					<option>CPU Usage</option>
 				</select>
 			</div>
+			
+			<div id="HiddenInputs">
+				<input type="hidden" id="hDeviceWidth" name="deviceWidth" value="test" runat="server">
+			</div>
 		
 			<div id="ChartsView" style="padding-top: 10px;padding-left: 50px; text-align: left;">
 				<br />
@@ -103,12 +111,16 @@
 				<input type="submit" value="Show Charts" name="UpdateChartView">	
 			</div>
 		</form>
+		<script>
+			document.getElementById('hDeviceWidth').value=screen.width;
+		</script>
 		<br />
 		
 		<div id= "Charts">
 		</div>
 		
 	  </div>
+	    
       <div id="Footer">
       </div>
     </div>
