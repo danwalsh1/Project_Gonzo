@@ -69,11 +69,20 @@
 		return $val;
 	}
 	
-	function insert_device_data($deviceId, $batteryLevel, $chargingState){
+	function insert_battery_data($deviceId, $batteryLevel, $chargingState){
 		$connect = connect_db();
 		$sql = "INSERT INTO device_battery_data(device_id, battery_level, charging_state) VALUES (?, ?, ?)";
 		$stmt = $connect->prepare($sql);
 		$stmt->bind_param('sss', $deviceId, $batteryLevel, $chargingState);
+		$stmt->execute();
+		$stmt->close();
+	}
+	
+	function insert_cpu_data($cpu, $deviceId){
+		$connect = connect_db();
+		$sql = "INSERT INTO device_cpu_data(device_id, cpu_percent_avg) VALUES (?, ?)";
+		$stmt = $connect->prepare($sql);
+		$stmt->bind_param('ss', $deviceId, $cpu);
 		$stmt->execute();
 		$stmt->close();
 	}
