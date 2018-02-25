@@ -26,7 +26,7 @@
 		$title = "Battery Level Chart";
 	  }elseif($_POST['DDChartType'] == "Battery Charging State"){
 		$chartType = "batteryState";
-		$title = "Battery Charge State Chart":
+		$title = "Battery Charge State Chart";
 	  }elseif($_POST['DDChartType'] == "CPU Usage"){
 		$chartType = "cpuUsage";
 		$title = "CPU Usage Chart";
