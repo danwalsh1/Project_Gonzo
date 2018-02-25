@@ -32,6 +32,7 @@ Public Class sendData
     Private deviceID As String
     Private chargingState As PowerLineStatus
     Private UsageCPU As New PerformanceCounter
+    Private CPUoutput As String
 
     Public Sub New(gonzoInterval As Integer, monitorform As frmProjGon)
         gonzoTimer = New System.Windows.Forms.Timer
@@ -51,23 +52,23 @@ Public Class sendData
     End Sub
 
     Private Sub intervalTick() Handles gonzoTimer.Tick
-        batteryData = SystemInformation.PowerStatus 'Assign power status function to variable batteryData
-        batLevel = batteryData.BatteryLifePercent * 100
-        deviceID = My.Computer.Name
-        chargingState = batteryData.PowerLineStatus
-        gonzoForm.lblBatLevData.Text = batLevel
-        gonzoForm.lblDevIDData.Text = deviceID
-        gonzoForm.lblChargeStateData.Text = chargingState
-
         With UsageCPU
             .CategoryName = "Processor"
             .CounterName = "% Processor Time"
             .InstanceName = "_Total"
         End With
 
+        batteryData = SystemInformation.PowerStatus 'Assign power status function to variable batteryData
+        batLevel = batteryData.BatteryLifePercent * 100
+        deviceID = My.Computer.Name
+        chargingState = batteryData.PowerLineStatus
+        CPUoutput = UsageCPU.NextValue()
+        gonzoForm.lblBatLevData.Text = batLevel
+        gonzoForm.lblDevIDData.Text = deviceID
+        gonzoForm.lblChargeStateData.Text = chargingState
         gonzoForm.lblCPU.Text = UsageCPU.NextValue()
-
         Page_Load()
+
     End Sub
 
     Private Sub Page_Load()
@@ -78,9 +79,17 @@ Public Class sendData
             chargeString = "false"
         End If
 
+
+        Dim urlCPU As String = "http://projectgonzocoventry.000webhostapp.com/app_page/insertData.php?deviceid=" & deviceID & "&cpu=" & CPUoutput
+        Dim CPUSend As WebRequest = WebRequest.Create(urlCPU)
+        CPUSend.GetResponse()
+
         Dim url As String = "http://projectgonzocoventry.000webhostapp.com/app_page/insertData.php?deviceid=" & deviceID & "&batlevel=" & batLevel & "&chargestate=" & chargeString
-        ' Using WebRequest
         Dim request As WebRequest = WebRequest.Create(url)
-        Dim response As WebResponse = request.GetResponse()
+        request.GetResponse()
 
     End Sub
+
+
+
+End Class
