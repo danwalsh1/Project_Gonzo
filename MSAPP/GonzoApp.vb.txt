@@ -1,5 +1,7 @@
 Imports System.Net
 Imports System.IO
+Imports System.Diagnostics
+
 
 Public Class frmProjGon
     Dim data_Send As sendData
@@ -16,6 +18,10 @@ Public Class frmProjGon
     Private Sub lblBatLevData_Click(sender As Object, e As EventArgs) Handles lblBatLevData.Click
 
     End Sub
+
+    Private Sub lblCPU_Click(sender As Object, e As EventArgs) Handles lblCPU.Click
+
+    End Sub
 End Class
 
 Public Class sendData
@@ -25,6 +31,7 @@ Public Class sendData
     Private batLevel As Integer
     Private deviceID As String
     Private chargingState As PowerLineStatus
+    Private UsageCPU As New PerformanceCounter
 
     Public Sub New(gonzoInterval As Integer, monitorform As frmProjGon)
         gonzoTimer = New System.Windows.Forms.Timer
@@ -32,6 +39,7 @@ Public Class sendData
         gonzoForm = monitorform
     End Sub
 
+    Public Property CPUstring As String
     Public Event Load(sender As Object, e As EventArgs)
 
     Public Sub startSending()
@@ -50,6 +58,15 @@ Public Class sendData
         gonzoForm.lblBatLevData.Text = batLevel
         gonzoForm.lblDevIDData.Text = deviceID
         gonzoForm.lblChargeStateData.Text = chargingState
+
+        With UsageCPU
+            .CategoryName = "Processor"
+            .CounterName = "% Processor Time"
+            .InstanceName = "_Total"
+        End With
+
+        gonzoForm.lblCPU.Text = UsageCPU.NextValue()
+
         Page_Load()
     End Sub
 
@@ -67,7 +84,3 @@ Public Class sendData
         Dim response As WebResponse = request.GetResponse()
 
     End Sub
-
-
-
-End Class
