@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Battery..."
+        android:text="Battery"
         app:layout_constraintTop_toBottomOf="@id/BrowserButton"
         app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="78dp" />
@@ -31,9 +31,18 @@
         android:id="@+id/ChargeState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Charge State: "
+        android:text="ChargeState"
         app:layout_constraintTop_toBottomOf="@id/BatteryLevel"
         tools:layout_editor_absoluteX="78dp"
         tools:layout_editor_absoluteY="93dp" />
+
+    <TextView
+        android:id="@+id/DeviceID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DeviceID"
+        app:layout_constraintTop_toBottomOf="@id/ChargeState"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="86dp" />
 
 </android.support.constraint.ConstraintLayout>
