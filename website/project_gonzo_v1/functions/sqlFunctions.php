@@ -78,7 +78,7 @@
 		$stmt->close();
 	}
 	
-	function insert_cpu_data($cpu, $deviceId){
+	function insert_cpu_data($deviceId, $cpu){
 		$connect = connect_db();
 		$sql = "INSERT INTO device_cpu_data(device_id, cpu_percent_avg) VALUES (?, ?)";
 		$stmt = $connect->prepare($sql);
