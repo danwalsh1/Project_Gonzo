@@ -7,6 +7,7 @@ The content in -main_activity.txt- should replace the content in -main_activity.
 The content in -MainActivity.txt- should replace the content in -MainActivity.java-
 
 The content inside -buildgradle.txt- should replace the content in the -build.gradle- file located at the path -"ProjectGonzo/build.gradle"-.
+Make sure this is the "build.gradle" with "Project:ProjectGonzo" to the right of it as there are 2 of the same name here.
 
 --
 
