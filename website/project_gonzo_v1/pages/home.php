@@ -37,7 +37,7 @@
 		<p><img src="../img/gonzoLogo.jpg" alt="Gonzo Logo" align="right" align="bottom" class="res"/>
 			Project Gonzo is an app which you can download on to your device, 
 			it records your device's sensor data, for example your battery 
-			percentage.</p>
+			percentage, charging state and CPU usage.</p>
 		<p><b>Step 1: Install the app through our Website -</b> you must first install 
 		    the app on the device you wish to monitor. This can be done by
 			accessing the website on your device and clicking the download
