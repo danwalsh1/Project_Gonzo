@@ -27,6 +27,8 @@
 			}else{
 				$admin = "false";
 			}
+		}else{
+			$admin = "false";
 		}
 		  
 		  $connect = connect_db();
