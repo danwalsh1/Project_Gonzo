@@ -10,18 +10,6 @@ Public Class frmProjGon
         data_Send = New sendData(10000, Me)
         data_Send.startSending()
     End Sub
-
-    Private Sub lblDevIDData_Click(sender As Object, e As EventArgs) Handles lblDevIDData.Click
-
-    End Sub
-
-    Private Sub lblBatLevData_Click(sender As Object, e As EventArgs) Handles lblBatLevData.Click
-
-    End Sub
-
-    Private Sub lblCPU_Click(sender As Object, e As EventArgs) Handles lblCPU.Click
-
-    End Sub
 End Class
 
 Public Class sendData
