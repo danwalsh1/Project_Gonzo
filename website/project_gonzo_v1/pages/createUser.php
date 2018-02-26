@@ -21,10 +21,12 @@
   
   if(isset($_POST['createUser'])){
 	  if(ctype_alnum($_POST['username']) and ctype_alnum($_POST['forename']) and ctype_alnum($_POST['surname']) and ctype_alnum($_POST['deviceid']) and ctype_alnum($_POST['phonenumber']) and ctype_alnum($_POST['password']) and filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-		if($_POST['admin'] == true){
-			$admin = "true";
-		}else{
-			$admin = "false";
+		if(isset($_POST['admin'])){
+			if($_POST['admin'] == true){
+				$admin = "true";
+			}else{
+				$admin = "false";
+			}
 		}
 		  
 		  $connect = connect_db();
@@ -33,6 +35,16 @@
 		  $result = mysqli_query($connect, $sql);
 	  }
   }
+  function insert_user_data(){
+	  $connect = connect_db("NULL");   # Connects to data base
+	  $sql = "INSERT INTO users values(forename = ?, surname = ?, device_id = ? , phone_num = ?, email = ?, password = ? WHERE username = ?)";   # Queries the data base for user details 
+	  $stmt->prepare($sql);
+	  $stmt->bind_param('sssssss', $_POST["Forename"], $_POST["Surname"], $_POST["Device ID"], $_POST["Phone_Number"], $_POST["Email_Address"], $_POST["Password"], $_POST["username"]);
+	  $stmt->execute();
+  }
+  
+  
+  
 ?>
 <!DOCTYPE html>
 <html>
