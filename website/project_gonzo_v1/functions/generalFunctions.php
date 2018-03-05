@@ -15,12 +15,12 @@
 			}else{
 				echo '<li><a href="home.php"; style="font-family:arial">Home</a></li>
 				<li><a href="userCharts.php"; style="font-family:arial">My Device</a></li>
-				<li><a href="UserProfile.php; style="font-family:arial"">My Profile</a></li>
+				<li><a href="UserProfile.php"; style="font-family:arial">My Profile</a></li>
 				<li><a href="logout.php"; style="font-family:arial">Logout</a></li>
 				<li style="float:right"><a href="home.php"><img src="../img/gonzoLogo.jpg" height="60" width="65" style="align:center" /></a></li>';
 			}
 		}else{
-			echo '<li><a href="login.php">Login</a></li><li style="float:right"><a href="home.php"><img src="../img/gonzoLogo.jpg" height="60" width="65" style="align:center" /></a></li>';
+			echo '<li><a href="login.php"; style="font-family:arial">Login</a></li><li style="float:right"><a href="home.php"><img src="../img/gonzoLogo.jpg" height="60" width="65" style="align:center" /></a></li>';
 		}
 		echo '</ul></nav></div>';
 	}
