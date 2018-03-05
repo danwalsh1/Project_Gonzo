@@ -65,49 +65,49 @@
       </div>
 	    
       <div id="Content">
-		<div id="createUserForm" style="text-align: center;">
+		<div id="createUserForm" style="text-align: center;font-family:arial">
 			<form action="createUser.php" method="POST">
 				<div id="Username" style="padding-top: 10px;">
 					<label>Username:</label>
 					<input type ="text" name="username">   
 				</div>
 			
-				<div id="Forename" style="padding-top: 10px;">
+				<div id="Forename" style="padding-top: 10px;font-family:arial">
 					<label>Forename:</label>
 					<input type ="text" name="forename">
 				</div>
 		
-				<div id="Surname" style="padding-top: 10px;">
+				<div id="Surname" style="padding-top: 10px;font-family:arial">
 					<label>Surname:</label>
 					<input type="text" name ="surname">
 				</div>
 		
-				<div id= "Device_ID" style="padding-top: 10px;">
+				<div id= "Device_ID" style="padding-top: 10px;font-family:arial">
 					<label>Device ID:</label>
 					<input type ="text" name="deviceid">
 				</div>
 		 
-				<div id= "Phone_Number" style="padding-top: 10px;">
+				<div id= "Phone_Number" style="padding-top: 10px;font-family:arial">
 					<label>Phone Number:</label>
 					<input type ="text" name="phonenumber">
 				</div>
 		
-				<div id= "Email_Address" style="padding-top: 10px;">
+				<div id= "Email_Address" style="padding-top: 10px;font-family:arial">
 					<label>Email Address:</label>
 					<input type ="text" name="email">
 				</div>
 		
-				<div id= "Password" style="padding-top: 10px;">
+				<div id= "Password" style="padding-top: 10px;font-family:arial">
 					<label>Password:</label>
 					<input type ="text" name="password">
 				</div>
 				
-				<div id="Admin" style="padding-top: 10px;">
+				<div id="Admin" style="padding-top: 10px;font-family:arial">
 					<label>Admin:</label>
 					<input type="checkbox" name="admin">
 				</div>
 			
-				<div id= "Submit" style="padding-top: 10px;">
+				<div id= "Submit" style="padding-top: 10px;font-family:arial">
 					<input type="submit" value="Create User" name="createUser">
 				</div>
 			</form>
