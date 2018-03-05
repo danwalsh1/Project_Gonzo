@@ -35,7 +35,7 @@
 		</div>
       </div>
 	  
-	<div style = "padding-left: 10px;">
+	<div style = "padding-left: 10px;font-family:arial">
 	<p><u>Installation Instructions - Windows Desktop Application</u></p>
 	<p>1. If you haven't already, click on the app link.</p>
 	<p>2. Unzip the download contents.</p>
