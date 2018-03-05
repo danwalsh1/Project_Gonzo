@@ -56,9 +56,9 @@
       </div>
       
       <div id="Content">
-		<h2>Device ID: <?php echo $userValues->device_id; ?></h2>
+		<h2 style="font-family:arial">Device ID: <?php echo $userValues->device_id; ?></h2>
 		<form action="userCharts.php" method="POST">
-			<div id="Timeframe" style="padding-top: 10px; text-align: left;">
+			<div id="Timeframe" style="padding-top: 10px; text-align: left; font-family:arial">
 			<label> Period to report: </label>
 			<select class="form-dropdown" style="width:150px" id="DropdownTimeframe" name="DDTimeframe">
 				<option> Day </option>
@@ -67,12 +67,12 @@
 			</select>
 			</div>
 			
-			<div id = "Calendar" style="padding-top: 10px; text-align: left;">
+			<div id = "Calendar" style="padding-top: 10px; text-align: left; font-family:arial">
 			<label> Please select a start date: </label>
 			<input type= "date" name="Calendar">
 			</div>
 			
-			<div id = "ChartType" style="padding-top: 10px; text-align: left;">
+			<div id = "ChartType" style="padding-top: 10px; text-align: left; font-family:arial">
 				<label> Please select data to report: </label>
 				<select class="form-dropdown" style="width:150px" id="DropdownChartType" name="DDChartType">
 					<option>Battery Level</option>
@@ -85,7 +85,7 @@
 				<input type="hidden" id="hDeviceWidth" name="deviceWidth" value="test" runat="server">
 			</div>
 		
-			<div id="ChartsView" style="padding-top: 10px;padding-left: 50px; text-align: left;">
+			<div id="ChartsView" style="padding-top: 10px;padding-left: 50px; text-align: left; font-family:arial">
 				<br />
 				<br />
 				<input type="submit" value="Show Charts" name="UpdateChartView">	
