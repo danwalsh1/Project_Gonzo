@@ -71,28 +71,28 @@
       <div id="Content">
 		<form action= "adminCharts.php" method = "POST">
 		
-			<div id="DropDown" style="padding-top: 10px; text-align: Left;">
+			<div id="DropDown" style="padding-top: 10px; text-align: Left; font-family:arial">
 			    <label> Please select a User: </label>
 			    <select class="form-dropdown" style="width:150px" id="Dropdown" name="DD">
 				    <?php echo retrieve_users_DropDown(); ?>			
 			    </select>
 			</div>
 			
-			<div id="Timeframe" style="padding-top: 10px; text-align: left;">
+			<div id="Timeframe" style="padding-top: 10px; text-align: left;font-family:arial">
 			    <label> Please select period to report: </label>
-			    <select class="form-dropdown" style="width:150px" id="DropdownTimeframe" name="DDTimeframe">
+			    <select class="form-dropdown" style="width:150px;font-family:arial" id="DropdownTimeframe" name="DDTimeframe">
 				    <option>Day</option>
 				    <option>Week</option>
 				    <option>Month</option>
 			    </select>
 			</div>
 			
-			<div id = "Calendar" style="padding-top: 10px; text-align: left;">
+			<div id = "Calendar" style="padding-top: 10px; text-align: left; font-family:arial">
 			    <label> Please select a start date: </label>
 			    <input type= "date" name="Calendar">
 			</div>
 			
-			<div id = "ChartType" style="padding-top: 10px; text-align: left;">
+			<div id = "ChartType" style="padding-top: 10px; text-align: left;font-family:arial">
 				<label> Please select data to report: </label>
 				<select class="form-dropdown" style="width:150px" id="DropdownChartType" name="DDChartType">
 					<option>Battery Level</option>
