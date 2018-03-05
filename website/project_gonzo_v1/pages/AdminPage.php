@@ -77,7 +77,7 @@ function update_user_data(){
       <div style ="text-align: center;"> <!--Form Configuration and positioning -->
 	  <form method ="POST" action="AdminPage.php">	
 
-	  <div id="DropDown" style="padding-top: 10px; text-align: center;">
+	  <div id="DropDown" style="padding-top: 10px; text-align: center; font-family:arial">
 		<label> Please Select a User: </label>
 		<select class="form-dropdown" style="width:150px" id="Dropdown" name="DD">
 		<?php echo retrieve_users_DropDown(); ?>
@@ -85,11 +85,11 @@ function update_user_data(){
 	   <br>
 	   </div>
 
-	  <div style="padding-top: 10px;padding-left: 50px;">
+	  <div style="padding-top: 10px;padding-left: 50px;font-family:arial">
 		<input type="submit" value="Show User Details" name="UpdateDetailsView">	
 	  </div>
 	  
-	  <div id="Username" style="padding-top: 10px;">
+	  <div id="Username" style="padding-top: 10px;font-family:arial">
 		<label> Username: </label>
 		<input type ="text" name="username" value="<?php if(isset($UserSelected)){
 															echo fetch_user_data($UserSelected)[0];
@@ -97,21 +97,21 @@ function update_user_data(){
 	   </div>
 	 	   
 	  <!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
-       <div id="FirstNameText" style="padding-top: 10px;">
+       <div id="FirstNameText" style="padding-top: 10px;font-family:arial">
 		<label> First Name: </label>
 		<input type ="text" name="forename" value="<?php if(isset($UserSelected)){
 															echo fetch_user_data($UserSelected)[1];
 														} ?>">
 	   </div>
 		
-	   <div id="Surname" style="padding-top: 10px;">
+	   <div id="Surname" style="padding-top: 10px;font-family:arial">
 		<label> Surname: </label>
 		<input type="text" name ="surname" value="<?php if(isset($UserSelected)){
 															echo fetch_user_data($UserSelected)[2];
 														} ?>">
 	   </div>
 		
-		<div id= "Device_ID" style="padding-top: 10px;">
+		<div id= "Device_ID" style="padding-top: 10px;font-family:arial">
 		 <label> Device ID: </label>
 		 <input type ="text" name="deviceid" value="<?php if(isset($UserSelected)){
 															echo fetch_user_data($UserSelected)[3];
@@ -119,14 +119,14 @@ function update_user_data(){
 		</div>
 		 
 		
-		<div id= "Phone_Number" style="padding-top: 10px;">
+		<div id= "Phone_Number" style="padding-top: 10px; font-family:arial">
 		 <label> Phone Number: </label>
 		 <input type ="text" name="phonenum" value="<?php if(isset($UserSelected)){
 															echo fetch_user_data($UserSelected)[4];
 														} ?>">
 		</div>
 		
-		<div id= "Email_Address" style="padding-top: 10px;">
+		<div id= "Email_Address" style="padding-top: 10px; font-family:arial">
 		 <label> Email Address: </label>
 		 <input type ="text" name="email" value="<?php if(isset($UserSelected)){
 															echo fetch_user_data($UserSelected)[5];
@@ -134,7 +134,7 @@ function update_user_data(){
 		</div>
 		
 		
-		<div id= "Update_Password" style="padding-top: 10px;">
+		<div id= "Update_Password" style="padding-top: 10px; font-family:arial">
 		 <label> Update Password: </label>
 		 <input type ="password" name="PasswordUpdate" value="<?php if(isset($UserSelected)){
 															echo fetch_user_data($UserSelected)[6];
@@ -142,7 +142,7 @@ function update_user_data(){
 		</div> 
 		
 
-		<div style="padding-top: 10px;padding-left: 50px;">
+		<div style="padding-top: 10px;padding-left: 50px; font-family:arial">
 		  <input type="submit" value="Save" name="SubmitProfileForm">
 		</div>
 	   </div>
