@@ -53,45 +53,45 @@ function update_user_data(){
       <div style ="text-align: center;"> <!--Form Configuration and positioning -->
 	  <form method ="POST" action="UserProfile.php">
 	  
-	   <div id="Username" style="padding-top: 10px;">
+	   <div id="Username" style="padding-top: 10px; font-family:arial">
 		<label> Username: </label>
 		<input type ="text" name="username" value=<?php echo fetch_user_data($_SESSION['Username'])[0]  ?>>   
 	   </div>
 	  <!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
-       <div id="FirstNameText" style="padding-top: 10px;">
+       <div id="FirstNameText" style="padding-top: 10px; font-family:arial">
 		<label> First Name: </label>
 		<input type ="text" name="forename" value=<?php echo fetch_user_data($_SESSION['Username'])[1] ?>>
 	   </div>
 		
-	   <div id="Surname" style="padding-top: 10px;">
+	   <div id="Surname" style="padding-top: 10px;font-family:arial">
 		<label> Surname: </label>
 		<input type="text" name ="surname" value=<?php echo fetch_user_data($_SESSION['Username'])[2] ?>>
 	   </div>
 		
-		<div id= "Device_ID" style="padding-top: 10px;">
+		<div id= "Device_ID" style="padding-top: 10px;font-family:arial">
 		 <label> Device ID: </label>
 		 <input type ="text" name="deviceid" value=<?php echo fetch_user_data($_SESSION['Username'])[3] ?>>
 		</div>
 		 
 		
-		<div id= "Phone_Number" style="padding-top: 10px;">
+		<div id= "Phone_Number" style="padding-top: 10px;font-family:arial">
 		 <label> Phone Number: </label>
 		 <input type ="text" name="phonenum" value=<?php echo fetch_user_data($_SESSION['Username'])[4] ?>>
 		</div>
 		
-		<div id= "Email_Address" style="padding-top: 10px;">
+		<div id= "Email_Address" style="padding-top: 10px;font-family:arial">
 		 <label> Email Address: </label>
 		 <input type ="text" name="email" value=<?php echo fetch_user_data($_SESSION['Username'])[5] ?>>
 		</div>
 		
 		
-		<div id= "Update_Password" style="padding-top: 10px;">
+		<div id= "Update_Password" style="padding-top: 10px;font-family:arial">
 		 <label> Update Password: </label>
 		 <input type ="password" name="PasswordUpdate" value=<?php echo fetch_user_data($_SESSION['Username'])[6] ?>>
 		</div> 
 		
 
-		<div style="padding-top: 10px;padding-left: 50px;">
+		<div style="padding-top: 10px;padding-left: 50px; font-family:arial">
 		  <input type="submit" value="Save" name="SubmitProfileForm">
 		</div>
 	   </div>
