@@ -1,6 +1,6 @@
 <?php
 	function displayMainMenu(){
-		echo '<label for="main-menu-control" class="main-menu-control">&#9776;</label>';
+		echo '<label for="main-menu-control" class="main-menu-control" style="font-size: 40px">&#9776;</label>';
 		echo '<input type="checkbox" id="main-menu-control" role="button">';
 		echo '<div id="main-menu"><nav><ul>';
 		if(isset($_SESSION['admin'])){
@@ -35,3 +35,4 @@
 	}
 	}
 ?>
+
