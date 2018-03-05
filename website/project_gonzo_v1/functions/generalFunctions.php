@@ -33,6 +33,15 @@
 	{
 		echo $ListofNames="<option>" . $row['username'] . "</option>";
 	}
+		
+	function messages($message, $redirect, $time){
+		if(gettype($message) == "string" and gettype($redirect) == "string" and gettype($time) == "integer"){
+			$_SESSION['msg'] = $message;
+			$_SESSION['redir'] = $redirect;
+			$_SESSION['time'] = $time;
+			header("Location: message.php");
+		}
 	}
+				
 ?>
 
