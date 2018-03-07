@@ -1,9 +1,9 @@
 <?php
 
   session_start(); #Starts a session.
-  
+
   include("../functions/generalFunctions.php");
-  
+
   if(isset($_SESSION['Username']) == false){
 	  header("Location: login.php");
 	  die();
@@ -34,7 +34,7 @@
 			<?php displayMainMenu(); ?>
 		</div>
       </div>
-	  
+
 	<div style = "padding-left: 10px;font-family:arial">
 	<p><u>Installation Instructions - Windows Desktop Application</u></p>
 	<p>1. If you haven't already, click on the app link.</p>
@@ -42,9 +42,16 @@
 	<p>3. Navigate into the folder and run the 'setup.exe' file. </p>
 	<p>4. When prompted press install, the app will automatically open when installation is complete.</p>
 	<p>5. Congratulations, you can now start logging data :) </p>
-	  
+
 	<div style= padding-top:10px; >
-	<a href=https://projectgonzocoventry.000webhostapp.com/downloads/MSAPP.zip > Click here for the desktop app. </a>
+    <form action=https://projectgonzocoventry.000webhostapp.com/downloads/MSAPP.zip>
+    <input type="submit" value="Click here for the desktop app." />
+    </form>
+
+    <form action=https://projectgonzocoventry.000webhostapp.com/downloads/MobileApp.zip>
+    <input type="submit" value="Click here for the mobile app." />
+    </form>
+
 	</div>
 	</body>
 </html>
