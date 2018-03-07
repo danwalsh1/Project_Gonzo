@@ -33,6 +33,7 @@
 	{
 		echo $ListofNames="<option>" . $row['username'] . "</option>";
 	}
+	}
 		
 	function messages($message, $redirect, $time){
 		if(gettype($message) == "string" and gettype($redirect) == "string" and gettype($time) == "integer"){
