@@ -54,7 +54,9 @@ function update_user_data(){
 		$sql->bind_param('sssssss', $_POST['forename'], $_POST['surname'],$_POST['deviceid'], $_POST['phonenum'], $_POST['email'], $_POST['PasswordUpdate'], $_POST['username']);
 		$sql->execute();
 		$sql->close();
-			
+		
+		$msg = "Users information has now been updated!";
+		messages($msg, "AdminPage.php", 10);
 		}
 		
 ?>
