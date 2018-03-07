@@ -30,6 +30,8 @@ function update_user_data(){
 		$sql->execute();
 		$sql->close();
 			
+		$msg = "Your profile details have been updated!";
+		messages($msg, "UserProfile.php", 10);
 }
 ?>
 
