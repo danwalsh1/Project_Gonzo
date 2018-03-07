@@ -35,6 +35,9 @@
 		  $sql = "INSERT INTO users(username, password, admin, forename, surname, device_id, phone_num, email) VALUES ('" . $_POST['username'] . "', '" . $_POST['password'] . "', " . $admin . ", '" . $_POST['forename'] . "', '" . $_POST['surname'] . "', '" . $_POST['deviceid'] . "', '" . $_POST['phonenumber'] . "', '" . $_POST['email'] . "')";
 		  
 		  $result = mysqli_query($connect, $sql);
+		  
+		  $msg = "New user created with the username: " . $_POST['username'];
+		  messages($msg, "createUser.php", 10);
 	  }
   }
   function insert_user_data(){
@@ -43,10 +46,10 @@
 	  $stmt->prepare($sql);
 	  $stmt->bind_param('sssssss', $_POST["Forename"], $_POST["Surname"], $_POST["Device ID"], $_POST["Phone_Number"], $_POST["Email_Address"], $_POST["Password"], $_POST["username"]);
 	  $stmt->execute();
+	  
+	  $msg = "New user created with the username: " . $_POST['username'];
+	  messages($msg, "createUser.php", 10);
   }
-  
-  
-  
 ?>
 <!DOCTYPE html>
 <html>
