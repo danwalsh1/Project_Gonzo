@@ -67,11 +67,11 @@ else{
       <div style ="text-align: center;"> <!--Form Configuration and positioning -->
 	  <form method ="POST" action="login.php">
        <div id="UsernameText" style="padding-top: 10px;">
-		<label> Username: </label>
+		<label style="font-family:arial"> Username: </label>
 		<input type ="text" name="Username">
 		</div>
 	   <div id="PasswordText" style="padding-top: 10px;">
-		<label> Password: </label>
+		<label style="font-family:arial"> Password: </label>
 		<input type="password" name ="Password">
 		<div style="padding-top: 10px;padding-left: 50px;">
 		<input type="submit" value="Login" name ="logindone">
