@@ -59,6 +59,7 @@
 		
 		$sql = "INSERT INTO users (username, password, admin, forename, surname, device_id, phone_num, email) VALUES (
 		'admin', 'password', true, 'Admin', 'Admin', 'NONE', '0', 'a')";
+		$result = mysqli_query($connect, $sql);
 	}
 	
 	function get_users_values($username){
