@@ -62,97 +62,96 @@ function update_user_data(){
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Makes page mobile-friendly-->
-    <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" /> <!--Calls CSS style sheets-->
-    <link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
-    <title>Admin Profile | Project Gonzo</title> <!--Page title -->
-  </head>
-  <body>
-    <div id="Page">
-      <div id="Header">
-		<div id="Menu">
-			<?php displayMainMenu(); ?>
-		</div>
-      </div>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Makes page mobile-friendly-->
+		<link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" /> <!--Calls CSS style sheets-->
+		<link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
+		<title>Admin Profile | Project Gonzo</title> <!--Page title -->
+	</head>
+	<body>
+		<div id="Page">
+			<div id="Header">
+				<div id="Menu">
+					<?php displayMainMenu(); ?>
+				</div>
+			</div>
 	    
-      <div style ="text-align: center;"> <!--Form Configuration and positioning -->
-	  <form method ="POST" action="AdminPage.php">	
+			<div style ="text-align: center;"> <!--Form Configuration and positioning -->
+				<form method ="POST" action="AdminPage.php">	
 
-	  <div id="DropDown" style="padding-top: 10px; text-align: center; font-family:arial">
-		<label> Please Select a User: </label>
-		<select class="form-dropdown" style="width:150px" id="Dropdown" name="DD">
-		<?php echo retrieve_users_DropDown(); ?>
-	   </select>
-	   <br>
-	   </div>
+					<div id="DropDown" style="padding-top: 10px; text-align: center; font-family:arial">
+						<label> Please Select a User: </label>
+						<select class="form-dropdown" style="width:150px" id="Dropdown" name="DD">
+							<?php echo retrieve_users_DropDown(); ?>
+						</select>
+						<br>
+					</div>
 
-	  <div style="padding-top: 10px;padding-left: 50px;font-family:arial">
-		<input type="submit" value="Show User Details" name="UpdateDetailsView">	
-	  </div>
+					<div style="padding-top: 10px;padding-left: 50px;font-family:arial">
+						<input type="submit" value="Show User Details" name="UpdateDetailsView">	
+					</div>
 	  
-	  <div id="Username" style="padding-top: 10px;font-family:arial">
-		<label> Username: </label>
-		<input type ="text" name="username" value="<?php if(isset($UserSelected)){
+					<div id="Username" style="padding-top: 10px;font-family:arial">
+						<label> Username: </label>
+						<input type ="text" name="username" value="<?php if(isset($UserSelected)){
 															echo fetch_user_data($UserSelected)[0];
 														} ?>">   <!--Updates the value based on whats passed in from the fetch_user_data function.-->
-	   </div>
+					</div>
 	 	   
-	  <!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
-       <div id="FirstNameText" style="padding-top: 10px;font-family:arial">
-		<label> First Name: </label>
-		<input type ="text" name="forename" value="<?php if(isset($UserSelected)){
+					<!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
+					<div id="FirstNameText" style="padding-top: 10px;font-family:arial">
+						<label> First Name: </label>
+						<input type ="text" name="forename" value="<?php if(isset($UserSelected)){
 															echo fetch_user_data($UserSelected)[1];
 														} ?>">
-	   </div>
+					</div>
 		
-	   <div id="Surname" style="padding-top: 10px;font-family:arial">
-		<label> Surname: </label>
-		<input type="text" name ="surname" value="<?php if(isset($UserSelected)){
+					<div id="Surname" style="padding-top: 10px;font-family:arial">
+						<label> Surname: </label>
+						<input type="text" name ="surname" value="<?php if(isset($UserSelected)){
 															echo fetch_user_data($UserSelected)[2];
 														} ?>">
-	   </div>
+					</div>
 		
-		<div id= "Device_ID" style="padding-top: 10px;font-family:arial">
-		 <label> Device ID: </label>
-		 <input type ="text" name="deviceid" value="<?php if(isset($UserSelected)){
+					<div id= "Device_ID" style="padding-top: 10px;font-family:arial">
+						<label> Device ID: </label>
+						<input type ="text" name="deviceid" value="<?php if(isset($UserSelected)){
 															echo fetch_user_data($UserSelected)[3];
 														} ?>">
-		</div>
+					</div>
 		 
 		
-		<div id= "Phone_Number" style="padding-top: 10px; font-family:arial">
-		 <label> Phone Number: </label>
-		 <input type ="text" name="phonenum" value="<?php if(isset($UserSelected)){
+					<div id= "Phone_Number" style="padding-top: 10px; font-family:arial">
+						<label> Phone Number: </label>
+						<input type ="text" name="phonenum" value="<?php if(isset($UserSelected)){
 															echo fetch_user_data($UserSelected)[4];
 														} ?>">
-		</div>
+					</div>
 		
-		<div id= "Email_Address" style="padding-top: 10px; font-family:arial">
-		 <label> Email Address: </label>
-		 <input type ="text" name="email" value="<?php if(isset($UserSelected)){
+					<div id= "Email_Address" style="padding-top: 10px; font-family:arial">
+						<label> Email Address: </label>
+						<input type ="text" name="email" value="<?php if(isset($UserSelected)){
 															echo fetch_user_data($UserSelected)[5];
 														} ?>">
-		</div>
+					</div>
 		
 		
-		<div id= "Update_Password" style="padding-top: 10px; font-family:arial">
-		 <label> Update Password: </label>
-		 <input type ="password" name="PasswordUpdate" value="<?php if(isset($UserSelected)){
+					<div id= "Update_Password" style="padding-top: 10px; font-family:arial">
+						<label> Update Password: </label>
+						<input type ="password" name="PasswordUpdate" value="<?php if(isset($UserSelected)){
 															echo fetch_user_data($UserSelected)[6];
 														} ?>">
-		</div> 
+					</div> 
 		
 
-		<div style="padding-top: 10px;padding-left: 50px; font-family:arial">
-		  <input type="submit" value="Save" name="SubmitProfileForm">
-		</div>
-	   </div>
-	  </form>
-      </div>
+					<div style="padding-top: 10px;padding-left: 50px; font-family:arial">
+						<input type="submit" value="Save" name="SubmitProfileForm">
+					</div>
+				</form>
+			</div>
 	  
-      <div id="Footer">
-      </div>
-    </div>
-  </body>
+			<div id="Footer">
+			</div>
+		</div>
+	</body>
 </html>
