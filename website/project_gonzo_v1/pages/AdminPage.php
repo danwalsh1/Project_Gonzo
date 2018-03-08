@@ -58,7 +58,10 @@ function update_user_data(){
 		$msg = "Users information has now been updated!";
 		messages($msg, "AdminPage.php", 10);
 		}
-		
+
+if(isset($UserSelected)){
+	$result = fetch_user_data($UserSelected);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -93,54 +96,40 @@ function update_user_data(){
 	  
 					<div id="Username" style="padding-top: 10px;font-family:arial">
 						<label> Username: </label>
-						<input type ="text" name="username" value="<?php if(isset($UserSelected)){
-															echo fetch_user_data($UserSelected)[0];
-														} ?>">   <!--Updates the value based on whats passed in from the fetch_user_data function.-->
+						<input type ="text" name="username" value="<?php if(isset($UserSelected)){echo $result[0];} ?>">   <!--Updates the value based on whats passed in from the fetch_user_data function.-->
 					</div>
 	 	   
 					<!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
 					<div id="FirstNameText" style="padding-top: 10px;font-family:arial">
 						<label> First Name: </label>
-						<input type ="text" name="forename" value="<?php if(isset($UserSelected)){
-															echo fetch_user_data($UserSelected)[1];
-														} ?>">
+						<input type ="text" name="forename" value="<?php if(isset($UserSelected)){echo $result[1];} ?>">
 					</div>
 		
 					<div id="Surname" style="padding-top: 10px;font-family:arial">
 						<label> Surname: </label>
-						<input type="text" name ="surname" value="<?php if(isset($UserSelected)){
-															echo fetch_user_data($UserSelected)[2];
-														} ?>">
+						<input type="text" name ="surname" value="<?php if(isset($UserSelected)){echo $result[2];} ?>">
 					</div>
 		
 					<div id= "Device_ID" style="padding-top: 10px;font-family:arial">
 						<label> Device ID: </label>
-						<input type ="text" name="deviceid" value="<?php if(isset($UserSelected)){
-															echo fetch_user_data($UserSelected)[3];
-														} ?>">
+						<input type ="text" name="deviceid" value="<?php if(isset($UserSelected)){echo $result[3];} ?>">
 					</div>
 		 
 		
 					<div id= "Phone_Number" style="padding-top: 10px; font-family:arial">
 						<label> Phone Number: </label>
-						<input type ="text" name="phonenum" value="<?php if(isset($UserSelected)){
-															echo fetch_user_data($UserSelected)[4];
-														} ?>">
+						<input type ="text" name="phonenum" value="<?php if(isset($UserSelected)){echo $result[4];} ?>">
 					</div>
 		
 					<div id= "Email_Address" style="padding-top: 10px; font-family:arial">
 						<label> Email Address: </label>
-						<input type ="text" name="email" value="<?php if(isset($UserSelected)){
-															echo fetch_user_data($UserSelected)[5];
-														} ?>">
+						<input type ="text" name="email" value="<?php if(isset($UserSelected)){echo $result[5];} ?>">
 					</div>
 		
 		
 					<div id= "Update_Password" style="padding-top: 10px; font-family:arial">
 						<label> Update Password: </label>
-						<input type ="password" name="PasswordUpdate" value="<?php if(isset($UserSelected)){
-															echo fetch_user_data($UserSelected)[6];
-														} ?>">
+						<input type ="password" name="PasswordUpdate" value="<?php if(isset($UserSelected)){echo $result[6];} ?>">
 					</div> 
 		
 
