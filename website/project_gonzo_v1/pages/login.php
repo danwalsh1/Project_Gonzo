@@ -35,13 +35,12 @@
 			}else{
 				$_SESSION['admin'] = False;
 			}
-				return true;
-			}else{
-				return false;
-			}
+			
+			return true;
+		}else{
+			return false;
+		}
 	}
-	
-	
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,23 +58,36 @@
 				</div>
 			</div>
 	  
-	 
-			<div style ="text-align: center;"> <!--Form Configuration and positioning -->
-				<form method ="POST" action="login.php">
-				<div id="UsernameText" style="padding-top: 10px;">
-					<label style="font-family:arial"> Username: </label>
-					<input type ="text" name="Username">
-				</div>
-				<div id="PasswordText" style="padding-top: 10px;">
-					<label style="font-family:arial"> Password: </label>
-					<input type="password" name ="Password">
-						<div style="padding-top: 10px;padding-left: 50px;">
-							<input type="submit" value="Login" name ="logindone">
-						</div>
-				</div>
-				</form>
+			<div style="font-family:arial">
+				<table align="center"> <!--Form Configuration and positioning -->
+					<form method ="POST" action="login.php">
+						<tr>
+							<td>
+								<label style="font-family:arial"> Username: </label>
+							</td>
+							<td>
+								<input type ="text" name="Username">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label style="font-family:arial"> Password: </label>
+							</td>
+							<td>
+								<input type="password" name ="Password">
+							</td>
+						</tr>
+						<tr>
+							<td>
+							</td>
+							<td>
+								<input type="submit" value="Login" name ="logindone">
+							</td>
+						</tr>
+					</form>
+				</table>
 			</div>
-	  
+			
 			<div id="Footer">
 			</div>
 		</div>
