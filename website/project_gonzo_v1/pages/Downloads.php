@@ -14,9 +14,7 @@
 			header("Location: home.php");
 			die();
 		}
-	}
-	
-	else{
+	}else{
 		header("Location: logout.php");
 		die();
 		}
