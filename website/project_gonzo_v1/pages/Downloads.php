@@ -5,8 +5,8 @@
 	include("../functions/generalFunctions.php");
 
 	if(isset($_SESSION['Username']) == false){
-	  header("Location: login.php");
-	  die();
+		header("Location: login.php");
+		die();
 	}
 	
 	if(isset($_SESSION['admin'])){
@@ -17,7 +17,7 @@
 	}else{
 		header("Location: logout.php");
 		die();
-		}
+	}
 ?>
 
 <!DOCTYPE html>
@@ -32,16 +32,16 @@
 		<div id="Page">
 			<div id="Header">
 				<div id="Menu">
-			<?php displayMainMenu(); ?>
+					<?php displayMainMenu(); ?>
 				</div>
 			</div>
 		<div style = "padding-left: 10px;font-family:arial">
-			<p><u>Installation Instructions - Windows Desktop Application</u></p>
-			<p>1. If you haven't already, click on the app link.</p>
-			<p>2. Unzip the download contents.</p>
-			<p>3. Navigate into the folder and run the 'setup.exe' file. </p>
-			<p>4. When prompted press install, the app will automatically open when installation is complete.</p>
-			<p>5. Congratulations, you can now start logging data :) </p>
+			<p><u>Installation Instructions - Windows Desktop Application</u><br /><br />
+			1. If you haven't already, click on the app link.<br /><br />
+			2. Unzip the download contents.<br /><br />
+			3. Navigate into the folder and run the 'setup.exe' file. <br /><br />
+			4. When prompted press install, the app will automatically open when installation is complete.<br /><br />
+			5. Congratulations, you can now start logging data :) </p>
 
 			<div style= padding-top:10px; >
 				<form action=https://projectgonzocoventry.000webhostapp.com/downloads/MSAPP.zip>
