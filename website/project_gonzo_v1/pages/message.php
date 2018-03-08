@@ -1,23 +1,23 @@
 <?php
-  session_start();
+	session_start();
   
-  include("../functions/generalFunctions.php");
+	include("../functions/generalFunctions.php");
   
-  if(!isset($_SESSION['Username'])){
-	  header("Location: login.php");
-	  die();
-  }
+	if(!isset($_SESSION['Username'])){
+		header("Location: login.php");
+		die();
+	}
   
-  if(isset($_SESSION['msg']) and isset($_SESSION['redir']) and isset($_SESSION['time'])){
-	  $msg_data = $_SESSION['msg'];
-	  $redir_data = $_SESSION['redir'];
-	  $time_data = $_SESSION['time'];
-	  unset($_SESSION['msg']);
-	  unset($_SESSION['redir']);
-	  unset($_SESSION['time']);
-  }else{
-	  header("Location:home.php");
-  }
+	if(isset($_SESSION['msg']) and isset($_SESSION['redir']) and isset($_SESSION['time'])){
+		$msg_data = $_SESSION['msg'];
+		$redir_data = $_SESSION['redir'];
+		$time_data = $_SESSION['time'];
+		unset($_SESSION['msg']);
+		unset($_SESSION['redir']);
+		unset($_SESSION['time']);
+	}else{
+		header("Location:home.php");
+	}
 ?>
 <!DOCTYPE html>
 <html>
