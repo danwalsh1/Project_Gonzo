@@ -25,32 +25,25 @@
       </div>
       
       <div id="Content">
-		  <h1>Project Gonzo</h1>
-		<p>Welcome <?php echo $_SESSION['Username']; ?>, to the Project Gonzo homepage.</p>
-		 <div id="Content">
-		 <style>
-		 p {
-			 font-family: "arial";
-			 font-size: 100%;
-		 }	 
-		 </style>
-		<p><img src="../img/gonzoLogo.jpg" alt="Gonzo Logo" align="right" align="bottom" class="res"/>
-			Project Gonzo is an app which you can download on to your device, 
-			it records your device's sensor data, for example your battery 
-			percentage, charging state and CPU usage.</p>
-		<p><b>Step 1: Install the app through our Website -</b> you must first install 
-		    the app on the device you wish to monitor. This can be done by
-			accessing the website on your device and clicking the download
-			button on the top left of the screen.</p>
-		<p><b>Step 2: Run the app -</b> Once you have downloaded the app, open it
-			and click run which is at the center of the screen. This will
-			then start the recording of your device's censor data, the app
-			runs in the background and sends the information collected to
-			the websites database where it gets stored.</p>
-		<p><b>Step 3: Now all you do is leave it -</b> censor data will be recorded
-			every 10 minutes the data recorded can then be viewed anytime 
-			on the <b>My device</b> page displayed as a graph.</p> 
-		<img src="../img/AndroidPhoneUpdated.png" align="top" alt="Android Phone" class="res"/>
+		  <h1 style="font-family:arial">Project Gonzo</h1>
+	<p style="font-family:arial">Welcome <?php echo $_SESSION['Username']; ?>, to the Project Gonzo homepage.
+	</p>
+		<div id="Content">
+			
+	<p style="font-family:arial"><img src="../img/gonzoLogo.jpg" alt="Gonzo Logo" align="right" align="bottom" class="res"/>
+			Project Gonzo is a data collection tool that retrieves information for the
+			battery level, charging state and CPU usage from a Windows machine and the battery level and charging state from an Android device.
+	</p>
+			
+	<p style="font-family:arial">If the application hasn't been installed already, your administrator can install the application on 
+			your device by navigating to the downloads page.
+	</p>
+		
+	<p style="font-family:arial">To access historical data and produce charts please select either 'My Device' or 'Charts', 
+	dependant on your permission level.
+	</p>
+			
+	<img src="../img/AndroidPhoneUpdated.png" align="top" alt="Android Phone" class="res"/>
       </div>
       
       <div id="Footer">
