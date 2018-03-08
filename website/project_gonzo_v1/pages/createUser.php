@@ -23,33 +23,25 @@
 	  if(ctype_alnum($_POST['username']) and ctype_alnum($_POST['forename']) and ctype_alnum($_POST['surname']) and ctype_alnum($_POST['deviceid']) and ctype_alnum($_POST['phonenumber']) and ctype_alnum($_POST['password']) and filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
 		if(isset($_POST['admin'])){
 			if($_POST['admin'] == true){
-				$admin = "true";
+				$admin = 1;
 			}else{
-				$admin = "false";
+				$admin = 0;
 			}
 		}else{
-			$admin = "false";
+			$admin = 0;
 		}
-		  
-		  $connect = connect_db();
-		  $sql = "INSERT INTO users(username, password, admin, forename, surname, device_id, phone_num, email) VALUES ('" . $_POST['username'] . "', '" . $_POST['password'] . "', " . $admin . ", '" . $_POST['forename'] . "', '" . $_POST['surname'] . "', '" . $_POST['deviceid'] . "', '" . $_POST['phonenumber'] . "', '" . $_POST['email'] . "')";
-		  
-		  $result = mysqli_query($connect, $sql);
-		  
-		  $msg = "New user created with the username: " . $_POST['username'];
-		  messages($msg, "createUser.php", 10);
-	  }
-  }
-  function insert_user_data(){
-	  $connect = connect_db("NULL");   # Connects to data base
-	  $sql = "INSERT INTO users values(forename = ?, surname = ?, device_id = ? , phone_num = ?, email = ?, password = ? WHERE username = ?)";   # Queries the data base for user details 
-	  $stmt->prepare($sql);
-	  $stmt->bind_param('sssssss', $_POST["Forename"], $_POST["Surname"], $_POST["Device ID"], $_POST["Phone_Number"], $_POST["Email_Address"], $_POST["Password"], $_POST["username"]);
+	  $connect = connect_db();   # Connects to data base
+	  $sql = "INSERT INTO users(username, password, admin, forename, surname, device_id, phone_num, email) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";   # Queries the data base for user details 
+	  $stmt = $connect->prepare($sql);
+	  $stmt->bind_param('ssisssss', $_POST['username'], $_POST['password'], $admin, $_POST['forename'], $_POST['surname'], $_POST['deviceid'], $_POST['phonenumber'], $_POST['email']);
 	  $stmt->execute();
 	  
 	  $msg = "New user created with the username: " . $_POST['username'];
 	  messages($msg, "createUser.php", 10);
+		
+	  }
   }
+
 ?>
 <!DOCTYPE html>
 <html>
