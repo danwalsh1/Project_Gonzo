@@ -50,7 +50,7 @@
 		<p><b>Step 3: Now all you do is leave it -</b> censor data will be recorded
 			every 10 minutes the data recorded can then be viewed anytime 
 			on the <b>My device</b> page displayed as a graph.</p> 
-		<img src="../img/Androidphone.png" align="top" alt="Android Phone" class="res"/>
+		<img src="../img/AndroidPhoneUpdated.png" align="top" alt="Android Phone" class="res"/>
       </div>
       
       <div id="Footer">
