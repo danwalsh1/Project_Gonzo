@@ -26,13 +26,12 @@
 	}
 	
 	function retrieve_users_DropDown(){
-	$connect = connect_db("NULL");
-	$sql = "SELECT * FROM users";
-	$result = mysqli_query($connect, $sql);
-	while($row = mysqli_fetch_array($result))
-	{
-		echo $ListofNames="<option>" . $row['username'] . "</option>";
-	}
+		$connect = connect_db("NULL");
+		$sql = "SELECT * FROM users";
+		$result = mysqli_query($connect, $sql);
+		while($row = mysqli_fetch_array($result)){
+			echo $ListofNames="<option>" . $row['username'] . "</option>";
+		}
 	}
 		
 	function messages($message, $redirect, $time){
