@@ -54,75 +54,100 @@
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Makes page mobile-friendly-->
-    <link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" />
-    <link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
-    <title>Charts | Project Gonzo</title>
-  </head>
-  <body>
-    <div id="Page">
-      <div id="Header">
-		<div id="Menu">
-			<?php displayMainMenu(); ?>
-		</div>
-      </div>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Makes page mobile-friendly-->
+		<link href="../CSS/mainMenu.css" rel  = "stylesheet" type="text/CSS" />
+		<link href="../CSS/mainLayout.css" rel  = "stylesheet" type="text/CSS" />
+		<title>Charts | Project Gonzo</title>
+	</head>
+	<body>
+		<div id="Page">
+			<div id="Header">
+				<div id="Menu">
+					<?php displayMainMenu(); ?>
+				</div>
+			</div>
       
-      <div id="Content">
-		<form action= "adminCharts.php" method = "POST">
+			<div id="Content">
+				<div style="font-family:arial">
+					<table align="left">
+						<form action= "adminCharts.php" method = "POST">
+							<tr>
+								<td>
+									<label> Please select a User: </label>
+								</td>
+								<td>
+									<select class="form-dropdown" style="width:150px" id="Dropdown" name="DD">
+										<?php echo retrieve_users_DropDown(); ?>			
+									</select>
+								</td>
+							</tr>
+				
+							<tr>
+								<td>
+									<label> Please select period to report: </label>
+								</td>
+								<td>
+									<select class="form-dropdown" style="width:150px;font-family:arial" id="DropdownTimeframe" name="DDTimeframe">
+										<option>Day</option>
+										<option>Week</option>
+										<option>Month</option>
+									</select>
+								</td>
+							</tr>
+			
+							<tr>
+								<td>
+									<label> Please select a start date: </label>
+								</td>
+								<td>
+									<input type= "date" name="Calendar">
+								</td>
+							</tr>
+			
+							<tr>
+								<td>
+									<label> Please select data to report: </label>
+								</td>
+								<td>
+									<select class="form-dropdown" style="width:150px" id="DropdownChartType" name="DDChartType">
+										<option>Battery Level</option>
+										<option>Battery Charging State</option>
+										<option>CPU Usage</option>
+									</select>
+								</td>
+							</tr>
+				
+							<tr>
+								<td>
+								</td>
+								<td>
+									<input type="hidden" id="hDeviceWidth" name="deviceWidth" value="test" runat="server">
+								</td>
+							</tr>
 		
-			<div id="DropDown" style="padding-top: 10px; text-align: Left; font-family:arial">
-			    <label> Please select a User: </label>
-			    <select class="form-dropdown" style="width:150px" id="Dropdown" name="DD">
-				    <?php echo retrieve_users_DropDown(); ?>			
-			    </select>
-			</div>
-			
-			<div id="Timeframe" style="padding-top: 10px; text-align: left;font-family:arial">
-			    <label> Please select period to report: </label>
-			    <select class="form-dropdown" style="width:150px;font-family:arial" id="DropdownTimeframe" name="DDTimeframe">
-				    <option>Day</option>
-				    <option>Week</option>
-				    <option>Month</option>
-			    </select>
-			</div>
-			
-			<div id = "Calendar" style="padding-top: 10px; text-align: left; font-family:arial">
-			    <label> Please select a start date: </label>
-			    <input type= "date" name="Calendar">
-			</div>
-			
-			<div id = "ChartType" style="padding-top: 10px; text-align: left;font-family:arial">
-				<label> Please select data to report: </label>
-				<select class="form-dropdown" style="width:150px" id="DropdownChartType" name="DDChartType">
-					<option>Battery Level</option>
-					<option>Battery Charging State</option>
-					<option>CPU Usage</option>
-				</select>
-			</div>
-			
-			<div id="HiddenInputs">
-				<input type="hidden" id="hDeviceWidth" name="deviceWidth" value="test" runat="server">
-			</div>
-		
-			<div id="ChartsView" style="padding-top: 10px;padding-left: 50px; text-align: left;">
+							<tr>
+								<td>
+								</td>
+								<td>
+									<input type="submit" value="Show Charts" name="UpdateChartView">	
+								</td>
+							</tr>
+						</form>
+					</table>
+				</div>
+				<script>
+					document.getElementById('hDeviceWidth').value=screen.width;
+				</script>
 				<br />
-				<br />
-				<input type="submit" value="Show Charts" name="UpdateChartView">	
+		
+				<div id= "Charts">
+				</div>
+		
 			</div>
-		</form>
-		<script>
-			document.getElementById('hDeviceWidth').value=screen.width;
-		</script>
-		<br />
-		
-		<div id= "Charts">
-		</div>
-		
-	  </div>
 	    
-      <div id="Footer">
-      </div>
-    </div>
-  </body>
+			<div id="Footer">
+			</div>
+		</div>
+	</body>
 </html>
