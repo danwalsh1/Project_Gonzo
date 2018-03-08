@@ -54,48 +54,81 @@
 			</div>
 	  
 	 
-			<div style ="text-align: center;"> <!--Form Configuration and positioning -->
-				<form method ="POST" action="UserProfile.php">
-	  
-					<div id="Username" style="padding-top: 10px; font-family:arial">
-						<label> Username: </label>
-						<input type ="text" name="username" value=<?php echo $result[0]  ?>>   
-					</div>
-					<!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
-					<div id="FirstNameText" style="padding-top: 10px; font-family:arial">
-						<label> First Name: </label>
-						<input type ="text" name="forename" value=<?php echo $result[1] ?>>
-					</div>
+			<div style ="text-align: center; font-family:arial"> <!--Form Configuration and positioning -->
+				<table align="center">
+					<form method ="POST" action="UserProfile.php">
+						<tr>
+							<td>
+								<label> Username: </label>
+							</td>
+							<td>
+								<input type ="text" name="username" value=<?php echo $result[0]  ?>>   
+							</td>
+						</tr>
+						<!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
+						<tr>
+							<td>
+								<label> First Name: </label>
+							</td>
+							<td>
+								<input type ="text" name="forename" value=<?php echo $result[1] ?>>
+							</td>
+						</tr>
 		
-					<div id="Surname" style="padding-top: 10px;font-family:arial">
-						<label> Surname: </label>
-						<input type="text" name ="surname" value=<?php echo $result[2] ?>>
-					</div>
+						<tr>
+							<td>
+								<label> Surname: </label>
+							</td>
+							<td>
+								<input type="text" name ="surname" value=<?php echo $result[2] ?>>
+							</td>
+						</tr>
 		
-					<div id= "Device_ID" style="padding-top: 10px;font-family:arial">
-						<label> Device ID: </label>
-						<input type ="text" name="deviceid" value=<?php echo $result[3] ?>>
-					</div>
+						<tr>
+							<td>
+								<label> Device ID: </label>
+							</td>
+							<td>
+								<input type ="text" name="deviceid" value=<?php echo $result[3] ?>>
+							</td>
+						</tr>
 		 
-					<div id= "Phone_Number" style="padding-top: 10px;font-family:arial">
-						<label> Phone Number: </label>
-						<input type ="text" name="phonenum" value=<?php echo $result[4] ?>>
-					</div>
+						<tr>
+							<td>
+								<label> Phone Number: </label>
+							</td>
+							<td>
+								<input type ="text" name="phonenum" value=<?php echo $result[4] ?>>
+							</td>
+						</tr>
 		
-					<div id= "Email_Address" style="padding-top: 10px;font-family:arial">
-						<label> Email Address: </label>
-						<input type ="text" name="email" value=<?php echo $result[5] ?>>
-					</div>
+						<tr>
+							<td>
+								<label> Email Address: </label>
+							</td>
+							<td>
+								<input type ="text" name="email" value=<?php echo $result[5] ?>>
+							</td>
+						</tr>
 		
-					<div id= "Update_Password" style="padding-top: 10px;font-family:arial">
-						<label> Update Password: </label>
-						<input type ="password" name="PasswordUpdate" value=<?php echo $result[6] ?>>
-					</div> 
+						<tr>
+							<td>
+								<label> Update Password: </label>
+							</td>
+							<td>
+								<input type ="password" name="PasswordUpdate" value=<?php echo $result[6] ?>>
+							</td>
+						</tr> 
 					
-					<div style="padding-top: 10px;padding-left: 50px; font-family:arial">
-						<input type="submit" value="Save" name="SubmitProfileForm">
-					</div>
-				</form>
+						<tr>
+							<td>
+							</td>
+							<td>
+								<input type="submit" value="Save" name="SubmitProfileForm">
+							</td>
+						</tr>
+					</form>
+				</table>
 			</div>
 	  
 			<div id="Footer">
