@@ -1,8 +1,10 @@
 <?php
-	// No need to include sqlFunctions due to the chart pages already doing this.
+	# No need to include sqlFunctions due to the chart pages already doing this.
 	
 	function makeGoogleChart($title, $width, $height, $divID, $dataString, $vAxis, $hAxis){
-		# Uses Google Charts
+		# Uses Google Charts (https://developers.google.com/chart/)
+		# This function takes in a title, width, height, div tag ID, a string of data to be displayed in the table, a vertical axis label and a horizontal axis label.
+		# This function doesn't return any values. The function echo's Google Charts javascript into the page displaying the chart.
 		echo "
 			<!--Uses Google Charts-->
 			<script type=\"text/javascript\" src=\"https://www.gstatic.com/charts/loader.js\"></script>
@@ -24,7 +26,7 @@
 					chart.draw(data, options);
 				}
 		</script>
-	";
+		";
 	}
 	
 	function checkArrayForZero($arrayToCheck){
@@ -41,28 +43,39 @@
 	}
 
 	function get_avg_device_data_day($startDate, $endDate, $deviceId, $chartType){
+		# This function takes in a start date and end date, in the format Y-m-d, a device ID and the type of chart to be displayed(cpuUsage, batteryLevel or batteryState).
+		# This function is used to find the average of the given data type for the given period. Should be used to find average for one day.
 		# Start date is inclusive, end date is not inclusive
 		$connect = connect_db();
+		
+		# Get data from database
 		if($chartType == "cpuUsage"){
 			$sql = "SELECT * FROM device_cpu_data WHERE date>='" . $startDate . "' AND date<'" . $endDate . "' AND device_id='" . $deviceId . "'";
 		}else{
 			$sql = "SELECT * FROM device_battery_data WHERE date>='" . $startDate . "' AND date<'" . $endDate . "' AND device_id='" . $deviceId . "'";
 		}
 		$result = mysqli_query($connect, $sql);
+		
+		# Check that data has been found
 		if(mysqli_num_rows($result) != 0){
 			if($chartType == "cpuUsage"){
+				# Store each data element in an array
 				while($row = mysqli_fetch_array($result)){
 					$cpuPerArray[] = $row['cpu_percent_avg'];
 				}
 			}else{
+				# Store each data element in the relevant array
 				while($row = mysqli_fetch_array($result)){
 					$batLevelArray[] = $row['battery_level'];
 					$batStateArray[] = $row['charging_state'];
 				}
 			}
 		}else{
+			# No data found
 			return 0;
 		}
+		
+		# Prepare the returned variable
 		if($chartType == "batteryLevel" or $chartType == "batteryState"){
 			$count = 0;
 			$numOfCharging = 0;
