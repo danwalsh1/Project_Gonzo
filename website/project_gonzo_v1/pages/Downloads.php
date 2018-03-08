@@ -14,7 +14,9 @@
 			header("Location: home.php");
 			die();
 		}
-	}else{
+	}
+	
+	else{
 		header("Location: logout.php");
 		die();
 		}
@@ -47,12 +49,13 @@
 				<form action=https://projectgonzocoventry.000webhostapp.com/downloads/MSAPP.zip>
 					<input type="submit" value="Click here for the desktop app." />
 				</form>
-			<br><br>
-			<form action=https://projectgonzocoventry.000webhostapp.com/downloads/MobileApp.zip>
-				<input type="submit" value="Click here for the mobile app." />
-			</form>
+				<br><br>
+				<form action=https://projectgonzocoventry.000webhostapp.com/downloads/MobileApp.zip>
+					<input type="submit" value="Click here for the mobile app." />
+				</form>
 
 			</div>
 		</div>
 	</body>
 </html>
+
