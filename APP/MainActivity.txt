@@ -1,4 +1,4 @@
-package com.example.jacob.projectgonzo;
+package com.example.salazhar.projectgonzo;
 
 import android.content.Intent;
 import android.os.BatteryManager;
@@ -16,31 +16,34 @@ import java.util.Date;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-    //Initialises variables with varying types.
+    //Initialises variables with varying types. Also makes some of these variables public at the end, so they are accessible throughout the code.
     String Address;
+    String NameOfPhone = Build.ID; //Sets the phones id equal to the NameOfPhone variable.
+    String state;
     public int level;
-    String NameOfPhone = Build.ID; //Sets the phones name equal to the NameOfPhone variable. - THIS ISNT GOING TO WORK AS THE WEBSITES MAKES THE DEVICE ID ALL ONE WORD AND THE DEVICE ID FOR THIS APP IS MORE THAN ONE WORD.
-    String state;                   //think the above works. although data isnt showing on the website for some reason.
     public boolean isCharging;
     public int ChargeState;
-    public int CountdownAmount = 60; //Seconds for the countdown.
 
+
+    //Defines a function that is called when the battery changes. This call is later down in the code.
     public BroadcastReceiver BatteryChange = new BroadcastReceiver() {
         @Override
         public void onReceive(Context c, Intent i) {
 
-            //For future reference the battery level is stored inside the 'level' variable.
-            //Get the battery level and assign it to the 'level' variable. If the program cannot get a level it will set the battery level to 0 by default.
+            //Gets the battery level and assign it to the 'level' variable. If the program cannot get a level it will set the battery level to 0 by default.
             level = i.getIntExtra("level", 0);
-            //Find textview control created in activity_main.xml
+            //Find textview control for the BatteryLevel text view created in activity_main.xml and set to the variable 'tv'.
             TextView tv = (TextView) findViewById(R.id.BatteryLevel);
-            //Set the BatteryLevel text field as 'Battery level *batterylevelhere* %'.
+            //Sets the BatteryLevel text field's text as 'Battery level *batterylevelhere* %'.
             tv.setText("Battery Level: " + Integer.toString(level) + "%");
 
-            //Finding the charge state.
-            int status = i.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+            //Finds the charge state and sets it equal to the status variable.
+            int status = i.getIntExtra(BatteryManager.EXTRA_STATUS, 1);
+            //Sets the charge state as a boolean and assigns it to the variable 'ischarging'
             isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
                     status == BatteryManager.BATTERY_STATUS_FULL;
+            //Small if statements to make sure that the charge state is sent to the database properly, as true and false were not working some times.
+            //Also sets the state variable equal to charge state in a string so this can be displayed to the screen for the user to see.
             if (isCharging == true) {
                 state = "Charging.";
                 ChargeState = 1;
@@ -48,44 +51,61 @@ public class MainActivity extends AppCompatActivity {
                 state = "Not Charging.";
                 ChargeState = 0;
             }
+            //Finds the textview control for the ChargeState text view created in activity_main.xml and sets it to the variable 'cs'
             TextView cs = (TextView) findViewById(R.id.ChargeState);
+            //Sets the ChargeState text field's text as 'Charge State: *StateOfCharging*'.
             cs.setText("Charge State: "+state);
         }
     };
 
+    //This code essentially runs until another override function (a function with '@Override' at the beginning) is called.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Tells the content from this file to see the content in the 'activity_main.xml' file.
         setContentView(R.layout.activity_main);
-        //Register the receiver which triggers the event 'BatteryChange' when the battery level changes. This in turn then changes the text on the screen to say the now current battery life.
+        //Register the receiver which triggers the event 'BatteryChange' (The first function) when the battery level changes. This in turn then changes the text on the screen to say the now current battery life.
         registerReceiver(BatteryChange, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        //Finds the textview controls for the DeviceID and WhenDataSent text field's and sets to the variable tv and cd respectively.
         TextView tv = (TextView) findViewById(R.id.DeviceID);
+        TextView cd = (TextView) findViewById(R.id.WhenDataSent);
+        //Sets the DeviceID text field's text as 'Your Device ID is: *Build.ID*'.
         tv.setText("Your Device ID is: "+NameOfPhone);
-        TextView cd = (TextView) findViewById(R.id.Countdown);
+        //Sets the WhenDataSent text field's text as 'Data sent at: WAITING ON BUTTON PRESS' (As the data hasn't been set yet).
         cd.setText("Data sent at: WAITING ON BUTTON PRESS.");
     }
 
+    //This code is run when the button at the top of the screen on the app is pressed.
     public void OpenBrowser(View view){
-        //Creates a new browser session that opens a certain website.
+        //Sets the web url equal to the Address variable. Also inserts
         Address = "https://projectgonzocoventry.000webhostapp.com/app_page/insertData.php?deviceid="+NameOfPhone+"&batlevel="+level+"&chargestate="+ChargeState;
+        //Creates a new browser session that opens a certain website.
         Intent browserIntent=new Intent(Intent.ACTION_VIEW, Uri.parse(Address));
+        //Starts the browser intent, which opens the browser with the url.
         startActivity(browserIntent);
 
+        //Gets the current date and time
         Date CurrentTime = Calendar.getInstance().getTime();
-        TextView cd = (TextView) findViewById(R.id.Countdown);
+        //Finds the textview control for the WhenDataSent text view created in activity_main.xml and sets it to the variable 'cd'
+        TextView cd = (TextView) findViewById(R.id.WhenDataSent);
+        //Sets the WhenDataSent text field's text as 'Data sent at: *CurrentTime*'.
         cd.setText("Data sent at: "+CurrentTime);
 
-
+        //Creates a new thread
         Thread loop=new Thread(){
             @Override
             public void run(){
+                //Runs a while loop inside the thread
                 while(!isInterrupted()){
                     try {
-                        Thread.sleep(CountdownAmount*1000*60);  //1000ms = 1 sec //Every hour this thread is run which opens the browser.
+                        //Waits an hour (in milliseconds)
+                        Thread.sleep(60*1000*60);  //1000ms = 1 sec //1000 makes the time 1 second, 60, makes the time a minute and the next 60 makes the time an hour.
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                //Creates a new browser session that opens a certain website.
                                 Intent browserIntent=new Intent(Intent.ACTION_VIEW, Uri.parse(Address));
+                                //Starts the browser intent, which opens the browser with the url.
                                 startActivity(browserIntent);
                             }
                         });
