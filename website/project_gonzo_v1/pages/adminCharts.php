@@ -5,6 +5,7 @@
 	include("../functions/sqlFunctions.php");
 	include("../functions/chartFunctions.php");
  
+
 	if(!isset($_SESSION['Username'])){
 		header("Location: login.php");
 		die();
@@ -20,6 +21,7 @@
 		die();
 	}
 	  
+
 	if(isset($_POST['UpdateChartView'])){
 		$ChooseUser = $_POST['DD'];	
 		$Date = date("Y-m-d", strtotime($_POST['Calendar']));
@@ -31,6 +33,7 @@
 		}elseif($_POST['DDTimeframe'] == "Month"){
 			$NumOfDays = 30;
 		}
+
 		if($_POST['DDChartType'] == "Battery Level"){
 			$chartType = "batteryLevel";
 			$title = "Battery Level Chart";
@@ -42,6 +45,7 @@
 			$title = "CPU Usage Chart";
 		}
 	  
+
 		$tWidth = (int) $_POST['deviceWidth'];
 		$width = $tWidth - (($tWidth/100)*10);
 		$height = ($width/100) * 60;
@@ -49,6 +53,7 @@
 		$value = get_users_values($_POST['DD']);
 		$DeviceID = $value[3];
   
+
 		print_chart($Date, $NumOfDays, $DeviceID, $title, $width, $height, "Charts", $chartType);
 	}
 ?>
@@ -82,7 +87,11 @@
 									</select>
 								</td>
 							</tr>
+
 				
+
+
+
 							<tr>
 								<td>
 									<label> Please select period to report: </label>
@@ -118,6 +127,7 @@
 								</td>
 							</tr>
 				
+
 							<tr>
 								<td>
 								</td>
@@ -126,6 +136,7 @@
 								</td>
 							</tr>
 		
+
 							<tr>
 								<td>
 								</td>
@@ -136,16 +147,18 @@
 						</form>
 					</table>
 				</div>
+
 				<script>
 					document.getElementById('hDeviceWidth').value=screen.width;
 				</script>
-				<br />
-		
-				<div id= "Charts">
+				
+				
+				<div id= "Charts"; style="padding-top:150px">
 				</div>
 		
 			</div>
 	    
+
 			<div id="Footer">
 			</div>
 		</div>
