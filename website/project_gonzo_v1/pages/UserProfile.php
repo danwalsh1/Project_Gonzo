@@ -10,18 +10,6 @@
 		$result = update_user_data();
 	}
 
-	function fetch_user_data($username){
-		$connect = connect_db("NULL"); #NULL as no data retrieval is required yet, simply the connection.
-		$sql = 'SELECT * FROM users WHERE username = ?'; #Queries the database for the users details using details stored in session.
-		$stmt = $connect->prepare($sql);
-		$stmt->bind_param('s', $username);
-		$stmt->execute();
-		$result = $stmt->get_result();
-		$row = $result->fetch_assoc();
-		
-		return array($row['username'], $row['forename'], $row['surname'], $row['device_id'], $row['phone_num'], $row['email'],$row['password']);
-	}
-	
 	function update_user_data(){
       	$connect = connect_db("NULL"); #Connects to DB
 		$stmt = "UPDATE users SET forename = ?, surname = ?, device_id = ? , phone_num = ?, email = ?, password = ? WHERE username = ?";
@@ -34,7 +22,8 @@
 		messages($msg, "UserProfile.php", 10);
 	}
 	
-	$result = fetch_user_data($_SESSION['Username']);
+	$result = get_users_values($_SESSION['Username']);
+	
 ?>
 
 <!DOCTYPE html>
