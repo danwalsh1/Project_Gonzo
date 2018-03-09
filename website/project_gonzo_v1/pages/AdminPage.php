@@ -89,7 +89,7 @@
 								<label> Username: </label>
 							</td>
 							<td>
-								<input type ="text" name="username" value="<?php if(isset($UserSelected)){echo $result[0];} ?>">   <!--Updates the value based on whats passed in from the fetch_user_data function.-->
+								<input type ="text" name="username" readonly="readonly" value="<?php if(isset($UserSelected)){echo $result[0];} ?>">   <!--Updates the value based on whats passed in from the fetch_user_data function.-->
 							</td>
 						</tr>
 	 	   
