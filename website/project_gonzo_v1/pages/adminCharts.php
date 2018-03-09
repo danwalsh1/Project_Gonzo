@@ -47,7 +47,7 @@
 		$height = ($width/100) * 60;
   
 		$value = get_users_values($_POST['DD']);
-		$DeviceID = $value->device_id;
+		$DeviceID = $value[3];
   
 		print_chart($Date, $NumOfDays, $DeviceID, $title, $width, $height, "Charts", $chartType);
 	}
