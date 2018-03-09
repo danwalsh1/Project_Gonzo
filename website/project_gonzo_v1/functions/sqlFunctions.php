@@ -63,10 +63,15 @@
 	}
 	
 	function get_users_values($username){
-		$connect = connect_db();
-		$sql = "SELECT * FROM users WHERE username='" . $username . "'";
-		$result = mysqli_query($connect, $sql);
-		$val = mysqli_fetch_object($result);
+		$connect = connect_db("NULL"); #NULL as no data retrieval is required yet, simply the connection.
+		$sql = 'SELECT * FROM users WHERE username = ?'; #Queries the database for the users details using details stored in session.
+		$stmt = $connect->prepare($sql);
+		$stmt->bind_param('s', $username);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$row = $result->fetch_assoc();
+		$val = array($row['username'], $row['forename'], $row['surname'], $row['device_id'], $row['phone_num'], $row['email'],$row['password']);
+		
 		return $val;
 	}
 	
