@@ -37,7 +37,7 @@
 		$width = $tWidth - (($tWidth/100)*10);
 		$height = ($width/100) * 60;
 	
-		print_chart($Date, $NumOfDays, $userValues->device_id, $title, $width, $height, "dataChart", $chartType);
+		print_chart($Date, $NumOfDays, $userValues[3], $title, $width, $height, "dataChart", $chartType);
 	}
 ?>
 <!DOCTYPE html>
@@ -57,7 +57,7 @@
 			</div>
       
 			<div id="Content">
-				<h2 style="font-family:arial">Device ID: <?php echo $userValues->device_id; ?></h2>
+				<h2 style="font-family:arial">Device ID: <?php echo $userValues[3] ?></h2>
 				
 				<div style="font-family:arial">
 					<table>
