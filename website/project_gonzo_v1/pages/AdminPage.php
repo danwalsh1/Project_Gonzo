@@ -27,25 +27,11 @@
 		$result = update_user_data();
 	}
 	
-
 	if(isset($_POST['UpdateDetailsView'])){
 		$UserSelected = $_POST['DD'];
 		#Checked for validity incase of sql injection attempts.
-		$result = fetch_user_data($UserSelected); #Runs the fetch function and displays in the form fields.
+		$result = get_users_values($UserSelected); #Runs the fetch function and displays in the form fields.
 	}
-		
-
-	function fetch_user_data($UserSelected){
-		$connect = connect_db("NULL");
-		$sql = 'SELECT * FROM users WHERE username = ?';
-		$stmt = $connect->prepare($sql);
-		$stmt->bind_param('s', $UserSelected);
-		$stmt->execute();
-		$result = $stmt->get_result();
-		$row = $result->fetch_assoc();
-			
-		return array($row['username'], $row['forename'], $row['surname'], $row['device_id'], $row['phone_num'], $row['email'],$row['password']);		
-	}		
 		
 	function update_user_data(){
        	$connect = connect_db("NULL"); #Connects to DB
@@ -59,9 +45,6 @@
 		messages($msg, "AdminPage.php", 10);
 	}
 
-	if(isset($UserSelected)){
-		$result = fetch_user_data($UserSelected);
-	}
 ?>
 <!DOCTYPE html>
 <html>
