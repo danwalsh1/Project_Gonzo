@@ -51,7 +51,7 @@
 								<label> Username: </label>
 							</td>
 							<td>
-								<input type ="text" name="username" value=<?php echo $result[0]  ?>>   
+								<input type ="text" name="username" readonly="readonly" value=<?php echo $result[0] ?>>    
 							</td>
 						</tr>
 						<!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
