@@ -31,10 +31,10 @@
 		<div id="page">
 			<div id="header">
 				<div id="Menu">
-					<?php displayMainMenu(); ?> <!-- this calls a function in general functions which displays the main menu
+					<?php displayMainMenu(); ?> <!-- this calls a function in general functions which displays the main menu-->
 				</div>
 			</div>
-			<div id="content" style="font-family: arial">	<!--creates a div for content which selects a font for the page.
+			<div id="content" style="font-family: arial">	<!--creates a div for content which selects a font for the page.-->
 				<p>
 					<?php
 						echo $msg_data;  // echo means to print in php, so this prints the message data which the user will read when enteringthe page.
