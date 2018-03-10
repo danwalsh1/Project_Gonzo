@@ -74,8 +74,8 @@
 			</div>
       
 			<div id="Content">
-				<div style="font-family:arial; padding-bottom:150px">
-					<table align="left">
+				<div style="font-family:arial">
+					<table>
 						<form action= "adminCharts.php" method = "POST">
 							<tr>
 								<td>
