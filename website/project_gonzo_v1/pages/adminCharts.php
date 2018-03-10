@@ -74,7 +74,7 @@
 			</div>
       
 			<div id="Content">
-				<div style="font-family:arial">
+				<div style="font-family:arial; padding-bottom:150px">
 					<table align="left">
 						<form action= "adminCharts.php" method = "POST">
 							<tr>
@@ -153,7 +153,7 @@
 				</script>
 				
 				
-				<div id= "Charts"; style="padding-top:150px">
+				<div id= "Charts">
 				</div>
 		
 			</div>
