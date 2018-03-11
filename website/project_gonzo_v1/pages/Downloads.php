@@ -45,15 +45,25 @@
 
 			<div style= padding-top:10px; >
 				<form action=https://projectgonzocoventry.000webhostapp.com/downloads/MSAPP.zip>
-					<input type="submit" value="Click here for the desktop app." />
+					<input type="submit" value="Desktop App Download Button" />
 				</form>
-				<br><br>
+				<br>
+			</div>
+			<div style = "font-family:arial">
+				<p><u>Installation Instructions - Android Mobile Application</u><br><br>
+				1. Open this download page on your Android device.<br><br>
+				2. Click on the download button for the Android app.<br><br>
+				3. Open the downloaded file and press on the ‘mobile-app.apk’ file and choose install from the options that appear. The app will now be installed to your device.<br><br>
+				4. Find the ‘Project Gonzo’ app under your downloaded apps and open it.<br><br>
+				5. Press the grey button at the top of the screen, this will start sending data every hour. And now youre all sorted!<br><br>
+			</div>
+			<div style = padding-top:10px;>
 				<form action=https://projectgonzocoventry.000webhostapp.com/downloads/MobileApp.zip>
-					<input type="submit" value="Click here for the mobile app." />
+					<input type="submit" value="Mobile App Download Button" />
 				</form>
-
 			</div>
 		</div>
+
 	</body>
 </html>
 
