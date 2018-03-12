@@ -1,30 +1,30 @@
-Imports System.Net
+Imports System.Net 'imports module for the webRequest functionality.
 Imports System.IO
-Imports System.Diagnostics
+Imports System.Diagnostics 'imports the performance counters capabilities.
 
 
 Public Class frmProjGon
     Dim data_Send As sendData
 
     Private Sub frmProjGon_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        data_Send = New sendData(10000, Me)
-        data_Send.startSending()
+        data_Send = New sendData(10000, Me)'Specifies the sendData function passing in a timer and itself.
+        data_Send.startSending() 'Starts sending data at the time specified.
     End Sub
 End Class
 
 Public Class sendData
-    Private WithEvents gonzoTimer As New System.Windows.Forms.Timer
+    Private WithEvents gonzoTimer As New System.Windows.Forms.Timer 'Configuration of all the variables that will be used.
     Private gonzoForm As frmProjGon
     Private batteryData As PowerStatus
     Private batLevel As Integer
     Private deviceID As String
     Private chargingState As PowerLineStatus
-    Private UsageCPU As New PerformanceCounter
+    Private UsageCPU As New PerformanceCounter 'provides functionality to create a new performance counter.
     Private CPUoutput As String
 
     Public Sub New(gonzoInterval As Integer, monitorform As frmProjGon)
-        gonzoTimer = New System.Windows.Forms.Timer
-        gonzoTimer.Interval = gonzoInterval
+        gonzoTimer = New System.Windows.Forms.Timer 'Specifies a new timer to be created.
+        gonzoTimer.Interval = gonzoInterval 'provides a name to the interval step.
         gonzoForm = monitorform
     End Sub
 
@@ -40,7 +40,7 @@ Public Class sendData
     End Sub
 
     Private Sub intervalTick() Handles gonzoTimer.Tick
-        With UsageCPU
+        With UsageCPU 'Uses variable specified above to create performance counter and then passes in the relevant counter details.
             .CategoryName = "Processor"
             .CounterName = "% Processor Time"
             .InstanceName = "_Total"
