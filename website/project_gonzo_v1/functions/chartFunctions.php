@@ -75,7 +75,7 @@
 			return 0;
 		}
 		
-		# Prepare the returned variable
+		# Prepare the returned variable ($avg)
 		if($chartType == "batteryLevel" or $chartType == "batteryState"){
 			$count = 0;
 			$numOfCharging = 0;
@@ -103,12 +103,18 @@
 			}
 			$avg = $avg / count($cpuPerArray);
 		}
+		# Return the prepared variable ($avg)
 		return $avg;
 	}
 	
 	function get_avg_device_data_dates($startDate, $numOfDays, $deviceId, $chartType){
+		# This function takes in a start date in the format Y-m-d, the number of days after the start date (integer), a device ID and the type of chart to be displayed(cpuUsage, batteryLevel or batteryState).
+		# This function is used to find the average of the given data type for each day over the given period.
+		# Start date is inclusive
 		$count = 0;
+		# Get average for each day and store in relevant array.
 		while($count < $numOfDays){
+			#  Get average for one day.
 			$result = get_avg_device_data_day($startDate, date("Y-m-d", strtotime("+1 day", strtotime($startDate))), $deviceId, $chartType);
 			if($chartType == "cpuUsage"){
 				$avgCpuPerArray[] = round($result);
@@ -121,6 +127,7 @@
 			$count += 1;
 		}
 		
+		# Check arrays for all elements being zero. If all elements are zero, display message showing that there is no data for the given dates.
 		if($chartType == "cpuUsage"){
 			if(checkArrayForZero($avgCpuPerArray)){
 				$avgCpuPerArray = [0];
@@ -135,11 +142,14 @@
 			}
 			$resultArray = array($avgLevelArray, $dateArray, $avgStateArray);
 		}
+		# Return the array of arrays that holds data to be inserted into the chart.
 		return $resultArray;
 	}
 	
 	function get_device_data_day($startDate, $endDate, $deviceId, $chartType){
-		# Start date is inclusive, end date is not inclusive
+		# This function takes in a start date and end date, in the format Y-m-d, a device ID and the type of chart to be displayed(cpuUsage, batteryLevel or batteryState).
+		# This function is used to find all data of the given data type for the given period.
+		# Start date is inclusive, end date is not inclusive. Should only be used when displaying one day on a chart.
 		$connect = connect_db();
 		if($chartType == "cpuUsage"){
 			$sql = "SELECT * FROM device_cpu_data WHERE date>='" . $startDate . "' AND date<'" . $endDate . "' AND device_id='" . $deviceId . "'";
@@ -148,6 +158,7 @@
 		}
 		$result = mysqli_query($connect, $sql);
 		if(mysqli_num_rows($result) != 0){
+			# Store data in relevant array.
 			if($chartType == "cpuUsage"){
 				while($row = mysqli_fetch_array($result)){
 					$cpuPerArray[] = $row['cpu_percent_avg'];
@@ -165,6 +176,7 @@
 				}
 			}
 		}else{
+			# Store information to show that no data is available for the given date(s).
 			if($chartType == "cpuUsage"){
 				$cpuPerArray[] = 0;
 			}else{
@@ -174,6 +186,7 @@
 			$dateTimeArray[] = "No Data";
 		}
 		
+		# Return the relevant array.
 		if($chartType == "cpuUsage"){
 			return array($cpuPerArray, $dateTimeArray);
 		}else{
@@ -182,23 +195,31 @@
 	}
 	
 	function print_chart($startDate, $numOfDays, $deviceId, $title = 'Data Chart', $width = 500, $height = 300, $divId = 'chartDiv', $chartType){
+		# This function takes in a start date in the format Y-m-d, the number of days after the start date (integer), a device ID, the title of the chart (default is 'Data Chart' if no other title is given), the width and height of the chart (in pixels), the <div> tag id where the chart will be displayed and the type of chart to be displayed(cpuUsage, batteryLevel or batteryState).
+		# This function is used to create and echo out the Google Chart javascript to the webpage with the required data, that is fetched using the functions above.
+		# Start date is inclusive
 		if($chartType == "batteryLevel"){
 			if($numOfDays == 1){
+				# Get array of required data.
 				$result = get_device_data_day($startDate, date("Y-m-d", strtotime("+1 day", strtotime($startDate))), $deviceId, $chartType);
 			
 				$count = 0;
+				# Create string of data to be passed into the Google Chart javascript.
 				$dataString = "[['Date', 'Battery Level'],";
 				while($count < count($result[0])-1){
 					$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "],";
 					$count += 1;
 				}
 				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "]]";
-			
+				
+				# Call to the function that echos out the Google Charts javascript.
 				makeGoogleChart($title, $width, $height, $divId, $dataString, "Battery Level (%)", "Date & Time");
 			}else{
+				# Get array of required data.
 				$result = get_avg_device_data_dates($startDate, $numOfDays, $deviceId, $chartType);
 		
 				$count = 0;
+				# Create string of data to be passed into the Google Chart javascript.
 				$dataString = "[['Date', 'Avg Battery Level'],";
 				if(count($result[1]) != 1){
 					while($count < $numOfDays-1){
@@ -207,26 +228,32 @@
 					}
 				}
 				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "]]";
-			
+				
+				# Call to the function that echos out the Google Charts javascript.
 				makeGoogleChart($title, $width, $height, $divId, $dataString, "Battery Level (%)", "Date");
 			}
 		}elseif($chartType == "batteryState"){
 			if($numOfDays == 1){
+				# Get array of required data.
 				$result = get_device_data_day($startDate, date("Y-m-d", strtotime("+1 day", strtotime($startDate))), $deviceId, $chartType);
 			
 				$count = 0;
+				# Create string of data to be passed into the Google Chart javascript.
 				$dataString = "[['Date', 'Charging State'],";
 				while($count < count($result[0])-1){
 					$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[2][$count] . "],";
 					$count += 1;
 				}
 				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[2][$count] . "]]";
-			
+				
+				# Call to the function that echos out the Google Charts javascript.
 				makeGoogleChart($title, $width, $height, $divId, $dataString, "Battery Charging State", "Date & Time");
 			}else{
+				# Get array of required data.
 				$result = get_avg_device_data_dates($startDate, $numOfDays, $deviceId, $chartType);
 		
 				$count = 0;
+				# Create string of data to be passed into the Google Chart javascript.
 				$dataString = "[['Date', 'Avg Charging State'],";
 				if(count($result[1]) != 1){
 					while($count < $numOfDays-1){
@@ -235,14 +262,17 @@
 					}
 				}
 				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[2][$count] . "]]";
-			
+				
+				# Call to the function that echos out the Google Charts javascript.
 				makeGoogleChart($title, $width, $height, $divId, $dataString, "Battery Charging State", "Date");
 			}
 		}elseif($chartType == "cpuUsage"){
 			if($numOfDays == 1){
+				# Get array of required data.
 				$result = get_device_data_day($startDate, date("Y-m-d", strtotime("+1 day", strtotime($startDate))), $deviceId, $chartType);
 			
 				$count = 0;
+				# Create string of data to be passed into the Google Chart javascript.
 				$dataString = "[['Date', 'Avg CPU Usage'],";
 				if(count($result[1]) != 1){
 					while($count < count($result[0])-1){
@@ -251,12 +281,15 @@
 					}
 				}
 				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "]]";
-			
+				
+				# Call to the function that echos out the Google Charts javascript.
 				makeGoogleChart($title, $width, $height, $divId, $dataString, "CPU Avg Usage", "Date & Time");
 			}else{
+				# Get array of required data.
 				$result = get_avg_device_data_dates($startDate, $numOfDays, $deviceId, $chartType);
 		
 				$count = 0;
+				# Create string of data to be passed into the Google Chart javascript.
 				$dataString = "[['Date', 'Avg CPU Usage'],";
 				if(count($result[1]) != 1){
 					while($count < $numOfDays-1){
@@ -265,7 +298,8 @@
 					}
 				}
 				$dataString = $dataString . "['" . $result[1][$count] . "', " . $result[0][$count] . "]]";
-			
+				
+				# Call to the function that echos out the Google Charts javascript.
 				makeGoogleChart($title, $width, $height, $divId, $dataString, "CPU Avg Usage (Per day)", "Date");
 			}
 		}
