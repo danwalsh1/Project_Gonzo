@@ -22,7 +22,7 @@
 			$NumOfDays = 30; #Specifies 30 days for a month.
 		}
 		
-		if($_POST['DDChartType'] == "Battery Level"){ #Checks which data to retrieve from DB then passes in the relevant title.
+		if($_POST['DDChartType'] == "Battery Level"){ #Checks which data has been selected then passes in the relevant title.
 			$chartType = "batteryLevel";
 			$title = "Battery Level Chart";
 		}elseif($_POST['DDChartType'] == "Battery Charging State"){
