@@ -36,12 +36,12 @@
 		}
 	}
 		
-	function messages($message, $redirect, $time){		# This is a function for the messages page
-		if(gettype($message) == "string" and gettype($redirect) == "string" and gettype($time) == "integer"){	# This is stating that if message and redirect is a string and time is integer.
-			$_SESSION['msg'] = $message;		# Message becomes the same value as msg from a related session
-			$_SESSION['redir'] = $redirect;		# Redirect becomes redir.  
-			$_SESSION['time'] = $time;		# Time becomes time from the message page.  
-			header("Location: message.php");	# the user then get sent to the message page.
+	function messages($message, $redirect, $time){		# We have the variables of message, redirect and time.
+		if(gettype($message) == "string" and gettype($redirect) == "string" and gettype($time) == "integer"){	# If these variable from have correct inputs types
+			$_SESSION['msg'] = $message;		# message is passed as the same value of msg in message.php
+			$_SESSION['redir'] = $redirect;		# and the same is done to the others.
+			$_SESSION['time'] = $time;		
+			header("Location: message.php");	# The user is then redirected to the message page
 		}
 	}
 				
