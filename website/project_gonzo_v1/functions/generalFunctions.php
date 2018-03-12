@@ -1,5 +1,6 @@
 <?php
 	function displayMainMenu(){
+		# This function is used to echo HTML code into a page. The HTML code creates the main menu that should be shown at the top of all pages.
 		echo '<label for="main-menu-control" class="main-menu-control" style="font-size: 40px">&#9776;</label>';
 		echo '<input type="checkbox" id="main-menu-control" role="button">';
 		echo '<div id="main-menu"><nav><ul>';
@@ -26,6 +27,7 @@
 	}
 	
 	function retrieve_users_DropDown(){
+		# This function echos all available users into the dropdown boxes.
 		$connect = connect_db("NULL");
 		$sql = "SELECT * FROM users";
 		$result = mysqli_query($connect, $sql);
