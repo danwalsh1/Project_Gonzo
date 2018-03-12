@@ -1,28 +1,28 @@
 <?php
-	session_start();
+	session_start(); #Starts a session for a client to start working with.
   
-	include("../functions/generalFunctions.php");
+	include("../functions/generalFunctions.php"); #Provides access to the core reusable functions and code.
 	include("../functions/sqlFunctions.php");
 	include("../functions/chartFunctions.php");
   
-	if(!isset($_SESSION['Username'])){
+	if(!isset($_SESSION['Username'])){ #Checks a username is present and stored in SESSION. Kills off the login page if true.
 		header("Location: login.php");
 		die();
 	}
   
-	$userValues = get_users_values($_SESSION['Username']);
+	$userValues = get_users_values($_SESSION['Username']); #Pulls the function from the sqlFunctions page to retrieve the user data.
   
-	if(isset($_POST['UpdateChartView'])){
-		$Date = date("Y-m-d", strtotime($_POST['Calendar']));
+	if(isset($_POST['UpdateChartView'])){ #After the button is pressed, starts the if statement block.
+		$Date = date("Y-m-d", strtotime($_POST['Calendar']));#Stores date in a usuable functional format for when a calendar date is chosen.
 		if($_POST['DDTimeframe'] == "Day"){
-			$NumOfDays = 1;
+			$NumOfDays = 1; #Specifies a day for the day dropdown.
 		}elseif($_POST['DDTimeframe'] == "Week"){
-			$NumOfDays = 7;
+			$NumOfDays = 7; #Specifies 7 days for the week dropdown.
 		}elseif($_POST['DDTimeframe'] == "Month"){
-			$NumOfDays = 30;
+			$NumOfDays = 30; #Specifies 30 days for a month.
 		}
 		
-		if($_POST['DDChartType'] == "Battery Level"){
+		if($_POST['DDChartType'] == "Battery Level"){ #Checks which data to retrieve from DB then passes in the relevant title.
 			$chartType = "batteryLevel";
 			$title = "Battery Level Chart";
 		}elseif($_POST['DDChartType'] == "Battery Charging State"){
@@ -33,11 +33,11 @@
 			$title = "CPU Usage Chart";
 		}
 	
-		$tWidth = (int) $_POST['deviceWidth'];
+		$tWidth = (int) $_POST['deviceWidth'];#Dimensional settings for the chart.
 		$width = $tWidth - (($tWidth/100)*10);
 		$height = ($width/100) * 60;
 	
-		print_chart($Date, $NumOfDays, $userValues[3], $title, $width, $height, "dataChart", $chartType);
+		print_chart($Date, $NumOfDays, $userValues[3], $title, $width, $height, "dataChart", $chartType); #Display the chart with values passed in as specified above.
 	}
 ?>
 <!DOCTYPE html>
@@ -57,7 +57,7 @@
 			</div>
       
 			<div id="Content">
-				<h2 style="font-family:arial">Device ID: <?php echo $userValues[3] ?></h2>
+				<h2 style="font-family:arial">Device ID: <?php echo $userValues[3] #pulls in the result from the get_users_values() function. ?></h2>
 				
 				<div style="font-family:arial">
 					<table>
