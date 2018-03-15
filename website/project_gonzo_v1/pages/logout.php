@@ -1,15 +1,16 @@
 <?php
 	session_start();
   
-	include("../functions/generalFunctions.php");
-	if(isset($_SESSION['Username'])){
-		unset($_SESSION['Username']);
+	include("../functions/generalFunctions.php"); #Allows access to external functionality.
+
+	if(isset($_SESSION['Username'])){ #If the username is present in the session.
+		unset($_SESSION['Username']); #Removes the username from the session.
 	}
-	if(isset($_SESSION['admin'])){
-		unset($_SESSION['admin']);
+	if(isset($_SESSION['admin'])){ #If admin is present in the session. 
+		unset($_SESSION['admin']); #Remove the admin from the session.
 	}
-	session_destroy();
-	Header("Location: login.php");
+	session_destroy(); #Destroys the session that's started at the beginning.
+	Header("Location: login.php"); #Destroys the login page.
 	Die();
 ?>
 <!DOCTYPE html>
