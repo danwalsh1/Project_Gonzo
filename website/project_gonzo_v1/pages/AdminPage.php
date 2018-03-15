@@ -69,7 +69,7 @@
 							<td>
 								<label> Please Select a User: </label>
 							</td>
-							<td>
+							<td>	<!--Drop down menu of Username's so the Admin can choose which user's data they want to display.-->
 								<select class="form-dropdown" style="width:150px" id="Dropdown" name="DD">
 									<?php echo retrieve_users_DropDown(); ?>
 								</select>
@@ -79,7 +79,7 @@
 						<tr>
 							<td>
 							</td>
-							<td>
+							<td>	<!--Submit button for the Admin to confirm they want to load a user's data-->
 								<input type="submit" value="Show User Details" name="UpdateDetailsView">
 							</td>
 						</tr>
@@ -89,11 +89,11 @@
 								<label> Username: </label>
 							</td>
 							<td>
-								<input type ="text" name="username" readonly="readonly" value="<?php if(isset($UserSelected)){echo $result[0];} ?>">   <!--Updates the value based on whats passed in from the fetch_user_data function.-->
+								<input type ="text" name="username" readonly="readonly" value="<?php if(isset($UserSelected)){echo $result[0];} ?>">
 							</td>
 						</tr>
-	 	   
-						<!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
+	 	   				<!--Updates the values based on whats passed in from the fetch_user_data function.-->
+						<!--As for all the values in the form, the variable $result defined earlier is used to map to each table value to the form field name. So 1 for 'forename', 2 for 'surname' and so on.-->
 						<tr>
 							<td>
 								<label> First Name: </label>
