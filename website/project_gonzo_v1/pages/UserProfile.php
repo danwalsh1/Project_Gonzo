@@ -12,17 +12,17 @@
 
 	function update_user_data(){
       	$connect = connect_db("NULL"); #Connects to DB
-		$stmt = "UPDATE users SET forename = ?, surname = ?, device_id = ? , phone_num = ?, email = ?, password = ? WHERE username = ?";
-        $sql = $connect->prepare($stmt);
-		$sql->bind_param('sssssss', $_POST['forename'], $_POST['surname'],$_POST['deviceid'], $_POST['phonenum'], $_POST['email'], $_POST['PasswordUpdate'], $_POST['username']);
-		$sql->execute();
-		$sql->close();
+		$stmt = "UPDATE users SET forename = ?, surname = ?, device_id = ? , phone_num = ?, email = ?, password = ? WHERE username = ?"; #Store the sql statement in variable $stmt with placeholders.
+        $sql = $connect->prepare($stmt); #connect to db and then prepare the sql statement.
+		$sql->bind_param('sssssss', $_POST['forename'], $_POST['surname'],$_POST['deviceid'], $_POST['phonenum'], $_POST['email'], $_POST['PasswordUpdate'], $_POST['username']); #Binds parameters to the placeholders, specifies firstly the type and then the order of which the placeholder values will be entered.
+		$sql->execute(); #execute the statement.
+		$sql->close();#Close the connection.
 			
-		$msg = "Your profile details have been updated!";
-		messages($msg, "UserProfile.php", 10);
+		$msg = "Your profile details have been updated!"; #Message produced on submit.
+		messages($msg, "UserProfile.php", 10);#Calls the messages function stored on generalFunctions.php.
 	}
 	
-	$result = get_users_values($_SESSION['Username']);
+	$result = get_users_values($_SESSION['Username']); #Stores the result of the get user values function from the sqlFunction.php page and stores values in $result. 
 	
 ?>
 
@@ -54,7 +54,7 @@
 								<input type ="text" name="username" readonly="readonly" value=<?php echo $result[0] ?>>    
 							</td>
 						</tr>
-						<!--As for all the values in the form, the variable $value defined earlier is used to map to each table value to the form field name.-->
+						<!--As for all the values in the form, the variable $result defined earlier is used to map to each table value to the form field name.-->
 						<tr>
 							<td>
 								<label> First Name: </label>
