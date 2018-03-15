@@ -2,7 +2,7 @@
 
 	session_start(); #Starts a session.
 
-	include("../functions/generalFunctions.php");
+	include("../functions/generalFunctions.php"); #Allows functionality from the 'generalFunctions.php' page.
 
 	if(isset($_SESSION['Username']) == false){	#If the user tries to open this downloads.php page when they havent got a username yet they will be taken to the login page.
 		header("Location: login.php");
