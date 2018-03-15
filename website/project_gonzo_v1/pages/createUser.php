@@ -4,25 +4,25 @@
 	include("../functions/generalFunctions.php"); #Import additional functionality stored in seperate files.
 	include("../functions/sqlFunctions.php");
 
-	if(isset($_SESSION['Username']) == false){
+	if(isset($_SESSION['Username']) == false){ #Checks if the username is not set in the session and then destroys the login page. 
 		header("Location: login.php");
 		die();
 	}
 
-	if(isset($_SESSION['admin'])){
+	if(isset($_SESSION['admin'])){ #Checks if admin is set in session and if it is, destroys the home.php page to prevent pages.
 		if($_SESSION['admin'] == False){
 			header("Location: home.php");
 			die();
 		}
 	}else{
-		header("Location: logout.php");
+		header("Location: logout.php"); #If no conditions met, destory the logout page.
 		die();
 	}
   
 	if(isset($_POST['createUser'])){
 		if(ctype_alnum($_POST['username']) and ctype_alnum($_POST['forename']) and ctype_alnum($_POST['surname']) and ctype_alnum($_POST['deviceid']) and ctype_alnum($_POST['phonenumber']) and ctype_alnum($_POST['password']) and filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-			if(isset($_POST['admin'])){
-				if($_POST['admin'] == true){
+			if(isset($_POST['admin'])){#Checks the types so email addresses can't ill formed. Make sure no special characters can be entered.
+				if($_POST['admin'] == true){#Determines if the user created is an admin or not.
 					$admin = 1;
 				}else{
 					$admin = 0;
@@ -31,7 +31,7 @@
 				$admin = 0;
 			}
 			$connect = connect_db();   # Connects to data base
-			$sql = "INSERT INTO users(username, password, admin, forename, surname, device_id, phone_num, email) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";   # Queries the data base for user details 
+			$sql = "INSERT INTO users(username, password, admin, forename, surname, device_id, phone_num, email) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"; 
 			$stmt = $connect->prepare($sql);
 			$stmt->bind_param('ssisssss', $_POST['username'], $_POST['password'], $admin, $_POST['forename'], $_POST['surname'], $_POST['deviceid'], $_POST['phonenumber'], $_POST['email']);
 			$stmt->execute();
