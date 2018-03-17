@@ -24,8 +24,8 @@
 			</div>
 			<div id="Content">																													<!--Opens a new div for Header1 and the welcome message.-->
 				<h1 style="font-family:arial">Project Gonzo</h1>
-					<p style="font-family:arial">Welcome <?php echo $_SESSION['Username']; ?>, to the Project Gonzo homepage.</p>			 					<!--The php echo code here allows the text to be personalised to the user, so the site welcomes them by their username-->
-				<div id="Content">																																																	 					<!--Opens the Content div again, seperating the Header1 and welcome message from the text below.-->
+				<p style="font-family:arial">Welcome <?php echo $_SESSION['Username']; ?>, to the Project Gonzo homepage.</p>			 					<!--The php echo code here allows the text to be personalised to the user, so the site welcomes them by their username-->
+				<div>																																																	 					<!--Opens the Content div again, seperating the Header1 and welcome message from the text below.-->
 					<p style="font-family:arial"><img src="../img/gonzoLogo.jpg" alt="Gonzo Logo" align="right" align="bottom" class="res"/>		<!--Allows the image from the given folder to be used on the website, on the right at the bottom of the div.-->
 					Project Gonzo is a data collection tool that retrieves information for the
 					battery level, charging state and CPU usage from a Windows machine and the battery level and charging state from an Android device.</p>
