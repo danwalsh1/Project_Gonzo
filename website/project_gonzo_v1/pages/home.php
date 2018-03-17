@@ -1,10 +1,10 @@
 <?php
 	session_start();
-	include("../functions/generalFunctions.php"); #Allows functionality from the 'generalFunctions.php' page.
+	include("../functions/generalFunctions.php");	#Allows functionality from the 'generalFunctions.php' page.
 
-	if(!isset($_SESSION['Username'])){            #If the current session does not have a username set to it then the user will be taken to the login.php page.
+	if(!isset($_SESSION['Username'])){		#If the current session does not have a username set to it then the user will be taken to the login.php page.
 		header("Location: login.php");
-		die();
+		die();					#Stops the php script from being executed any further
 	}
 ?>
 <!DOCTYPE html>
