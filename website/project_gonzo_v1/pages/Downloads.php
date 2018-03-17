@@ -6,17 +6,17 @@
 
 	if(isset($_SESSION['Username']) == false){	#If the user tries to open this downloads.php page when they havent got a username yet they will be taken to the login page.
 		header("Location: login.php");
-		die();																		#Kill the current page.
+		die();					#Stops the php script from being executed any further													#Kill the current page.
 	}
 
 	if(isset($_SESSION['admin'])){
 		if($_SESSION['admin'] == False){					#If you are not an Admin and try to access the downloads.php page you will be redirected to the home.php page.
 			header("Location: home.php");
-			die();																	#Kill the current page.
+			die();								#Stops the php script from being executed any further									#Kill the current page.
 		}
 	}else{ 																			#If admin is not in the session (for some reason it has not been defined) then the user will be taken to the logout page.
 		header("Location: logout.php");
-		die();																		#Kill the current page.
+		die();									#Stops the php script from being executed any further									#Kill the current page.
 	}
 ?>
 
