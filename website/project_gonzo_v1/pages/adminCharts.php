@@ -1,28 +1,28 @@
 <?php
 	session_start();
   
-	include("../functions/generalFunctions.php");
-	include("../functions/sqlFunctions.php");
-	include("../functions/chartFunctions.php");
+	include("../functions/generalFunctions.php");	# Allows functionality from the 'generalFunctions.php' page.
+	include("../functions/sqlFunctions.php");	# Allows functionality from the 'sqlFunctions.php' page.
+	include("../functions/chartFunctions.php");	# Allows functionality from the 'chartFunctions.php' page.
  
 
-	if(!isset($_SESSION['Username'])){
-		header("Location: login.php");
-		die();
+	if(!isset($_SESSION['Username'])){		# If username is not set in sqlfunctions.php session
+		header("Location: login.php");		# the user will get redirected back to the "login.php" page
+		die();					# Stops the php script from being executed any further	
 	}
   
-	if(isset($_SESSION['admin'])){
-		if($_SESSION['admin'] == False){
-			header("Location: home.php");
-			die();
+	if(isset($_SESSION['admin'])){			 
+		if($_SESSION['admin'] == False){	# If the user is trying to access the "adminCharts.php" and is not an admin
+			header("Location: home.php");	# the user will be redirected to the home page 
+			die();	
 		}
 	}else{
-		header("Location: logout.php");
+		header("Location: logout.php");		# If the user is not an admin, the function wont be exicuted further
 		die();
 	}
 	  
 
-	if(isset($_POST['UpdateChartView'])){
+	if(isset($_POST['UpdateChartView'])){		# if the chart view from is set 
 		$ChooseUser = $_POST['DD'];	
 		$Date = date("Y-m-d", strtotime($_POST['Calendar']));
   
