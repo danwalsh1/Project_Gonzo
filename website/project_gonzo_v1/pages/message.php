@@ -1,12 +1,11 @@
 <?php
 	session_start();	# Start session
   
-	include("../functions/generalFunctions.php");
+	include("../functions/generalFunctions.php");	#Allows functionality from the 'generalFunctions.php' page.
   
 	if(!isset($_SESSION['Username'])){	# If username is not set 
 		header("Location: login.php");		# The user gets redirected to the login page 
-		die();		# Function ends
-	}
+		die();		# Stops the php script from being executed any further
   
 	if(isset($_SESSION['msg']) and isset($_SESSION['redir']) and isset($_SESSION['time'])){	 # If message and redirect and time are set 
 		$msg_data = $_SESSION['msg'];		# data form another sesion is brought into this session and a variable is then created with these  
