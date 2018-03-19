@@ -6,12 +6,12 @@ nav ul {
 nav ul li {
 	float:left;
 	display:block;
-	width:150px;
+	width:150px; //Appearance and dimensionals of the nav bar.
 	height:60px;
 	text-align:center;
 	line-height:55px;
 	font-size:17px;
-	background-color: #2F97E7;
+	background-color: #2F97E7; //Base colour.
 }
 
 nav ul li a {
@@ -24,7 +24,7 @@ nav ul li:hover {
 }
 
 nav ul li:hover a {
-	display:block;
+	display:block; //Hover over colour.
 	color:#000000;
 }
 
