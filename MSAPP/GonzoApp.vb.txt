@@ -1,13 +1,13 @@
-Imports System.Net 'imports module for the webRequest functionality.
-Imports System.IO
-Imports System.Diagnostics 'imports the performance counters capabilities.
+Imports System.Net 'Imports module for the webRequest functionality.
+Imports System.IO 'Allows reading and writing to datastreams, namely the webrequest.
+Imports System.Diagnostics 'Imports the performance counters capabilities.
 
 
 Public Class frmProjGon
     Dim data_Send As sendData
 
     Private Sub frmProjGon_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        data_Send = New sendData(10000, Me)'Specifies the sendData function passing in a timer and itself.
+        data_Send = New sendData(10000, Me)'Specifies the sendData function passing in a time limit and itself.
         data_Send.startSending() 'Starts sending data at the time specified.
     End Sub
 End Class
@@ -32,49 +32,49 @@ Public Class sendData
     Public Event Load(sender As Object, e As EventArgs)
 
     Public Sub startSending()
-        gonzoTimer.Start()
+        gonzoTimer.Start() 'Start the timer.
     End Sub
 
     Public Sub stopSending()
-        gonzoTimer.Stop()
+        gonzoTimer.Stop() 'Stop the timer.
     End Sub
 
-    Private Sub intervalTick() Handles gonzoTimer.Tick
+    Private Sub intervalTick() Handles gonzoTimer.Tick 'Moves the timer on a second for the period specified.
         With UsageCPU 'Uses variable specified above to create performance counter and then passes in the relevant counter details.
-            .CategoryName = "Processor"
-            .CounterName = "% Processor Time"
+            .CategoryName = "Processor" 'Defines the category, name of the counter and the totality the performance monitor checks for.
+            .CounterName = "% Processor Time" 'Uses with to ensure all options use UsageCPU prefix.
             .InstanceName = "_Total"
         End With
 
         batteryData = SystemInformation.PowerStatus 'Assign power status function to variable batteryData
-        batLevel = batteryData.BatteryLifePercent * 100
-        deviceID = My.Computer.Name
-        chargingState = batteryData.PowerLineStatus
-        CPUoutput = UsageCPU.NextValue()
-        gonzoForm.lblBatLevData.Text = batLevel
+        batLevel = batteryData.BatteryLifePercent * 100 'Puts battery information into a percentage out of 100.
+        deviceID = My.Computer.Name 'Records the computers name.
+        chargingState = batteryData.PowerLineStatus 'Detects the charing state using powerlinestatus.
+        CPUoutput = UsageCPU.NextValue() 'Provides the next value in the performance counters.
+        gonzoForm.lblBatLevData.Text = batLevel 'form labels.
         gonzoForm.lblDevIDData.Text = deviceID
         gonzoForm.lblChargeStateData.Text = chargingState
         gonzoForm.lblCPU.Text = UsageCPU.NextValue()
-        Page_Load()
+        Page_Load()'Runs after the timer reaches it's time condition.
 
     End Sub
 
     Private Sub Page_Load()
         Dim chargeString As String
         If chargingState = PowerLineStatus.Online Then
-            chargeString = "true"
+            chargeString = "true" 'Provides the value for the charging state using online or offline as the detector.
         Else
             chargeString = "false"
         End If
 
 
-        Dim urlCPU As String = "http://projectgonzocoventry.000webhostapp.com/app_page/insertData.php?deviceid=" & deviceID & "&cpu=" & CPUoutput
-        Dim CPUSend As WebRequest = WebRequest.Create(urlCPU)
-        CPUSend.GetResponse()
+        Dim urlCPU As String = "http://projectgonzocoventry.000webhostapp.com/app_page/insertData.php?deviceid=" & deviceID & "&cpu=" & CPUoutput 'Web address that points to the insertData.php page where they are input into the DB.
+        Dim CPUSend As WebRequest = WebRequest.Create(urlCPU) 'Uses a web request to send the information.
+        CPUSend.GetResponse() 'Awaits the response, required to ensure data is successfully sent.
 
         Dim url As String = "http://projectgonzocoventry.000webhostapp.com/app_page/insertData.php?deviceid=" & deviceID & "&batlevel=" & batLevel & "&chargestate=" & chargeString
-        Dim request As WebRequest = WebRequest.Create(url)
-        request.GetResponse()
+        Dim request As WebRequest = WebRequest.Create(url) 'Uses a web request to send the infromation.
+        request.GetResponse() 'Awaits the response, required to ensure data is successfully sent.
 
     End Sub
 
