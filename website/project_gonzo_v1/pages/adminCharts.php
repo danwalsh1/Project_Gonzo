@@ -6,9 +6,9 @@
 	include("../functions/chartFunctions.php");	# Allows functionality from the 'chartFunctions.php' page.
  
 
-	if(!isset($_SESSION['Username'])){		# If username is not set in sqlfunctions.php session
-		header("Location: login.php");		# the user will get redirected back to the "login.php" page
-		die();					# Stops the php script from being executed any further	
+	if(!isset($_SESSION['Username'])){		# Username is pulled as a cookie which would have been stored on your web session (as the website is server side) after the username is called on another page.
+		header("Location: login.php");		# If the Username is not set in the generalFunctions.php session the user will get redirected back to the "login.php" page
+		die();					# this then stops the php script from being executed any further	
 	}
   
 	if(isset($_SESSION['admin'])){			 
