@@ -23,11 +23,11 @@
   
 	function UserLogin($username,$password){ #Passes in username and password from html form.
 		$connect = connect_db(); #connect to db
-		$sql = 'SELECT * FROM users WHERE username = ? AND password = ?'; # checking validity of credentials.
-		$stmt = $connect->prepare($sql);
-		$stmt->bind_param('ss', $username, $password);
-		$stmt->execute();
-		$result = $stmt->get_result();
+		$sql = 'SELECT * FROM users WHERE username = ? AND password = ?'; # checking validity of credentials. #SQL statement.
+		$stmt = $connect->prepare($sql); #DB connection opened and SQL statement prepared.
+		$stmt->bind_param('ss', $username, $password); #Placeholder types and values entered in order.
+		$stmt->execute(); #Execute the statement.
+		$result = $stmt->get_result();#Get the result of the statement.
 		$row = $result->fetch_assoc();
 		if(mysqli_num_rows($result)== 1){
 			if($row['admin'] == 1){  # Check if the user is an admin and store in the session dictionary.
