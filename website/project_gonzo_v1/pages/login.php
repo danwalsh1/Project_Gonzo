@@ -88,7 +88,8 @@
 				</table>
 			</div>
 			
-			<div id="Footer">
+			<div id="Footer" style="font-family:arial; position:absolute; bottom:2%; padding-left:25%">
+				<p>This website uses cookies; by continuing and using it's service you accept the use of these cookies.</p>
 			</div>
 		</div>
 	</body>
