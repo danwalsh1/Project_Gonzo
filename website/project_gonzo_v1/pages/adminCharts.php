@@ -46,7 +46,7 @@
 		}
 	  
 
-		$tWidth = (int) $_POST['deviceWidth'];
+		$tWidth = (int) $_POST['deviceWidth']; #Chart dimensions.
 		$width = $tWidth - (($tWidth/100)*10);
 		$height = ($width/100) * 60;
   
