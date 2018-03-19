@@ -21,11 +21,9 @@
         android:id="@+id/BatteryLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="Battery"
-        app:layout_constraintBottom_toTopOf="@id/ChargeState"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="78dp" />
+        app:layout_constraintTop_toBottomOf="@id/BrowserButton"
+        tools:layout_editor_absoluteX="65dp" />
 
     <TextView
         android:id="@+id/ChargeState"
@@ -37,21 +35,21 @@
         tools:layout_editor_absoluteY="93dp" />
 
     <TextView
-        android:id="@+id/DeviceID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DeviceID"
-        app:layout_constraintTop_toBottomOf="@id/WhenDataSent"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="86dp" />
-
-    <TextView
         android:id="@+id/WhenDataSent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="When is the data sent"
         app:layout_constraintTop_toBottomOf="@id/ChargeState"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="86dp" />
+        tools:layout_editor_absoluteX="110dp" />
+
+    <TextView
+        android:id="@+id/DeviceID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DeviceID"
+        app:layout_constraintTop_toBottomOf="@id/WhenDataSent"
+        tools:layout_editor_absoluteX="78dp" />
+
+
 
 </android.support.constraint.ConstraintLayout>
