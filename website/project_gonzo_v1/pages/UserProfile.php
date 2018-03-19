@@ -13,7 +13,7 @@
 	function update_user_data(){
       	$connect = connect_db("NULL"); #Connects to DB
 		$stmt = "UPDATE users SET forename = ?, surname = ?, device_id = ? , phone_num = ?, email = ?, password = ? WHERE username = ?"; #Store the sql statement in variable $stmt with placeholders.
-        $sql = $connect->prepare($stmt); #connect to db and then prepare the sql statement.
+        	$sql = $connect->prepare($stmt); #connect to db and then prepare the sql statement.
 		$sql->bind_param('sssssss', $_POST['forename'], $_POST['surname'],$_POST['deviceid'], $_POST['phonenum'], $_POST['email'], $_POST['PasswordUpdate'], $_POST['username']); #Binds parameters to the placeholders, specifies firstly the type and then the order of which the placeholder values will be entered.
 		$sql->execute(); #execute the statement.
 		$sql->close();#Close the connection.
