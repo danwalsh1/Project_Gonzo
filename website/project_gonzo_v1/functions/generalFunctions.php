@@ -28,11 +28,11 @@
 	
 	function retrieve_users_DropDown(){
 		# This function echos all available users into the dropdown boxes.
-		$connect = connect_db("NULL");
-		$sql = "SELECT * FROM users";
-		$result = mysqli_query($connect, $sql);
-		while($row = mysqli_fetch_array($result)){
-			echo $ListofNames="<option>" . $row['username'] . "</option>";
+		$connect = connect_db(); #Connects to DB.
+		$sql = "SELECT * FROM users"; #SQL statement.
+		$result = mysqli_query($connect, $sql); #Run the query and store in result.
+		while($row = mysqli_fetch_array($result)){#While values in result, display them as an option in the dropdown.
+			echo $ListofNames="<option>" . $row['username'] . "</option>"; #Displays values to the screen in the dropdown box.
 		}
 	}
 		
