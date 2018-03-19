@@ -1,10 +1,10 @@
 <?php
 	session_start(); #Starts a session.
   
-	include("../functions/generalFunctions.php");
+	include("../functions/generalFunctions.php"); #Allows additional functionality from the generalFunctions and sqlFunctions pages.
 	include("../functions/sqlFunctions.php");
   
-	if(isset($_SESSION['Username'])){
+	if(isset($_SESSION['Username'])){ #Checks if a username is stored in session and then stops the php code running further.
 		header("Location: home.php");
 		die();
 	}
@@ -16,7 +16,7 @@
 			if($result){ #if result is true, continues through to homepage otherwise remains on login page.
 				$_SESSION["Username"] = $_POST['Username']; #Post assigned to session to carry username to next page.
 				header ("Location: home.php");
-				die();
+				die(); #Stops the php code running any further.
 			}
 		}
 	}
@@ -28,12 +28,12 @@
 		$stmt->bind_param('ss', $username, $password); #Placeholder types and values entered in order.
 		$stmt->execute(); #Execute the statement.
 		$result = $stmt->get_result();#Get the result of the statement.
-		$row = $result->fetch_assoc();
+		$row = $result->fetch_assoc();#Fetches all related values.
 		if(mysqli_num_rows($result)== 1){
 			if($row['admin'] == 1){  # Check if the user is an admin and store in the session dictionary.
 				$_SESSION['admin'] = True;
 			}else{
-				$_SESSION['admin'] = False;
+				$_SESSION['admin'] = False; #If false is returned, only show user level of access with less menus.
 			}
 			
 			return true;
@@ -54,7 +54,7 @@
 		<div id="Page">
 			<div id="Header">
 				<div id="Menu">
-					<?php displayMainMenu(); ?>
+					<?php displayMainMenu(); ?> <!--Pulls the navigation bar design-->
 				</div>
 			</div>
 	  
