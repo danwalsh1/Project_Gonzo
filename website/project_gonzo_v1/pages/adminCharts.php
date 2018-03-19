@@ -22,7 +22,7 @@
 	}
 	  
 
-	if(isset($_POST['UpdateChartView'])){		# if the chart view from is set 
+	if(isset($_POST['UpdateChartView'])){		# If update chart view has been clicked, using the form information work out the required values.
 		$ChooseUser = $_POST['DD'];	
 		$Date = date("Y-m-d", strtotime($_POST['Calendar']));
   
@@ -54,7 +54,7 @@
 		$DeviceID = $value[3];
   
 
-		print_chart($Date, $NumOfDays, $DeviceID, $title, $width, $height, "Charts", $chartType);
+		print_chart($Date, $NumOfDays, $DeviceID, $title, $width, $height, "Charts", $chartType); #Using the selected data, as per the options selected, to run the print chart function on the chartFunctions.php page.
 	}
 ?>
 <!DOCTYPE html>
