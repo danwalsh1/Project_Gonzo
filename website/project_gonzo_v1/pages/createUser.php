@@ -6,17 +6,17 @@
 
 	if(isset($_SESSION['Username']) == false){ #Checks if the username is not set in the session and then destroys the login page. 
 		header("Location: login.php");
-		die();
+		die(); #Stops php code from login.php running.
 	}
 
 	if(isset($_SESSION['admin'])){ #Checks if admin is set in session and if it is, destroys the home.php page to prevent pages.
 		if($_SESSION['admin'] == False){
 			header("Location: home.php");
-			die();
+			die(); #Stops php code from home.php running.
 		}
 	}else{
 		header("Location: logout.php"); #If no conditions met, destory the logout page.
-		die();
+		die(); #Stops php code from logout.php from running.
 	}
   
 	if(isset($_POST['createUser'])){
@@ -31,13 +31,14 @@
 				$admin = 0;
 			}
 			$connect = connect_db();   # Connects to data base
-			$sql = "INSERT INTO users(username, password, admin, forename, surname, device_id, phone_num, email) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"; 
-			$stmt = $connect->prepare($sql);
-			$stmt->bind_param('ssisssss', $_POST['username'], $_POST['password'], $admin, $_POST['forename'], $_POST['surname'], $_POST['deviceid'], $_POST['phonenumber'], $_POST['email']);
-			$stmt->execute();
+			$sql = "INSERT INTO users(username, password, admin, forename, surname, device_id, phone_num, email) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"; #SQL statement with placeholders.
+			$stmt = $connect->prepare($sql); #OpenDB connection and prepare the SQL statement.
+			$stmt->bind_param('ssisssss', $_POST['username'], $_POST['password'], $admin, $_POST['forename'], $_POST['surname'], $_POST['deviceid'], $_POST['phonenumber'], $_POST['email']);#Placeholder types and values implemented in the order they are input.
+			$stmt->execute();#Statement executed.
+			$stmt->close(); #Connection closed.
 	  
-			$msg = "New user created with the username: " . $_POST['username'];
-			messages($msg, "createUser.php", 10);
+			$msg = "New user created with the username: " . $_POST['username']; #Message that is passed into the messages fucntions on the generalFunctions.php page.
+			messages($msg, "createUser.php", 10); #Message passed in, page to return to stated, time until redirect.
 		}
 	}
 ?>
