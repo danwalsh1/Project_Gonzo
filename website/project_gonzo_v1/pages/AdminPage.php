@@ -35,14 +35,14 @@
 		
 	function update_user_data(){
        	$connect = connect_db("NULL"); #Connects to DB
-		$stmt = "UPDATE users SET forename = ?, surname = ?, device_id = ? , phone_num = ?, email = ?, password = ? WHERE username = ?";
-        $sql = $connect->prepare($stmt);
-		$sql->bind_param('sssssss', $_POST['forename'], $_POST['surname'],$_POST['deviceid'], $_POST['phonenum'], $_POST['email'], $_POST['PasswordUpdate'], $_POST['username']);
-		$sql->execute();
-		$sql->close();
+		$stmt = "UPDATE users SET forename = ?, surname = ?, device_id = ? , phone_num = ?, email = ?, password = ? WHERE username = ?"; #Statement that will be executed with question mark placeholders.
+        $sql = $connect->prepare($stmt); #Statement is prepared, calls connect to open DB connection and then prepares the statement.
+		$sql->bind_param('sssssss', $_POST['forename'], $_POST['surname'],$_POST['deviceid'], $_POST['phonenum'], $_POST['email'], $_POST['PasswordUpdate'], $_POST['username']); #Parameters are bound along with the types, which in this case is strings. Pulls the information from the html form entries.
+		$sql->execute();#Statement executed.
+		$sql->close();#Connection closed.
 		
-		$msg = "Users information has now been updated!";
-		messages($msg, "AdminPage.php", 10);
+		$msg = "Users information has now been updated!"; 
+		messages($msg, "AdminPage.php", 10); #Runs the messages function from the generalFunctions.php page and displays confirmation of input.
 	}
 
 ?>
