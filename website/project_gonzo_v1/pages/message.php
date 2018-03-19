@@ -1,7 +1,7 @@
 <?php
 	session_start();	# Start session
   
-	include("../functions/generalFunctions.php");	#Allows functionality from the 'generalFunctions.php' page. (Quotes from JacobStenson1) 
+	include("../functions/generalFunctions.php");	#Allows functionality from the 'generalFunctions.php' page. 
   
 	if(!isset($_SESSION['Username'])){	# If username is not set 
 		header("Location: login.php");		# The user gets redirected to the login page 
