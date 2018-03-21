@@ -45,7 +45,7 @@
 
 			<div style= padding-top:10px; >
 				<form action=https://projectgonzocoventry.000webhostapp.com/downloads/MSAPP.zip> <!--Creates a button on the website that can be clicked to download the windows app.-->
-					<input type="submit" value="Desktop App Download Button" />
+					<input type="submit" value="Desktop App Download" />
 				</form>
 				<br>
 			</div>
@@ -59,7 +59,7 @@
 			</div>
 			<div style = padding-top:10px;>
 				<form action=https://projectgonzocoventry.000webhostapp.com/downloads/MobileApp.zip> <!--Creates a button on the website that can be clicked to download the mobile app.-->
-					<input type="submit" value="Mobile App Download Button" />
+					<input type="submit" value="Mobile App Download" />
 				</form>
 			</div>
 		</div>
