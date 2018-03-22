@@ -10,8 +10,8 @@
 		unset($_SESSION['admin']); #Remove the admin from the session.
 	}
 	session_destroy(); #Destroys the session that's started at the beginning.
-	Header("Location: login.php"); #Destroys the login page.
-	Die();
+	Header("Location: login.php"); #Redirects to login.php page.
+	die(); #Stops the script running any further.
 ?>
 <!DOCTYPE html>
 <html>
