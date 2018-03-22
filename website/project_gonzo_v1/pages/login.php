@@ -4,9 +4,9 @@
 	include("../functions/generalFunctions.php"); #Allows additional functionality from the generalFunctions and sqlFunctions pages.
 	include("../functions/sqlFunctions.php");
   
-	if(isset($_SESSION['Username'])){ #Checks if a username is stored in session and then stops the php code running further.
-		header("Location: home.php");
-		die();
+	if(isset($_SESSION['Username'])){ #Checks if a username is stored in session.
+		header("Location: home.php"); #Redirects to home.php if true.
+		die(); #Stops to php script running further for this page.
 	}
 	check_db_exists();
   
@@ -15,7 +15,7 @@
 			$result = UserLogin($_POST['Username'],$_POST['Password']); #Stores input username and password.
 			if($result){ #if result is true, continues through to homepage otherwise remains on login page.
 				$_SESSION["Username"] = $_POST['Username']; #Post assigned to session to carry username to next page.
-				header ("Location: home.php");
+				header ("Location: home.php"); #Redirect to home.php.
 				die(); #Stops the php code running any further.
 			}
 		}
