@@ -12,7 +12,7 @@
 	if(isset($_SESSION['admin'])){ #Checks if admin is set in session.
 		if($_SESSION['admin'] == False){
 			header("Location: home.php"); #Redirect to home.php.
-			die(); #Stops php code from home.php running.
+			die(); #Stops php code running.
 		}
 	}else{
 		header("Location: logout.php"); #Redirect to logout.php.
