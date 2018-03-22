@@ -18,7 +18,7 @@
 		}
 	}else{
 		header("Location: logout.php");		# If the user is not an admin, the function wont be exicuted further
-		die();
+		die();					# this then stops the php script from being executed any further
 	}
 	  
 
