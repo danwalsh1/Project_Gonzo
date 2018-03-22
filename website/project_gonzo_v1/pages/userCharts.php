@@ -5,9 +5,9 @@
 	include("../functions/sqlFunctions.php");
 	include("../functions/chartFunctions.php");
   
-	if(!isset($_SESSION['Username'])){ #Checks a username is present and stored in SESSION. Kills off the login page if true.
-		header("Location: login.php");
-		die();
+	if(!isset($_SESSION['Username'])){ #Checks a username is present and stored in SESSION.
+		header("Location: login.php"); #Redirects to login.php if true.
+		die(); #Stops php script running any further.
 	}
   
 	$userValues = get_users_values($_SESSION['Username']); #Pulls the function from the sqlFunctions page to retrieve the user data.
