@@ -4,7 +4,7 @@
 	include("../functions/generalFunctions.php"); #Import additional functionality stored in seperate files.
 	include("../functions/sqlFunctions.php");
 
-	if(!isset($_SESSION['Username'])){ 	#Checks the session username is set from the login page and then kills off the login page after.
+	if(!isset($_SESSION['Username'])){ 	#Checks the session username is not set from the login page then points the user back to login page if it isn't set.
 		header("Location: login.php");
 		die();				#Stops the php script from being executed any further
 	}
