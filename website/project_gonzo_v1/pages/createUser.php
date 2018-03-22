@@ -4,19 +4,19 @@
 	include("../functions/generalFunctions.php"); #Import additional functionality stored in seperate files.
 	include("../functions/sqlFunctions.php");
 
-	if(isset($_SESSION['Username']) == false){ #Checks if the username is not set in the session and then destroys the login page. 
+	if(isset($_SESSION['Username']) == false){ #Checks if the username is not set in the session, if not set send client to the login page.
 		header("Location: login.php");
-		die(); #Stops php code from login.php running.
+		die(); #Stops php code running.
 	}
 
-	if(isset($_SESSION['admin'])){ #Checks if admin is set in session and if it is, destroys the home.php page to prevent pages.
+	if(isset($_SESSION['admin'])){ #Checks if admin is set in session.
 		if($_SESSION['admin'] == False){
-			header("Location: home.php");
+			header("Location: home.php"); #Redirect to home.php.
 			die(); #Stops php code from home.php running.
 		}
 	}else{
-		header("Location: logout.php"); #If no conditions met, destory the logout page.
-		die(); #Stops php code from logout.php from running.
+		header("Location: logout.php"); #Redirect to logout.php.
+		die(); #Stops php code from running.
 	}
   
 	if(isset($_POST['createUser'])){
