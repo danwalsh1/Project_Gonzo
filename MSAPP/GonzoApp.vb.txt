@@ -54,7 +54,7 @@ Public Class sendData
         gonzoForm.lblBatLevData.Text = batLevel 'form labels.
         gonzoForm.lblDevIDData.Text = deviceID
         gonzoForm.lblChargeStateData.Text = chargingState
-        gonzoForm.lblCPU.Text = UsageCPU.NextValue()
+        gonzoForm.lblCPU.Text = CPUoutput
         Page_Load()'Runs after the timer reaches it's time condition.
 
     End Sub
